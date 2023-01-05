@@ -10,7 +10,7 @@ import java.sql.ResultSet;
  *
  * @author pavansomashekar
  */
-public class Employee {
+public class Enterprise {
     
     private String username;
     private String password;
@@ -53,7 +53,7 @@ public class Employee {
     
     public String checkCredentials(String username, String password){
         String role = "";
-        ResultSet rs = db.getEmployeeDetails(username, password);
+        ResultSet rs = db.getEnterpriseDetails(username, password);
 
         try{
             if(rs != null){
@@ -75,21 +75,21 @@ public class Employee {
 
     }
     
-    public ResultSet getEmployeeList() {
-        ResultSet rs = db.getAllEmployee();
+    public ResultSet getEnterpriseList() {
+        ResultSet rs = db.getAllEnterprises();
         return rs;
     }
     
-    public void addEmployee(String username, String password, String role, String network){
-        db.addEmployee(username, password, role, network);
+    public void addEnterprise(String username, String password, String role, String network){
+        db.addEnterprise(username, password, role, network);
     }
     
-    public void updateEmployee(String condition, String username, String password, String role, String network){
-        db.updateEmployee(condition, username, password, role, network);
+    public void updateEnterprise(String condition, String username, String password, String role, String network){
+        db.updateEnterprise(condition, username, password, role, network);
     }
     
-    public void deleteEmployee(String username){
-        db.deleteEmployee(username);
+    public void deleteEnterprise(String username){
+        db.deleteEnterprise(username);
     }
     
 }

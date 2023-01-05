@@ -4,7 +4,7 @@
  */
 package UI.Admin;
 
-import Model.Employee;
+import Model.Enterprise;
 import Model.Network;
 import java.awt.CardLayout;
 import java.sql.ResultSet;
@@ -24,7 +24,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
      */
     private JPanel workJPanel;
     Network network = new Network();
-    Employee employee = new Employee();
+    Enterprise enterprise = new Enterprise();
 
     public ManageEnterpriseJPanel(JPanel workJPanel) {
         initComponents();
@@ -90,7 +90,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
         roleJLabel.setText("Role");
 
-        roleJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BankingAdmin", "CardAdmin", "LoanAdmin", "VerificationAdmin" }));
+        roleJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BankingAdmin", "CardAdmin", "LoanAdmin", "VerificationAdmin", "Customer" }));
         roleJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roleJComboBoxActionPerformed(evt);
@@ -211,9 +211,9 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 String network = (String) networkJComboBox.getSelectedItem();
                 String role = (String) roleJComboBox.getSelectedItem();
 
-                employee.addEmployee(username, password, role, network);
+                enterprise.addEnterprise(username, password, role, network);
 
-                JOptionPane.showMessageDialog(this, "Employee added successfully");
+                JOptionPane.showMessageDialog(this, "Enterprise added successfully");
 
                 usernameJTextField.setText("");
                 jPasswordField.setText("");
@@ -250,9 +250,9 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
             String network = (String) networkJComboBox.getSelectedItem();
             String role = (String) roleJComboBox.getSelectedItem();
 
-            employee.updateEmployee(condition, username, password, role, network);
+            enterprise.updateEnterprise(condition, username, password, role, network);
 
-            JOptionPane.showMessageDialog(this,"Employee Details updated.");
+            JOptionPane.showMessageDialog(this,"Enterprise Details updated.");
 
             populateEnterpriseTable();
 
@@ -273,9 +273,9 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         }
 
         String username = model.getValueAt(selectedRowIndex, 0).toString();
-        employee.deleteEmployee(username);
+        enterprise.deleteEnterprise(username);
 
-        JOptionPane.showMessageDialog(this, "Employee details deleted");
+        JOptionPane.showMessageDialog(this, "Enterprise details deleted");
 
         populateEnterpriseTable();
 
@@ -297,7 +297,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         
         try{ 
-            ResultSet rs = employee.getEmployeeList();
+            ResultSet rs = enterprise.getEnterpriseList();
             while(rs.next()){
             Object[] rows = new Object[4];
             rows[0] = rs.getString(1);

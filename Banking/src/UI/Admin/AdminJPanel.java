@@ -17,7 +17,6 @@ public class AdminJPanel extends javax.swing.JPanel {
      * Creates new form AdminJPanel
      */
     private JPanel workJPanel;
-//    Connection conn;
     ManageNetworkJPanel manageNetworkJPanel;
     ManageEnterpriseJPanel manageEnterpriseJPanel;
     

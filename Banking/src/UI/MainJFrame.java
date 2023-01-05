@@ -8,8 +8,9 @@ package UI;
  *
  * @author pavansomashekar
  */
-import Model.Employee;
+import Model.Enterprise;
 import UI.Admin.AdminJPanel;
+import UI.BankingAdmin.BankingAdminJPanel;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,7 +23,8 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     
     AdminJPanel adminJPanel;
-    Employee employee = new Employee();
+    BankingAdminJPanel bankingAdminJPanel;
+    Enterprise employee = new Enterprise();
     
     public MainJFrame() {
         initComponents();
@@ -154,6 +156,16 @@ public class MainJFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
                     adminJPanel = new AdminJPanel(workJPanel);
                     workJPanel.add("workArea", adminJPanel);
+                    layout.next(workJPanel);
+                }
+                else if(role.equals("BankingAdmin")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    bankingAdminJPanel = new BankingAdminJPanel(workJPanel);
+                    workJPanel.add("workArea", bankingAdminJPanel);
                     layout.next(workJPanel);
                 }
                 else{

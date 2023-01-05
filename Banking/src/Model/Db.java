@@ -24,11 +24,11 @@ public class Db {
         return connection;
     }
     
-    public ResultSet getEmployeeDetails(String username, String password) {
+    public ResultSet getEnterpriseDetails(String username, String password) {
         ResultSet rs = null;
         try {
             Connection connection = getConnection();
-            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Employee where username=? and password=?");
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Enterprise where username=? and password=?");
             st.setString(1, username);
             st.setString(2, password);
             rs = st.executeQuery();
@@ -92,11 +92,11 @@ public class Db {
         return rs;
     }
     
-    public ResultSet getAllEmployee() {
+    public ResultSet getAllEnterprises() {
         ResultSet rs = null;
         try {
             Connection connection = getConnection();
-            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Employee");
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Enterprise");
             rs = st.executeQuery();
             return rs;
         } catch(Exception e) {
@@ -105,10 +105,10 @@ public class Db {
         return rs;
     }
     
-    public void addEmployee(String username, String password, String role, String network) {
+    public void addEnterprise(String username, String password, String role, String network) {
         try {
             Connection connection = getConnection();
-            String sql = "insert into Employee values(?,?,?,?)";
+            String sql = "insert into Enterprise values(?,?,?,?)";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
             st.setString(1, username);
             st.setString(2, password);
@@ -120,10 +120,10 @@ public class Db {
         }
     }
     
-    public void updateEmployee(String condition, String username, String password, String role, String network) {
+    public void updateEnterprise(String condition, String username, String password, String role, String network) {
         try {
             Connection connection = getConnection();
-            String sql = "update Employee set username=?, password=?, role=?, network=? where username=?";
+            String sql = "update Enterprise set username=?, password=?, role=?, network=? where username=?";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
             st.setString(1, username);
             st.setString(2, password);
@@ -136,10 +136,80 @@ public class Db {
         }
     }
     
-    public void deleteEmployee(String username) {
+    public void deleteEnterprise(String username) {
         try {
             Connection connection = getConnection();
-            String sql = "delete from Employee where username=?";
+            String sql = "delete from Enterprise where username=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public ResultSet getAllCustomers() {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Customer");
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public void addCustomer(String accNo, int balance, String fname, String lname, String email, String phNo, String address, String username, String password, String role, String network) {
+        try {
+            Connection connection = getConnection();
+            String sql = "insert into Customer values(?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, accNo);
+            st.setString(2, fname);
+            st.setString(3, lname);
+            st.setString(4, email);
+            st.setString(5, phNo);
+            st.setString(6, address);
+            st.setInt(7, balance);
+            st.setString(8, username);
+            st.setString(9, password);
+            st.setString(10, role);
+            st.setString(11, network);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateCustomer(String condition, String accNo, int balance, String fname, String lname, String email, String phNo, String address, String username, String password, String role, String network) {
+        try {
+            Connection connection = getConnection();
+            String sql = "update Customer set AccNo=?, FName=?, LName=?, Email=?, PhNo=?, Address=?, Balance=?, username=?, password=?, role=?, network=? where username=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, accNo);
+            st.setString(2, fname);
+            st.setString(3, lname);
+            st.setString(4, email);
+            st.setString(5, phNo);
+            st.setString(6, address);
+            st.setInt(7, balance);
+            st.setString(8, username);
+            st.setString(9, password);
+            st.setString(10, role);
+            st.setString(11, network);
+            st.setString(12, condition);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void deleteCustomer(String username) {
+        try {
+            Connection connection = getConnection();
+            String sql = "delete from Customer where username=?";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
             st.setString(1, username);
             st.executeUpdate();
