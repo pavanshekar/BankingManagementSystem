@@ -249,7 +249,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         try{
             ResultSet rs = network.getNetworkList();
             while(rs.next()){
-            Object[] rows = new Object[4];
+            Object[] rows = new Object[1];
             rows[0]= rs.getString(1);
             model.addRow(rows);
             }
