@@ -4,7 +4,11 @@
  */
 package UI.LoanVerificationAdmin;
 
+import Model.Loan;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,10 +21,13 @@ public class LoanVerificationAdminJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
+    Loan loan = new Loan();
+    private String action;
     
     public LoanVerificationAdminJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
+        populateLoanTable();
     }
 
     /**
@@ -32,31 +39,167 @@ public class LoanVerificationAdminJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        processLoanRequestButtonGroup = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        loanJTable = new javax.swing.JTable();
+        processLoanRequestJLabel = new javax.swing.JLabel();
+        approveJRadioButton = new javax.swing.JRadioButton();
+        rejectJRadioButton = new javax.swing.JRadioButton();
+        processJButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("Loan Verification Admin");
+
+        loanJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Acc No", "Loan No", "Loan Type", "Loan Amount", "Status"
+            }
+        ));
+        jScrollPane1.setViewportView(loanJTable);
+
+        processLoanRequestJLabel.setText("Process Loan Request");
+
+        processLoanRequestButtonGroup.add(approveJRadioButton);
+        approveJRadioButton.setText("Approve");
+        approveJRadioButton.setActionCommand("Approve");
+
+        processLoanRequestButtonGroup.add(rejectJRadioButton);
+        rejectJRadioButton.setText("Reject");
+        rejectJRadioButton.setActionCommand("Reject");
+
+        processJButton.setText("Process");
+        processJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                processJButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(150, 150, 150))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(processLoanRequestJLabel)
+                                .addGap(70, 70, 70)
+                                .addComponent(approveJRadioButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(rejectJRadioButton)
+                                .addGap(120, 120, 120))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(177, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(150, 150, 150))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(processJButton)
+                .addGap(260, 260, 260))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addContainerGap(540, Short.MAX_VALUE))
+                .addGap(99, 99, 99)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(processLoanRequestJLabel)
+                    .addComponent(approveJRadioButton)
+                    .addComponent(rejectJRadioButton))
+                .addGap(60, 60, 60)
+                .addComponent(processJButton)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) loanJTable.getModel();
+        int selectedRowIndex = loanJTable.getSelectedRow();
+
+        if(selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this,"Please select a row.");
+            return;
+        }
+
+        String status = model.getValueAt(selectedRowIndex, 4).toString();
+        if(status.equals("Sent for Verification")){
+            if(processLoanRequestButtonGroup.getSelection()==null){
+                JOptionPane.showMessageDialog(this, "Select the option");
+            }
+            else{
+                action = processLoanRequestButtonGroup.getSelection().getActionCommand();
+                String loanNo = model.getValueAt(selectedRowIndex, 1).toString();
+                if(action.equals("Approve")){
+                    loan.updateLoanStatus(loanNo, "Approved");
+                    JOptionPane.showMessageDialog(this, "Loan request approved");
+                    populateLoanTable();
+                }
+                else{
+                    loan.updateLoanStatus(loanNo, "Rejected");
+                    JOptionPane.showMessageDialog(this, "Loan request rejected");
+                    populateLoanTable();
+                }
+            }
+        }
+        else if(status.equals("Approved")){
+            JOptionPane.showMessageDialog(this, "Loan request has been approved");
+        }
+        else if(status.equals("Rejected")){
+            JOptionPane.showMessageDialog(this, "Loan request has been rejected");
+        }
+        else if(status.equals("Sent to Card Admin")){
+            JOptionPane.showMessageDialog(this, "Loan request should be approved by Loan Admin");
+        }
+    }//GEN-LAST:event_processJButtonActionPerformed
+
+    private void populateLoanTable() {
+        DefaultTableModel model = (DefaultTableModel) loanJTable.getModel();
+
+        model.setRowCount(0);
+        
+        try{
+            ResultSet rs = loan.getLoans();
+            while(rs.next()){
+            Object[] rows = new Object[5];
+            rows[0]= rs.getString(1);
+            rows[1]= rs.getString(2);
+            rows[2]= rs.getString(3);
+            rows[3]= rs.getString(4);
+            rows[4]= rs.getString(5);
+            model.addRow(rows);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton approveJRadioButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable loanJTable;
+    private javax.swing.JButton processJButton;
+    private javax.swing.ButtonGroup processLoanRequestButtonGroup;
+    private javax.swing.JLabel processLoanRequestJLabel;
+    private javax.swing.JRadioButton rejectJRadioButton;
     // End of variables declaration//GEN-END:variables
 }
