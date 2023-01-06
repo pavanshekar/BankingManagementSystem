@@ -14,6 +14,8 @@ import UI.BankingAdmin.BankingAdminJPanel;
 import UI.CardAdmin.CardAdminJPanel;
 import UI.Customer.CustomerJPanel;
 import UI.CardVerificationAdmin.CardVerificationAdminJPanel;
+import UI.LoanAdmin.LoanAdminJPanel;
+import UI.LoanVerificationAdmin.LoanVerificationAdminJPanel;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,6 +32,9 @@ public class MainJFrame extends javax.swing.JFrame {
     CustomerJPanel customerJPanel;
     CardAdminJPanel cardAdminJPanel;
     CardVerificationAdminJPanel cardVerificationAdminJPanel;
+    LoanAdminJPanel loanAdminJPanel;
+    LoanVerificationAdminJPanel loanVerificationAdminJPanel;
+    
     Enterprise employee = new Enterprise();
     
     public MainJFrame() {
@@ -202,6 +207,26 @@ public class MainJFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
                     cardVerificationAdminJPanel = new CardVerificationAdminJPanel(workJPanel);
                     workJPanel.add("workArea", cardVerificationAdminJPanel);
+                    layout.next(workJPanel);
+                }
+                else if(role.equals("LoanAdmin")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    loanAdminJPanel = new LoanAdminJPanel(workJPanel);
+                    workJPanel.add("workArea", loanAdminJPanel);
+                    layout.next(workJPanel);
+                }
+                else if(role.equals("LoanVerificationAdmin")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    loanVerificationAdminJPanel = new LoanVerificationAdminJPanel(workJPanel);
+                    workJPanel.add("workArea", loanVerificationAdminJPanel);
                     layout.next(workJPanel);
                 }
                 else{

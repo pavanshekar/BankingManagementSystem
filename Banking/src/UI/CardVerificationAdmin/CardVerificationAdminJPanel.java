@@ -140,12 +140,12 @@ public class CardVerificationAdminJPanel extends javax.swing.JPanel {
                 action = processCardRequestButtonGroup.getSelection().getActionCommand();
                 String cardNo = model.getValueAt(selectedRowIndex, 1).toString();
                 if(action.equals("Approve")){
-                    card.updateStatus(cardNo, "Approved");
+                    card.updateCardStatus(cardNo, "Approved");
                     JOptionPane.showMessageDialog(this, "Credit card request approved");
                     populateCardTable();
                 }
                 else{
-                    card.updateStatus(cardNo, "Rejected");
+                    card.updateCardStatus(cardNo, "Rejected");
                     JOptionPane.showMessageDialog(this, "Credit card request rejected");
                     populateCardTable();
                 }

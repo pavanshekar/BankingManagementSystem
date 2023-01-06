@@ -152,12 +152,12 @@ public class CardAdminJPanel extends javax.swing.JPanel {
                 action = processCardRequestButtonGroup.getSelection().getActionCommand();
                 String cardNo = model.getValueAt(selectedRowIndex, 1).toString();
                 if(action.equals("Approve")){
-                    card.updateStatus(cardNo, "Approved by Card Admin");
+                    card.updateCardStatus(cardNo, "Approved by Card Admin");
                     JOptionPane.showMessageDialog(this, "Credit card request approved");
                     populateCardTable();
                 }
                 else{                    
-                    card.updateStatus(cardNo, "Rejected");
+                    card.updateCardStatus(cardNo, "Rejected");
                     JOptionPane.showMessageDialog(this, "Credit card request rejected");
                     populateCardTable();
                 }
@@ -187,7 +187,7 @@ public class CardAdminJPanel extends javax.swing.JPanel {
         String status = model.getValueAt(selectedRowIndex, 3).toString();
         if(status.equals("Approved by Card Admin")){
             String cardNo = model.getValueAt(selectedRowIndex, 1).toString();
-            card.updateStatus(cardNo, "Sent for Verification");
+            card.updateCardStatus(cardNo, "Sent for Verification");
             JOptionPane.showMessageDialog(this,"Credit card request sent for verification");
             populateCardTable();
         }

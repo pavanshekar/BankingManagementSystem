@@ -65,8 +65,8 @@ public class Card {
         return rs;
     }
     
-    public void updateStatus(String cardNo, String status){
-        db.updateStatus(cardNo, status);
+    public void updateCardStatus(String cardNo, String status){
+        db.updateCardStatus(cardNo, status);
     }
     
 }

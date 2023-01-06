@@ -289,7 +289,7 @@ public class Db {
         return rs;
     }
     
-    public void updateStatus(String cardNo, String status){
+    public void updateCardStatus(String cardNo, String status){
         try{
             Connection connection = getConnection();
             String sql = "update Card set status=? where cardNo=?";
@@ -301,6 +301,37 @@ public class Db {
         catch(Exception e){
             System.out.println(e);
         }
+    }
+    
+    public void applyLoan(String accNo, String loanNo, String loanType, String loanAmount, String status) {
+        try {
+            Connection connection = getConnection();
+            String sql = "insert into Loan values(?,?,?,?,?)";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, accNo);
+            st.setString(2, loanNo);
+            st.setString(3, loanType);
+            st.setString(4, loanAmount);
+            st.setString(5, status);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public ResultSet getCustomerLoans(String accNo) {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Loan where accNo=? and status=?");
+            st.setString(1, accNo);
+            st.setString(2, "Approved");
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
     }
     
 }
