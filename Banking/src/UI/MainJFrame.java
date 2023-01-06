@@ -176,7 +176,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     loginJButton.setEnabled(false);
                     logoutJButton.setEnabled(true);
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
-                    customerJPanel = new CustomerJPanel(workJPanel);
+                    customerJPanel = new CustomerJPanel(workJPanel, username);
                     workJPanel.add("workArea", customerJPanel);
                     layout.next(workJPanel);
                 }

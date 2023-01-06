@@ -18,10 +18,12 @@ public class CardJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
+    private String username;
     
-    public CardJPanel(JPanel workJPanel) {
+    public CardJPanel(JPanel workJPanel, String username) {
         initComponents();
         this.workJPanel = workJPanel;
+        this.username = username;
     }
 
     /**

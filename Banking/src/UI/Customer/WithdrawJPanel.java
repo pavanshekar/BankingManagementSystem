@@ -4,7 +4,10 @@
  */
 package UI.Customer;
 
+import Model.Customer;
 import java.awt.CardLayout;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,10 +21,16 @@ public class WithdrawJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
+    private String username;
+    private int balance;
     
-    public WithdrawJPanel(JPanel workJPanel) {
+    Customer customer = new Customer();
+    
+    public WithdrawJPanel(JPanel workJPanel, String username) {
         initComponents();
         this.workJPanel = workJPanel;
+        this.username = username;
+        populateAccountBalance();
     }
 
     /**
@@ -35,6 +44,11 @@ public class WithdrawJPanel extends javax.swing.JPanel {
 
         withdrawJLabel = new javax.swing.JLabel();
         backJButton = new javax.swing.JButton();
+        accountBalance = new javax.swing.JLabel();
+        withdrawAmountJLabel = new javax.swing.JLabel();
+        withdrawAmountJTextField = new javax.swing.JTextField();
+        accountBalanceJLabel = new javax.swing.JLabel();
+        withdrawJButton = new javax.swing.JButton();
 
         withdrawJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         withdrawJLabel.setText("Withdraw");
@@ -43,6 +57,17 @@ public class WithdrawJPanel extends javax.swing.JPanel {
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
+            }
+        });
+
+        withdrawAmountJLabel.setText("Enter the amount to be withdrawn: ");
+
+        accountBalanceJLabel.setText("Account Balance: ");
+
+        withdrawJButton.setText("Withdraw");
+        withdrawJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                withdrawJButtonActionPerformed(evt);
             }
         });
 
@@ -59,6 +84,22 @@ public class WithdrawJPanel extends javax.swing.JPanel {
                         .addGap(25, 25, 25)
                         .addComponent(backJButton)))
                 .addContainerGap(240, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(88, 88, 88)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(withdrawAmountJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(accountBalanceJLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(70, 70, 70)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(withdrawAmountJTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(accountBalance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(withdrawJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(117, 117, 117)))
+                    .addContainerGap(87, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,6 +109,19 @@ public class WithdrawJPanel extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addComponent(backJButton)
                 .addContainerGap(477, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(172, 172, 172)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(accountBalanceJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(accountBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(78, 78, 78)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(withdrawAmountJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(withdrawAmountJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(84, 84, 84)
+                    .addComponent(withdrawJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(172, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -78,9 +132,49 @@ public class WithdrawJPanel extends javax.swing.JPanel {
         layout.previous(workJPanel);
     }//GEN-LAST:event_backJButtonActionPerformed
 
+    private void withdrawJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawJButtonActionPerformed
+        // TODO add your handling code here:
+        if(withdrawAmountJTextField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Enter the amount to be withdrawn");
+        }
+        else{
+            int withdrawalAmount = Integer.parseInt(withdrawAmountJTextField.getText());
+            if(withdrawalAmount>balance){
+                JOptionPane.showMessageDialog(this,"Insufficient funds");
+            }
+            else{
+                int updatedBalance = balance-withdrawalAmount;
+                customer.updateAccountBalance(username, updatedBalance);
+                JOptionPane.showMessageDialog(this, "Amount has been withdrawn");
+                populateAccountBalance();
+                withdrawAmountJTextField.setText("");
+            }
+        } 
+    }//GEN-LAST:event_withdrawJButtonActionPerformed
+
+    private void populateAccountBalance() {
+        
+        try{
+            ResultSet rs = customer.getCustomerDetails(username);
+            while(rs.next()){
+                balance = Integer.parseInt(String.valueOf(rs.getString(7)));
+                accountBalance.setText(String.valueOf(rs.getString(7)));
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel accountBalance;
+    private javax.swing.JLabel accountBalanceJLabel;
     private javax.swing.JButton backJButton;
+    private javax.swing.JLabel withdrawAmountJLabel;
+    private javax.swing.JTextField withdrawAmountJTextField;
+    private javax.swing.JButton withdrawJButton;
     private javax.swing.JLabel withdrawJLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -218,4 +218,32 @@ public class Db {
         }
     }
     
+    public ResultSet getCustomerDetails(String username) {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Customer where username=?");
+            st.setString(1, username);
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public void updateAccountBalance(String username, int updatedBalance){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Customer set balance=? where username=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setInt(1, updatedBalance);
+            st.setString(2, username);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
 }

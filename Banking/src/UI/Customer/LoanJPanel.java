@@ -18,10 +18,12 @@ public class LoanJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
+    private String username;
     
-    public LoanJPanel(JPanel workJPanel) {
+    public LoanJPanel(JPanel workJPanel, String username) {
         initComponents();
         this.workJPanel = workJPanel;
+        this.username = username;
     }
 
     /**

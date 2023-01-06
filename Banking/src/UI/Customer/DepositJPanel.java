@@ -4,7 +4,10 @@
  */
 package UI.Customer;
 
+import Model.Customer;
 import java.awt.CardLayout;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -18,10 +21,16 @@ public class DepositJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
+    private String username;
+    private int balance;
     
-    public DepositJPanel(JPanel workJPanel) {
+    Customer customer = new Customer();
+    
+    public DepositJPanel(JPanel workJPanel, String username) {
         initComponents();
         this.workJPanel = workJPanel;
+        this.username = username;
+        populateAccountBalance();
     }
 
     /**
@@ -35,6 +44,11 @@ public class DepositJPanel extends javax.swing.JPanel {
 
         depositJLabel = new javax.swing.JLabel();
         backJButton = new javax.swing.JButton();
+        depositAmountJLabel = new javax.swing.JLabel();
+        depositAmountJTextField = new javax.swing.JTextField();
+        accountBalanceJLabel = new javax.swing.JLabel();
+        depositJButton = new javax.swing.JButton();
+        accountBalance = new javax.swing.JLabel();
 
         depositJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         depositJLabel.setText("Deposit");
@@ -43,6 +57,17 @@ public class DepositJPanel extends javax.swing.JPanel {
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backJButtonActionPerformed(evt);
+            }
+        });
+
+        depositAmountJLabel.setText("Enter the amount to be deposited: ");
+
+        accountBalanceJLabel.setText("Account Balance: ");
+
+        depositJButton.setText("Deposit");
+        depositJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                depositJButtonActionPerformed(evt);
             }
         });
 
@@ -58,7 +83,22 @@ public class DepositJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(backJButton)))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(90, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(depositAmountJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(accountBalanceJLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(depositAmountJTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(accountBalance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(86, 86, 86))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(depositJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(203, 203, 203))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -67,7 +107,17 @@ public class DepositJPanel extends javax.swing.JPanel {
                 .addComponent(depositJLabel)
                 .addGap(40, 40, 40)
                 .addComponent(backJButton)
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(accountBalanceJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(accountBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(depositAmountJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(depositAmountJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(84, 84, 84)
+                .addComponent(depositJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(150, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -78,9 +128,45 @@ public class DepositJPanel extends javax.swing.JPanel {
         layout.previous(workJPanel);
     }//GEN-LAST:event_backJButtonActionPerformed
 
+    private void depositJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositJButtonActionPerformed
+        // TODO add your handling code here:
+        if(depositAmountJTextField.getText().equals((""))){
+            JOptionPane.showMessageDialog(this, "Enter the amount to be deposited");
+        }
+        else{
+            int depositAmount = Integer.parseInt(depositAmountJTextField.getText());
+            int updatedBalance = balance+depositAmount;
+            customer.updateAccountBalance(username, updatedBalance);
+            JOptionPane.showMessageDialog(this, "Amount has been deposited");
+            populateAccountBalance();
+            depositAmountJTextField.setText("");
+        }
+        
+    }//GEN-LAST:event_depositJButtonActionPerformed
+
+    private void populateAccountBalance() {
+        
+        try{
+            ResultSet rs = customer.getCustomerDetails(username);
+            while(rs.next()){
+                balance = Integer.parseInt(String.valueOf(rs.getString(7)));
+                accountBalance.setText(String.valueOf(rs.getString(7)));
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel accountBalance;
+    private javax.swing.JLabel accountBalanceJLabel;
     private javax.swing.JButton backJButton;
+    private javax.swing.JLabel depositAmountJLabel;
+    private javax.swing.JTextField depositAmountJTextField;
+    private javax.swing.JButton depositJButton;
     private javax.swing.JLabel depositJLabel;
     // End of variables declaration//GEN-END:variables
 }

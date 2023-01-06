@@ -18,15 +18,17 @@ public class CustomerJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
+    private String username;
     AccountInfoJPanel accountInfoJPanel;
     DepositJPanel depositJPanel;
     WithdrawJPanel withdrawJPanel;
     CardJPanel cardJPanel;
     LoanJPanel loanJPanel;
     
-    public CustomerJPanel(JPanel workJPanel) {
+    public CustomerJPanel(JPanel workJPanel, String username) {
         initComponents();
         this.workJPanel = workJPanel;
+        this.username = username;
     }
 
     /**
@@ -69,7 +71,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        cardsJButton.setText("Creadit/Debit Cards");
+        cardsJButton.setText("Credit/Debit Cards");
         cardsJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cardsJButtonActionPerformed(evt);
@@ -100,10 +102,10 @@ public class CustomerJPanel extends javax.swing.JPanel {
                             .addComponent(accInfoJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(loanJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cardsJButton)
-                            .addComponent(withdrawJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(loanJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(withdrawJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cardsJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
                 .addGap(219, 219, 219))
         );
         layout.setVerticalGroup(
@@ -128,7 +130,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
     private void accInfoJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accInfoJButtonActionPerformed
         // TODO add your handling code here:
         CardLayout layout=(CardLayout)workJPanel.getLayout();
-        accountInfoJPanel = new AccountInfoJPanel(workJPanel);
+        accountInfoJPanel = new AccountInfoJPanel(workJPanel, username);
         workJPanel.add("workArea", accountInfoJPanel);
         layout.next(workJPanel);
     }//GEN-LAST:event_accInfoJButtonActionPerformed
@@ -136,7 +138,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
     private void depositJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositJButtonActionPerformed
         // TODO add your handling code here:
         CardLayout layout=(CardLayout)workJPanel.getLayout();
-        depositJPanel = new DepositJPanel(workJPanel);
+        depositJPanel = new DepositJPanel(workJPanel, username);
         workJPanel.add("workArea", depositJPanel);
         layout.next(workJPanel);
     }//GEN-LAST:event_depositJButtonActionPerformed
@@ -144,7 +146,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
     private void withdrawJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withdrawJButtonActionPerformed
         // TODO add your handling code here:
         CardLayout layout=(CardLayout)workJPanel.getLayout();
-        withdrawJPanel = new WithdrawJPanel(workJPanel);
+        withdrawJPanel = new WithdrawJPanel(workJPanel, username);
         workJPanel.add("workArea", withdrawJPanel);
         layout.next(workJPanel);
     }//GEN-LAST:event_withdrawJButtonActionPerformed
@@ -152,7 +154,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
     private void cardsJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardsJButtonActionPerformed
         // TODO add your handling code here:
         CardLayout layout=(CardLayout)workJPanel.getLayout();
-        cardJPanel = new CardJPanel(workJPanel);
+        cardJPanel = new CardJPanel(workJPanel, username);
         workJPanel.add("workArea", cardJPanel);
         layout.next(workJPanel);
     }//GEN-LAST:event_cardsJButtonActionPerformed
@@ -160,7 +162,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
     private void loanJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loanJButtonActionPerformed
         // TODO add your handling code here:
         CardLayout layout=(CardLayout)workJPanel.getLayout();
-        loanJPanel = new LoanJPanel(workJPanel);
+        loanJPanel = new LoanJPanel(workJPanel, username);
         workJPanel.add("workArea", loanJPanel);
         layout.next(workJPanel);
     }//GEN-LAST:event_loanJButtonActionPerformed

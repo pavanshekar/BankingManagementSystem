@@ -32,10 +32,10 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="loanJButton" min="-2" pref="146" max="-2" attributes="0"/>
-                          <Component id="cardsJButton" min="-2" max="-2" attributes="0"/>
-                          <Component id="withdrawJButton" min="-2" pref="146" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="loanJButton" max="32767" attributes="0"/>
+                          <Component id="withdrawJButton" max="32767" attributes="0"/>
+                          <Component id="cardsJButton" alignment="1" pref="146" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="cardsJButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Creadit/Debit Cards"/>
+        <Property name="text" type="java.lang.String" value="Credit/Debit Cards"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cardsJButtonActionPerformed"/>

@@ -131,4 +131,13 @@ public class Customer {
         db.deleteCustomer(username);
     }
     
+    public ResultSet getCustomerDetails(String username) {
+        ResultSet rs = db.getCustomerDetails(username);
+        return rs;
+    }
+    
+    public void updateAccountBalance(String username, int updatedBalance){
+        db.updateAccountBalance(username, updatedBalance);
+    }
+    
 }
