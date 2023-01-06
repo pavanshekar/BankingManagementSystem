@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.CardAdmin;
+package UI.CardVerificationAdmin;
 
 import Model.Card;
 import java.sql.ResultSet;
@@ -14,17 +14,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author pavansomashekar
  */
-public class CardAdminJPanel extends javax.swing.JPanel {
+public class CardVerificationAdminJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form CardAdminJPanel
+     * Creates new form VerificationAdminJPanel
      */
     
     private JPanel workJPanel;
     Card card = new Card();
     private String action;
     
-    public CardAdminJPanel(JPanel workJPanel) {
+    public CardVerificationAdminJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
         populateCardTable();
@@ -40,17 +40,16 @@ public class CardAdminJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         processCardRequestButtonGroup = new javax.swing.ButtonGroup();
-        cardAdminJLabel = new javax.swing.JLabel();
+        verificationAdminJLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         cardJTable = new javax.swing.JTable();
         processCardRequestJLabel = new javax.swing.JLabel();
         approveJRadioButton = new javax.swing.JRadioButton();
         rejectJRadioButton = new javax.swing.JRadioButton();
         processJButton = new javax.swing.JButton();
-        sendForVerificationJButton = new javax.swing.JButton();
 
-        cardAdminJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        cardAdminJLabel.setText("Card Admin");
+        verificationAdminJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        verificationAdminJLabel.setText("Card Verification Admin");
 
         cardJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,54 +81,43 @@ public class CardAdminJPanel extends javax.swing.JPanel {
             }
         });
 
-        sendForVerificationJButton.setText("Send for Verification");
-        sendForVerificationJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendForVerificationJButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(239, 239, 239)
-                .addComponent(cardAdminJLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 132, Short.MAX_VALUE)
-                .addComponent(processCardRequestJLabel)
-                .addGap(70, 70, 70)
-                .addComponent(approveJRadioButton)
-                .addGap(18, 18, 18)
-                .addComponent(rejectJRadioButton)
-                .addGap(116, 116, 116))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(processJButton)
-                .addGap(71, 71, 71)
-                .addComponent(sendForVerificationJButton)
-                .addGap(139, 139, 139))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(processCardRequestJLabel)
+                        .addGap(70, 70, 70)
+                        .addComponent(approveJRadioButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(rejectJRadioButton)
+                        .addGap(119, 119, 119))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(processJButton)
+                        .addGap(257, 257, 257))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(verificationAdminJLabel)
+                        .addGap(163, 163, 163))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(cardAdminJLabel)
-                .addGap(73, 73, 73)
+                .addGap(32, 32, 32)
+                .addComponent(verificationAdminJLabel)
+                .addGap(59, 59, 59)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
+                .addGap(120, 120, 120)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(processCardRequestJLabel)
                     .addComponent(approveJRadioButton)
                     .addComponent(rejectJRadioButton))
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(processJButton)
-                    .addComponent(sendForVerificationJButton))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addComponent(processJButton)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -142,9 +130,9 @@ public class CardAdminJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Please select a row.");
             return;
         }
-        
+
         String status = model.getValueAt(selectedRowIndex, 3).toString();
-        if(status.equals("Sent to Card Admin")){
+        if(status.equals("Sent for Verification")){
             if(processCardRequestButtonGroup.getSelection()==null){
                 JOptionPane.showMessageDialog(this, "Select the option");
             }
@@ -152,11 +140,11 @@ public class CardAdminJPanel extends javax.swing.JPanel {
                 action = processCardRequestButtonGroup.getSelection().getActionCommand();
                 String cardNo = model.getValueAt(selectedRowIndex, 1).toString();
                 if(action.equals("Approve")){
-                    card.updateStatus(cardNo, "Approved by Card Admin");
+                    card.updateStatus(cardNo, "Approved");
                     JOptionPane.showMessageDialog(this, "Credit card request approved");
                     populateCardTable();
                 }
-                else{                    
+                else{
                     card.updateStatus(cardNo, "Rejected");
                     JOptionPane.showMessageDialog(this, "Credit card request rejected");
                     populateCardTable();
@@ -164,46 +152,15 @@ public class CardAdminJPanel extends javax.swing.JPanel {
             }
         }
         else if(status.equals("Approved")){
-            JOptionPane.showMessageDialog(this, "Credit card request has already been approved");
-        }
-        else if(status.equals("Rejected")){
-            JOptionPane.showMessageDialog(this, "Credit card request has been rejected");
-        }
-        else if(status.equals("Sent for Verification")){
-            JOptionPane.showMessageDialog(this, "Credit card request is sent for verification");
-        }
-    }//GEN-LAST:event_processJButtonActionPerformed
-
-    private void sendForVerificationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendForVerificationJButtonActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) cardJTable.getModel();
-        int selectedRowIndex = cardJTable.getSelectedRow();
-
-        if(selectedRowIndex<0) {
-            JOptionPane.showMessageDialog(this,"Please select a row.");
-            return;
-        }
-        
-        String status = model.getValueAt(selectedRowIndex, 3).toString();
-        if(status.equals("Approved by Card Admin")){
-            String cardNo = model.getValueAt(selectedRowIndex, 1).toString();
-            card.updateStatus(cardNo, "Sent for Verification");
-            JOptionPane.showMessageDialog(this,"Credit card request sent for verification");
-            populateCardTable();
-        }
-        else if(status.equals("Approved")){
             JOptionPane.showMessageDialog(this, "Credit card request has been approved");
         }
         else if(status.equals("Rejected")){
             JOptionPane.showMessageDialog(this, "Credit card request has been rejected");
         }
-        else if(status.equals("Sent for Verification")){
-            JOptionPane.showMessageDialog(this, "Credit card request is sent for verification");
-        }
-        else{
+        else if(status.equals("Sent to Card Admin")){
             JOptionPane.showMessageDialog(this, "Credit card request should be approved by Card Admin");
         }
-    }//GEN-LAST:event_sendForVerificationJButtonActionPerformed
+    }//GEN-LAST:event_processJButtonActionPerformed
 
     private void populateCardTable() {
         DefaultTableModel model = (DefaultTableModel) cardJTable.getModel();
@@ -230,13 +187,12 @@ public class CardAdminJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton approveJRadioButton;
-    private javax.swing.JLabel cardAdminJLabel;
     private javax.swing.JTable cardJTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.ButtonGroup processCardRequestButtonGroup;
     private javax.swing.JLabel processCardRequestJLabel;
     private javax.swing.JButton processJButton;
     private javax.swing.JRadioButton rejectJRadioButton;
-    private javax.swing.JButton sendForVerificationJButton;
+    private javax.swing.JLabel verificationAdminJLabel;
     // End of variables declaration//GEN-END:variables
 }

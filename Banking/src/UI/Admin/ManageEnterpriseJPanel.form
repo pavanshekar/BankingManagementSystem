@@ -27,8 +27,13 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Component id="deleteJButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -39,10 +44,10 @@
                       </Group>
                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="usernameJTextField" max="32767" attributes="0"/>
                           <Component id="networkJComboBox" max="32767" attributes="0"/>
-                          <Component id="roleJComboBox" min="-2" pref="100" max="-2" attributes="0"/>
-                          <Component id="jPasswordField" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="usernameJTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPasswordField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="roleJComboBox" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -52,12 +57,7 @@
                       <Component id="updateJButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Component id="deleteJButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -181,12 +181,13 @@
     <Component class="javax.swing.JComboBox" name="roleJComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="6">
             <StringItem index="0" value="BankingAdmin"/>
             <StringItem index="1" value="CardAdmin"/>
             <StringItem index="2" value="LoanAdmin"/>
-            <StringItem index="3" value="VerificationAdmin"/>
-            <StringItem index="4" value="Customer"/>
+            <StringItem index="3" value="CardVerificationAdmin"/>
+            <StringItem index="4" value="LoanVerificationAdmin"/>
+            <StringItem index="5" value="Customer"/>
           </StringArray>
         </Property>
       </Properties>
