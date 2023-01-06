@@ -334,4 +334,31 @@ public class Db {
         return rs;
     }
     
+    public ResultSet getLoans() {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Loan");
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public void updateLoanStatus(String loanNo, String status){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Loan set status=? where loanNo=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, status);
+            st.setString(2, loanNo);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
 }

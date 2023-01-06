@@ -69,4 +69,13 @@ public class Loan {
         return rs;
     }
     
+    public ResultSet getLoans() {
+        ResultSet rs = db.getLoans();
+        return rs;
+    }
+    
+    public void updateLoanStatus(String loanNo, String status){
+        db.updateLoanStatus(loanNo, status);
+    }
+    
 }
