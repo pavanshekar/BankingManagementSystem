@@ -11,6 +11,7 @@ package UI;
 import Model.Enterprise;
 import UI.Admin.AdminJPanel;
 import UI.BankingAdmin.BankingAdminJPanel;
+import UI.CardAdmin.CardAdminJPanel;
 import UI.Customer.CustomerJPanel;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
     AdminJPanel adminJPanel;
     BankingAdminJPanel bankingAdminJPanel;
     CustomerJPanel customerJPanel;
+    CardAdminJPanel cardAdminJPanel;
     Enterprise employee = new Enterprise();
     
     public MainJFrame() {
@@ -178,6 +180,16 @@ public class MainJFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
                     customerJPanel = new CustomerJPanel(workJPanel, username);
                     workJPanel.add("workArea", customerJPanel);
+                    layout.next(workJPanel);
+                }
+                else if(role.equals("CardAdmin")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    cardAdminJPanel = new CardAdminJPanel(workJPanel);
+                    workJPanel.add("workArea", cardAdminJPanel);
                     layout.next(workJPanel);
                 }
                 else{

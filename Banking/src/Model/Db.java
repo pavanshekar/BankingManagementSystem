@@ -261,7 +261,7 @@ public class Db {
         }
     }
     
-    public ResultSet getCards(String accNo) {
+    public ResultSet getCustomerCards(String accNo) {
         ResultSet rs = null;
         try {
             Connection connection = getConnection();
@@ -274,6 +274,33 @@ public class Db {
             System.out.println(e);
         }
         return rs;
+    }
+    
+    public ResultSet getCards() {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Card");
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public void updateStatus(String cardNo, String status){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Card set status=? where cardNo=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, status);
+            st.setString(2, cardNo);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
     
 }

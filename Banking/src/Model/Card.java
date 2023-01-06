@@ -55,9 +55,18 @@ public class Card {
         db.addCard(accNo, cardNo, cardType, status);
     }
     
-    public ResultSet getCards(String accNo) {
-        ResultSet rs = db.getCards(accNo);
+    public ResultSet getCustomerCards(String accNo) {
+        ResultSet rs = db.getCustomerCards(accNo);
         return rs;
+    }
+    
+    public ResultSet getCards() {
+        ResultSet rs = db.getCards();
+        return rs;
+    }
+    
+    public void updateStatus(String cardNo, String status){
+        db.updateStatus(cardNo, status);
     }
     
 }

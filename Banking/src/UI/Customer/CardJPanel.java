@@ -184,7 +184,7 @@ public class CardJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         
         try{
-            ResultSet rs = card.getCards(accNo);
+            ResultSet rs = card.getCustomerCards(accNo);
             while(rs.next()){
             Object[] rows = new Object[3];
             rows[0]= rs.getString(1);
