@@ -246,4 +246,34 @@ public class Db {
         }
     }
     
+    public void addCard(String accNo, String cardNo, String cardType, String status) {
+        try {
+            Connection connection = getConnection();
+            String sql = "insert into Card values(?,?,?,?)";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, accNo);
+            st.setString(2, cardNo);
+            st.setString(3, cardType);
+            st.setString(4, status);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public ResultSet getCards(String accNo) {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Card where accNo=? and status=?");
+            st.setString(1, accNo);
+            st.setString(2, "Approved");
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
 }

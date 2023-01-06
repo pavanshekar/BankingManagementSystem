@@ -4,8 +4,14 @@
  */
 package UI.Customer;
 
+import Model.Card;
+import Model.Customer;
 import java.awt.CardLayout;
+import java.sql.ResultSet;
 import javax.swing.JPanel;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,11 +25,26 @@ public class CardJPanel extends javax.swing.JPanel {
     
     private JPanel workJPanel;
     private String username;
+    private String accNo;
+    
+    Customer customer = new Customer();
+    Card card = new Card();
     
     public CardJPanel(JPanel workJPanel, String username) {
         initComponents();
         this.workJPanel = workJPanel;
         this.username = username;
+        try{
+            ResultSet rs = customer.getCustomerDetails(username);
+            while(rs.next()){
+                accNo = String.valueOf(rs.getString(1));
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        populateCardTable();
     }
 
     /**
@@ -37,6 +58,12 @@ public class CardJPanel extends javax.swing.JPanel {
 
         cardJLabel = new javax.swing.JLabel();
         backJButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cardJTable = new javax.swing.JTable();
+        cardApplyJLabel = new javax.swing.JLabel();
+        cardTypeJLabel = new javax.swing.JLabel();
+        cardTypeJComboBox = new javax.swing.JComboBox<>();
+        applyJButton = new javax.swing.JButton();
 
         cardJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         cardJLabel.setText("Cards");
@@ -48,28 +75,83 @@ public class CardJPanel extends javax.swing.JPanel {
             }
         });
 
+        cardJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Acc No", "Card No", "Card Type"
+            }
+        ));
+        jScrollPane1.setViewportView(cardJTable);
+
+        cardApplyJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        cardApplyJLabel.setText("Apply for Credit/Debit Cards");
+
+        cardTypeJLabel.setText("Card Type");
+
+        cardTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Black", "Silver", "Gold", "Platinum" }));
+
+        applyJButton.setText("Apply");
+        applyJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(256, 256, 256)
                         .addComponent(cardJLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(18, 18, 18)
                         .addComponent(backJButton)))
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(202, 202, 202)
+                .addComponent(cardTypeJLabel)
+                .addGap(62, 62, 62)
+                .addComponent(cardTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 138, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cardApplyJLabel)
+                        .addGap(136, 136, 136))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(applyJButton)
+                        .addGap(263, 263, 263))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(cardJLabel)
-                .addGap(35, 35, 35)
+                .addGap(15, 15, 15)
                 .addComponent(backJButton)
-                .addContainerGap(486, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(cardApplyJLabel)
+                .addGap(80, 80, 80)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cardTypeJLabel)
+                    .addComponent(cardTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addComponent(applyJButton)
+                .addContainerGap(90, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -80,9 +162,52 @@ public class CardJPanel extends javax.swing.JPanel {
         layout.previous(workJPanel);
     }//GEN-LAST:event_backJButtonActionPerformed
 
+    private void applyJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyJButtonActionPerformed
+        // TODO add your handling code here:
+        String cardType = (String) cardTypeJComboBox.getSelectedItem();
+        Random r = new Random();
+        int postfix = 1000 + r.nextInt(10000);
+        String cardNo = "37272494357"+String.valueOf(postfix);
+        String status = "Sent to Card Admin";
+        
+        card.addCard(accNo, cardNo, cardType, status);
+        
+        JOptionPane.showMessageDialog(this, "Credit card application request sent");
+        
+        populateCardTable();
+    }//GEN-LAST:event_applyJButtonActionPerformed
+
+    
+    private void populateCardTable() {
+        DefaultTableModel model = (DefaultTableModel) cardJTable.getModel();
+
+        model.setRowCount(0);
+        
+        try{
+            ResultSet rs = card.getCards(accNo);
+            while(rs.next()){
+            Object[] rows = new Object[3];
+            rows[0]= rs.getString(1);
+            rows[1]= rs.getString(2);
+            rows[2]= rs.getString(3);
+            model.addRow(rows);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton applyJButton;
     private javax.swing.JButton backJButton;
+    private javax.swing.JLabel cardApplyJLabel;
     private javax.swing.JLabel cardJLabel;
+    private javax.swing.JTable cardJTable;
+    private javax.swing.JComboBox<String> cardTypeJComboBox;
+    private javax.swing.JLabel cardTypeJLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

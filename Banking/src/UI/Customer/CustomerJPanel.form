@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="cardsJButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Credit/Debit Cards"/>
+        <Property name="text" type="java.lang.String" value="Credit Card"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cardsJButtonActionPerformed"/>

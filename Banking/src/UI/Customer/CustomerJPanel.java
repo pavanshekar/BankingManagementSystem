@@ -71,7 +71,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        cardsJButton.setText("Credit/Debit Cards");
+        cardsJButton.setText("Credit Card");
         cardsJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cardsJButtonActionPerformed(evt);
