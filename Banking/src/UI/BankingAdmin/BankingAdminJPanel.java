@@ -251,135 +251,169 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
 
     private void updateCustomerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCustomerJButtonActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) customerJTable.getModel();
-        int selectedRowIndex = customerJTable.getSelectedRow();
+        try{
+            ResultSet rs1 = enterprise.checkIfUsernameIsUnique(usernameJTextField.getText());
+            boolean usernameNotExists = !rs1.isBeforeFirst() && rs1.getRow() == 0;
+            
+            ResultSet rs2 = customer.checkIfAccNoIsUnique(accNoJTextField.getText());
+            boolean accNoNotExists = !rs2.isBeforeFirst() && rs2.getRow() == 0;
 
-        if(selectedRowIndex<0) {
-            JOptionPane.showMessageDialog(this,"Please select a row to update.");
-            return;
-        }
+            DefaultTableModel model = (DefaultTableModel) customerJTable.getModel();
+            int selectedRowIndex = customerJTable.getSelectedRow();
 
-        if(accNoJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the AccNo");
-        }
-        else if(balanceJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the balance");
-        }
-        else if(fNameJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the first name");
-        }
-        else if(lNameJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the last name");
-        }
-        else if(emailJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the email");
-        }
-        else if(phNoJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the phone number");
-        }
-        else if(addressJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the address");
-        }
-        else if(usernameJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the username");
-        }
-        else if(jPasswordField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the password");
-        }
-        else{
+            if(selectedRowIndex<0) {
+                JOptionPane.showMessageDialog(this,"Please select a row to update.");
+                return;
+            }
 
-            String condition = model.getValueAt(selectedRowIndex, 6).toString();
-            String accNo = accNoJTextField.getText();
-            int balance = Integer.parseInt(balanceJTextField.getText());
-            String fname = fNameJTextField.getText();
-            String lname = lNameJTextField.getText();
-            String email = emailJTextField.getText();
-            String phNo = phNoJTextField.getText();
-            String address = addressJTextField.getText();
-            String username = usernameJTextField.getText();
-            String password = jPasswordField.getText();
-            String role = "Customer";
-            String network = (String) networkJComboBox.getSelectedItem();
+            if(accNoJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the AccNo");
+            }
+            else if(!accNoNotExists){
+                JOptionPane.showMessageDialog(this, "Enter a unique Acc No");
+            }
+            else if(balanceJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the balance");
+            }
+            else if(fNameJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the first name");
+            }
+            else if(lNameJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the last name");
+            }
+            else if(emailJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the email");
+            }
+            else if(phNoJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the phone number");
+            }
+            else if(addressJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the address");
+            }
+            else if(usernameJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the username");
+            }
+            else if(!usernameNotExists){
+                JOptionPane.showMessageDialog(this, "Enter a unique username");
+            }
+            else if(jPasswordField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the password");
+            }
+            else{
 
-            enterprise.updateEnterprise(condition, username, password, role, network);
-            customer.updateCustomer(condition, accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
+                String condition = model.getValueAt(selectedRowIndex, 6).toString();
+                String accNo = accNoJTextField.getText();
+                int balance = Integer.parseInt(balanceJTextField.getText());
+                String fname = fNameJTextField.getText();
+                String lname = lNameJTextField.getText();
+                String email = emailJTextField.getText();
+                String phNo = phNoJTextField.getText();
+                String address = addressJTextField.getText();
+                String username = usernameJTextField.getText();
+                String password = jPasswordField.getText();
+                String role = "Customer";
+                String network = (String) networkJComboBox.getSelectedItem();
 
-            JOptionPane.showMessageDialog(this,"Customer Details updated.");
+                enterprise.updateEnterprise(condition, username, password, role, network);
+                customer.updateCustomer(condition, accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
 
-            populateCustomerTable();
+                JOptionPane.showMessageDialog(this,"Customer Details updated.");
 
-            accNoJTextField.setText("");
-            balanceJTextField.setText("");
-            fNameJTextField.setText("");
-            lNameJTextField.setText("");
-            emailJTextField.setText("");
-            phNoJTextField.setText("");
-            addressJTextField.setText("");
-            usernameJTextField.setText("");
-            jPasswordField.setText("");
+                populateCustomerTable();
+
+                accNoJTextField.setText("");
+                balanceJTextField.setText("");
+                fNameJTextField.setText("");
+                lNameJTextField.setText("");
+                emailJTextField.setText("");
+                phNoJTextField.setText("");
+                addressJTextField.setText("");
+                usernameJTextField.setText("");
+                jPasswordField.setText("");
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
         }
     }//GEN-LAST:event_updateCustomerJButtonActionPerformed
 
     private void addCustomerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerJButtonActionPerformed
         // TODO add your handling code here:
-        if(accNoJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the AccNo");
-        }
-        else if(balanceJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the balance");
-        }
-        else if(fNameJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the first name");
-        }
-        else if(lNameJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the last name");
-        }
-        else if(emailJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the email");
-        }
-        else if(phNoJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the phone number");
-        }
-        else if(addressJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the address");
-        }
-        else if(usernameJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the username");
-        }
-        else if(jPasswordField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the password");
-        } 
-        else{
+        try{
+            ResultSet rs1 = enterprise.checkIfUsernameIsUnique(usernameJTextField.getText());
+            boolean usernameNotExists = !rs1.isBeforeFirst() && rs1.getRow() == 0;
             
-            String accNo = accNoJTextField.getText();
-            int balance = Integer.parseInt(balanceJTextField.getText());
-            String fname = fNameJTextField.getText();
-            String lname = lNameJTextField.getText();
-            String email = emailJTextField.getText();
-            String phNo = phNoJTextField.getText();
-            String address = addressJTextField.getText();
-            String username = usernameJTextField.getText();
-            String password = jPasswordField.getText();
-            String role = "Customer";
-            String network = (String) networkJComboBox.getSelectedItem();
+            ResultSet rs2 = customer.checkIfAccNoIsUnique(accNoJTextField.getText());
+            boolean accNoNotExists = !rs2.isBeforeFirst() && rs2.getRow() == 0;
             
-            enterprise.addEnterprise(username, password, role, network);
-            customer.addCustomer(accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
-
-            JOptionPane.showMessageDialog(this, "Customer added successfully");
-
-            accNoJTextField.setText("");
-            balanceJTextField.setText("");
-            fNameJTextField.setText("");
-            lNameJTextField.setText("");
-            emailJTextField.setText("");
-            phNoJTextField.setText("");
-            addressJTextField.setText("");
-            usernameJTextField.setText("");
-            jPasswordField.setText("");
-                
-            populateCustomerTable();
+            if(accNoJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the AccNo");
             }
+            else if(!accNoNotExists){
+                JOptionPane.showMessageDialog(this, "Enter a unique Acc No");
+            }
+            else if(balanceJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the balance");
+            }
+            else if(fNameJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the first name");
+            }
+            else if(lNameJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the last name");
+            }
+            else if(emailJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the email");
+            }
+            else if(phNoJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the phone number");
+            }
+            else if(addressJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the address");
+            }
+            else if(usernameJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the username");
+            }
+            else if(!usernameNotExists){
+                JOptionPane.showMessageDialog(this, "Enter a unique username");
+            }
+            else if(jPasswordField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the password");
+            } 
+            else{
+
+                String accNo = accNoJTextField.getText();
+                int balance = Integer.parseInt(balanceJTextField.getText());
+                String fname = fNameJTextField.getText();
+                String lname = lNameJTextField.getText();
+                String email = emailJTextField.getText();
+                String phNo = phNoJTextField.getText();
+                String address = addressJTextField.getText();
+                String username = usernameJTextField.getText();
+                String password = jPasswordField.getText();
+                String role = "Customer";
+                String network = (String) networkJComboBox.getSelectedItem();
+
+                enterprise.addEnterprise(username, password, role, network);
+                customer.addCustomer(accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
+
+                JOptionPane.showMessageDialog(this, "Customer added successfully");
+
+                accNoJTextField.setText("");
+                balanceJTextField.setText("");
+                fNameJTextField.setText("");
+                lNameJTextField.setText("");
+                emailJTextField.setText("");
+                phNoJTextField.setText("");
+                addressJTextField.setText("");
+                usernameJTextField.setText("");
+                jPasswordField.setText("");
+
+                populateCustomerTable();
+                }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }//GEN-LAST:event_addCustomerJButtonActionPerformed
 
     public void populateNetworkComboBox() {

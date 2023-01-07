@@ -175,20 +175,25 @@ public class LoanJPanel extends javax.swing.JPanel {
 
     private void applyJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyJButtonActionPerformed
         // TODO add your handling code here:
-        String loanType = (String) loanTypeJComboBox.getSelectedItem();
-        String loanAmount = loanAmountJTextField.getText();
-        Random r = new Random();
-        int postfix = 10000 + r.nextInt(10000);
-        String loanNo = "L"+String.valueOf(postfix);
-        String status = "Sent to Loan Admin";
-        
-        loan.applyLoan(accNo, loanNo, loanType, loanAmount, status);
-        
-        JOptionPane.showMessageDialog(this, "Loan application request sent");
-        
-        populateLoanTable();
-        
-        loanAmountJTextField.setText("");
+        if(loanAmountJTextField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Enter the loan amount");
+        }
+        else{
+            String loanType = (String) loanTypeJComboBox.getSelectedItem();
+            String loanAmount = loanAmountJTextField.getText();
+            Random r = new Random();
+            int postfix = 10000 + r.nextInt(10000);
+            String loanNo = "L"+String.valueOf(postfix);
+            String status = "Sent to Loan Admin";
+
+            loan.applyLoan(accNo, loanNo, loanType, loanAmount, status);
+
+            JOptionPane.showMessageDialog(this, "Loan application request sent");
+
+            populateLoanTable();
+
+            loanAmountJTextField.setText("");
+        }
     }//GEN-LAST:event_applyJButtonActionPerformed
 
     private void populateLoanTable() {

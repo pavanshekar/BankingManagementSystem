@@ -390,4 +390,32 @@ public class Db {
         return rs;
     }
     
+    public ResultSet checkIfUsernameIsUnique(String username){
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Enterprise where username=?");
+            st.setString(1, username);
+            rs = st.executeQuery();     
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public ResultSet checkIfAccNoIsUnique(String accNo){
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Customer where AccNo=?");
+            st.setString(1, accNo);
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
 }

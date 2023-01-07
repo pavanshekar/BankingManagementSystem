@@ -92,4 +92,9 @@ public class Enterprise {
         db.deleteEnterprise(username);
     }
     
+    public ResultSet checkIfUsernameIsUnique(String username){
+        ResultSet rs = db.checkIfUsernameIsUnique(username);
+        return rs;
+    }
+    
 }

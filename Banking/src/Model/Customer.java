@@ -140,4 +140,9 @@ public class Customer {
         db.updateAccountBalance(username, updatedBalance);
     }
     
+    public ResultSet checkIfAccNoIsUnique(String accNo ){
+        ResultSet rs = db.checkIfAccNoIsUnique(accNo);
+        return rs;
+    }
+    
 }

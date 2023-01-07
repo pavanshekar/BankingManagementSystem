@@ -200,9 +200,15 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
         // TODO add your handling code here:
-        
+        try{
+            ResultSet rs = enterprise.checkIfUsernameIsUnique(usernameJTextField.getText());
+            boolean notExists = !rs.isBeforeFirst() && rs.getRow() == 0;
+            
             if(usernameJTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter a valid username");
+            }
+            else if(!notExists){
+                JOptionPane.showMessageDialog(this, "Enter a unique username");
             }
             else if(jPasswordField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter a valid password");
@@ -222,6 +228,10 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 
                 populateEnterpriseTable();
             }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void roleJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleJComboBoxActionPerformed
@@ -230,36 +240,47 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
     private void updateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateJButtonActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) enterpriseJTable.getModel();
-        int selectedRowIndex = enterpriseJTable.getSelectedRow();
+        try{
+            ResultSet rs = enterprise.checkIfUsernameIsUnique(usernameJTextField.getText());
+            boolean notExists = !rs.isBeforeFirst() && rs.getRow() == 0;
+            
+            DefaultTableModel model = (DefaultTableModel) enterpriseJTable.getModel();
+            int selectedRowIndex = enterpriseJTable.getSelectedRow();
 
-        if(selectedRowIndex<0) {
-            JOptionPane.showMessageDialog(this,"Please select a row to update.");
-            return;
+            if(selectedRowIndex<0) {
+                JOptionPane.showMessageDialog(this,"Please select a row to update.");
+                return;
+            }
+
+            if(usernameJTextField.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Enter the username");
+            }
+            else if(!notExists){
+                JOptionPane.showMessageDialog(this, "Enter a unique username");
+            }
+            else if(jPasswordField.getText().equals((""))){
+                JOptionPane.showMessageDialog(this, "Enter the password");
+            }
+            else{
+
+                String condition = model.getValueAt(selectedRowIndex, 0).toString();
+                String username = usernameJTextField.getText();
+                String password = jPasswordField.getText();
+                String network = (String) networkJComboBox.getSelectedItem();
+                String role = (String) roleJComboBox.getSelectedItem();
+
+                enterprise.updateEnterprise(condition, username, password, role, network);
+
+                JOptionPane.showMessageDialog(this,"Enterprise Details updated.");
+
+                populateEnterpriseTable();
+
+                usernameJTextField.setText("");
+                jPasswordField.setText("");
+            }
         }
-
-        if(usernameJTextField.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Enter the username");
-        }
-        else if(jPasswordField.getText().equals((""))){
-            JOptionPane.showMessageDialog(this, "Enter the password");
-        }
-        else{
-
-            String condition = model.getValueAt(selectedRowIndex, 0).toString();
-            String username = usernameJTextField.getText();
-            String password = jPasswordField.getText();
-            String network = (String) networkJComboBox.getSelectedItem();
-            String role = (String) roleJComboBox.getSelectedItem();
-
-            enterprise.updateEnterprise(condition, username, password, role, network);
-
-            JOptionPane.showMessageDialog(this,"Enterprise Details updated.");
-
-            populateEnterpriseTable();
-
-            usernameJTextField.setText("");
-            jPasswordField.setText("");
+        catch(Exception e){
+            System.out.println(e);
         }
     }//GEN-LAST:event_updateJButtonActionPerformed
 
