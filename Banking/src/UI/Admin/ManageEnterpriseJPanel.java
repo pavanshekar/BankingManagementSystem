@@ -57,6 +57,8 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         updateJButton = new javax.swing.JButton();
         deleteJButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 204, 204));
+
         enterpriseJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -90,7 +92,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
         roleJLabel.setText("Role");
 
-        roleJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BankingAdmin", "CardAdmin", "LoanAdmin", "CardVerificationAdmin", "LoanVerificationAdmin", "Customer" }));
+        roleJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BankingAdmin", "CardAdmin", "LoanAdmin", "CardVerificationAdmin", "LoanVerificationAdmin" }));
         roleJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roleJComboBoxActionPerformed(evt);
@@ -154,7 +156,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                         .addComponent(addJButton)
                         .addGap(46, 46, 46)
                         .addComponent(updateJButton)))
-                .addGap(159, 159, 159))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +167,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(deleteJButton)
-                .addGap(17, 17, 17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(networkJLabel)
                     .addComponent(networkJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -181,7 +183,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(roleJLabel)
                     .addComponent(roleJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(18, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addJButton)
                     .addComponent(updateJButton))

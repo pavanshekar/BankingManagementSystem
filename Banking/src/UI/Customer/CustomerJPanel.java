@@ -47,6 +47,8 @@ public class CustomerJPanel extends javax.swing.JPanel {
         cardsJButton = new javax.swing.JButton();
         loanJButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 204, 204));
+
         customerJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         customerJLabel.setText("Customer");
 
@@ -71,6 +73,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        cardsJButton.setBackground(new java.awt.Color(204, 204, 204));
         cardsJButton.setText("Credit Card");
         cardsJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,13 +93,13 @@ public class CustomerJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(249, 249, 249)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(customerJLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(235, Short.MAX_VALUE)
+                        .addContainerGap(227, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(depositJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(accInfoJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -106,7 +109,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
                             .addComponent(loanJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(withdrawJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cardsJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
-                .addGap(219, 219, 219))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

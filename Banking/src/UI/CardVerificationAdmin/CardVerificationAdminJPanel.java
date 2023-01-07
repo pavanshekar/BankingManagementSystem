@@ -48,6 +48,8 @@ public class CardVerificationAdminJPanel extends javax.swing.JPanel {
         rejectJRadioButton = new javax.swing.JRadioButton();
         processJButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 204, 204));
+
         verificationAdminJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         verificationAdminJLabel.setText("Card Verification Admin");
 
@@ -74,6 +76,7 @@ public class CardVerificationAdminJPanel extends javax.swing.JPanel {
         rejectJRadioButton.setText("Reject");
         rejectJRadioButton.setActionCommand("Reject");
 
+        processJButton.setBackground(new java.awt.Color(204, 204, 204));
         processJButton.setText("Process");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +89,11 @@ public class CardVerificationAdminJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(verificationAdminJLabel)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -94,21 +101,18 @@ public class CardVerificationAdminJPanel extends javax.swing.JPanel {
                         .addGap(70, 70, 70)
                         .addComponent(approveJRadioButton)
                         .addGap(18, 18, 18)
-                        .addComponent(rejectJRadioButton)
-                        .addGap(119, 119, 119))
+                        .addComponent(rejectJRadioButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(processJButton)
-                        .addGap(257, 257, 257))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(verificationAdminJLabel)
-                        .addGap(163, 163, 163))))
+                        .addGap(138, 138, 138)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(43, 43, 43)
                 .addComponent(verificationAdminJLabel)
-                .addGap(59, 59, 59)
+                .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(120, 120, 120)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

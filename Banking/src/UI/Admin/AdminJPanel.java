@@ -34,12 +34,11 @@ public class AdminJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        adminJLabel = new javax.swing.JLabel();
         networkButton = new javax.swing.JButton();
         enterpriseButton = new javax.swing.JButton();
+        adminJLabel = new javax.swing.JLabel();
 
-        adminJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        adminJLabel.setText("Admin");
+        setBackground(new java.awt.Color(204, 204, 204));
 
         networkButton.setText("Manage Network");
         networkButton.addActionListener(new java.awt.event.ActionListener() {
@@ -55,27 +54,30 @@ public class AdminJPanel extends javax.swing.JPanel {
             }
         });
 
+        adminJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        adminJLabel.setText("Admin");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(259, 259, 259)
-                .addComponent(adminJLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(103, 103, 103)
                 .addComponent(networkButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(enterpriseButton)
                 .addGap(100, 100, 100))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(adminJLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(adminJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172)
+                .addGap(107, 107, 107)
+                .addComponent(adminJLabel)
+                .addGap(123, 123, 123)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(networkButton)
                     .addComponent(enterpriseButton))

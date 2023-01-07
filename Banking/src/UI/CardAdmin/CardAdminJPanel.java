@@ -49,6 +49,8 @@ public class CardAdminJPanel extends javax.swing.JPanel {
         processJButton = new javax.swing.JButton();
         sendForVerificationJButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 204, 204));
+
         cardAdminJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         cardAdminJLabel.setText("Card Admin");
 
@@ -65,16 +67,20 @@ public class CardAdminJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(cardJTable);
 
+        processCardRequestJLabel.setBackground(new java.awt.Color(204, 204, 204));
         processCardRequestJLabel.setText("Process Card Request");
 
+        approveJRadioButton.setBackground(new java.awt.Color(204, 204, 204));
         processCardRequestButtonGroup.add(approveJRadioButton);
         approveJRadioButton.setText("Approve");
         approveJRadioButton.setActionCommand("Approve");
 
+        rejectJRadioButton.setBackground(new java.awt.Color(204, 204, 204));
         processCardRequestButtonGroup.add(rejectJRadioButton);
         rejectJRadioButton.setText("Reject");
         rejectJRadioButton.setActionCommand("Reject");
 
+        processJButton.setBackground(new java.awt.Color(204, 204, 204));
         processJButton.setText("Process");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +88,7 @@ public class CardAdminJPanel extends javax.swing.JPanel {
             }
         });
 
+        sendForVerificationJButton.setBackground(new java.awt.Color(204, 204, 204));
         sendForVerificationJButton.setText("Send for Verification");
         sendForVerificationJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,25 +100,27 @@ public class CardAdminJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(239, 239, 239)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cardAdminJLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 132, Short.MAX_VALUE)
-                .addComponent(processCardRequestJLabel)
-                .addGap(70, 70, 70)
-                .addComponent(approveJRadioButton)
-                .addGap(18, 18, 18)
-                .addComponent(rejectJRadioButton)
-                .addGap(116, 116, 116))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(processJButton)
-                .addGap(71, 71, 71)
-                .addComponent(sendForVerificationJButton)
-                .addGap(139, 139, 139))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(processCardRequestJLabel)
+                        .addGap(70, 70, 70)
+                        .addComponent(approveJRadioButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(rejectJRadioButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(processJButton)
+                        .addGap(71, 71, 71)
+                        .addComponent(sendForVerificationJButton)
+                        .addGap(23, 23, 23)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
