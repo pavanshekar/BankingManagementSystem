@@ -5,6 +5,7 @@
 package UI.Customer;
 
 import Model.Customer;
+import Model.Transaction;
 import java.awt.CardLayout;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -25,6 +26,7 @@ public class DepositJPanel extends javax.swing.JPanel {
     private int balance;
     
     Customer customer = new Customer();
+    Transaction transaction = new Transaction();
     
     public DepositJPanel(JPanel workJPanel, String username) {
         initComponents();
@@ -143,6 +145,7 @@ public class DepositJPanel extends javax.swing.JPanel {
             int depositAmount = Integer.parseInt(depositAmountJTextField.getText());
             int updatedBalance = balance+depositAmount;
             customer.updateAccountBalance(username, updatedBalance);
+            transaction.addTransaction(username, "Credit", depositAmount, updatedBalance);
             JOptionPane.showMessageDialog(this, "Amount has been deposited");
             populateAccountBalance();
             depositAmountJTextField.setText("");

@@ -361,4 +361,33 @@ public class Db {
         }
     }
     
+    public void addTransaction(String username, String transactionType, int transactionAmount, int balance) {
+        try {
+            Connection connection = getConnection();
+            String sql = "insert into Transaction values(?,?,?,?)";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, transactionType);
+            st.setInt(3, transactionAmount);
+            st.setInt(4, balance);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public ResultSet getCustomerTransactions(String username) {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Transaction where username=?");
+            st.setString(1, username);
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
 }

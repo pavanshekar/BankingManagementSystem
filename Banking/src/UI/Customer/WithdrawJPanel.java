@@ -5,6 +5,7 @@
 package UI.Customer;
 
 import Model.Customer;
+import Model.Transaction;
 import java.awt.CardLayout;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -25,6 +26,7 @@ public class WithdrawJPanel extends javax.swing.JPanel {
     private int balance;
     
     Customer customer = new Customer();
+    Transaction transaction = new Transaction();
     
     public WithdrawJPanel(JPanel workJPanel, String username) {
         initComponents();
@@ -144,6 +146,7 @@ public class WithdrawJPanel extends javax.swing.JPanel {
             else{
                 int updatedBalance = balance-withdrawalAmount;
                 customer.updateAccountBalance(username, updatedBalance);
+                transaction.addTransaction(username, "Debit", withdrawalAmount, updatedBalance);
                 JOptionPane.showMessageDialog(this, "Amount has been withdrawn");
                 populateAccountBalance();
                 withdrawAmountJTextField.setText("");
