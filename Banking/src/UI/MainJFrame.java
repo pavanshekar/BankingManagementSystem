@@ -17,6 +17,8 @@ import UI.CardVerificationAdmin.CardVerificationAdminJPanel;
 import UI.LoanAdmin.LoanAdminJPanel;
 import UI.LoanVerificationAdmin.LoanVerificationAdminJPanel;
 import java.awt.CardLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -274,6 +276,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
         workJPanel.removeAll();
         JPanel blankJP = new JPanel();
+        JLabel backGroundJLabel = new JLabel();
+        backGroundJLabel.setIcon(new ImageIcon(getClass().getResource("/UI/Images/workAreaBackground.jpg")));
+        blankJP.add(backGroundJLabel);
         workJPanel.add("blank", blankJP);
         CardLayout cardLayout = (CardLayout) workJPanel.getLayout();
         cardLayout.next(workJPanel);
