@@ -572,4 +572,18 @@ public class Db {
         return rs;
     }
     
+    public ResultSet getApprovedLoans() {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select LoanType, Count(*) as Count from Loan where Status=?");
+            st.setString(1, "Approved");
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
 }

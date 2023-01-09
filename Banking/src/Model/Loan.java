@@ -78,4 +78,9 @@ public class Loan {
         db.updateLoanStatus(loanNo, status);
     }
     
+    public ResultSet getApprovedLoans(){
+        ResultSet rs = db.getApprovedLoans();
+        return rs;
+    }
+    
 }
