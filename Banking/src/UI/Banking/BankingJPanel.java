@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.BankingAdmin;
+package UI.Banking;
 
 import Model.Customer;
 import Model.Enterprise;
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author pavansomashekar
  */
-public class BankingAdminJPanel extends javax.swing.JPanel {
+public class BankingJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form BankingAdminJPanel
@@ -28,7 +28,7 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
     Enterprise enterprise = new Enterprise();
     UserAccount userAccount = new UserAccount();
     
-    public BankingAdminJPanel(JPanel workJPanel) {
+    public BankingJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
         populateCustomerTable();
@@ -253,13 +253,7 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
 
     private void updateCustomerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCustomerJButtonActionPerformed
         // TODO add your handling code here:
-        try{
-            ResultSet rs1 = userAccount.checkIfUsernameIsUnique(usernameJTextField.getText());
-            boolean usernameNotExists = !rs1.isBeforeFirst() && rs1.getRow() == 0;
-            
-            ResultSet rs2 = customer.checkIfAccNoIsUnique(accNoJTextField.getText());
-            boolean accNoNotExists = !rs2.isBeforeFirst() && rs2.getRow() == 0;
-
+        
             DefaultTableModel model = (DefaultTableModel) customerJTable.getModel();
             int selectedRowIndex = customerJTable.getSelectedRow();
 
@@ -267,12 +261,8 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this,"Please select a row to update.");
                 return;
             }
-
             if(accNoJTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the AccNo");
-            }
-            else if(!accNoNotExists){
-                JOptionPane.showMessageDialog(this, "Enter a unique Acc No");
             }
             else if(balanceJTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the balance");
@@ -294,9 +284,6 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
             }
             else if(usernameJTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the username");
-            }
-            else if(!usernameNotExists){
-                JOptionPane.showMessageDialog(this, "Enter a unique username");
             }
             else if(jPasswordField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the password");
@@ -333,10 +320,7 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
                 usernameJTextField.setText("");
                 jPasswordField.setText("");
             }
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
+        
     }//GEN-LAST:event_updateCustomerJButtonActionPerformed
 
     private void addCustomerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerJButtonActionPerformed

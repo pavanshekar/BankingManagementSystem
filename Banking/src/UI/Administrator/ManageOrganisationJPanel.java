@@ -65,6 +65,11 @@ public class ManageOrganisationJPanel extends javax.swing.JPanel {
                 "Organisation"
             }
         ));
+        orgJTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orgJTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(orgJTable);
 
         orgJLabel.setText("Enter the organisation");
@@ -237,6 +242,15 @@ public class ManageOrganisationJPanel extends javax.swing.JPanel {
             orgJTextField.setText("");
         }
     }//GEN-LAST:event_updateJButtonActionPerformed
+
+    private void orgJTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orgJTableMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) orgJTable.getModel();
+        
+        int selectedRowIndex = orgJTable.getSelectedRow();
+        
+        orgJTextField.setText(model.getValueAt(selectedRowIndex, 0).toString());
+    }//GEN-LAST:event_orgJTableMouseClicked
 
     private void populateOrganisationTable() {
         DefaultTableModel model = (DefaultTableModel) orgJTable.getModel();

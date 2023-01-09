@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.CardVerificationAdmin;
+package UI.CardVerification;
 
 import Model.Card;
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author pavansomashekar
  */
-public class CardVerificationAdminJPanel extends javax.swing.JPanel {
+public class CardVerificationJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form VerificationAdminJPanel
@@ -24,7 +24,7 @@ public class CardVerificationAdminJPanel extends javax.swing.JPanel {
     Card card = new Card();
     private String action;
     
-    public CardVerificationAdminJPanel(JPanel workJPanel) {
+    public CardVerificationJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
         populateCardTable();
@@ -161,8 +161,11 @@ public class CardVerificationAdminJPanel extends javax.swing.JPanel {
         else if(status.equals("Rejected")){
             JOptionPane.showMessageDialog(this, "Credit card request has been rejected");
         }
-        else if(status.equals("Sent to Card Admin")){
-            JOptionPane.showMessageDialog(this, "Credit card request should be approved by Card Admin");
+        else if(status.equals("Sent to Card Officer")){
+            JOptionPane.showMessageDialog(this, "Credit card request should be approved by Card Officer");
+        }
+        else if(status.equals("Approved by Card Officer")){
+            JOptionPane.showMessageDialog(this, "Credit card request is not sent for verification");
         }
     }//GEN-LAST:event_processJButtonActionPerformed
 

@@ -4,7 +4,6 @@
  */
 package UI.SystemAdmin;
 
-import Model.Db;
 import Model.Enterprise;
 import Model.Network;
 import Model.UserAccount;
@@ -28,7 +27,6 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
     Network network = new Network();
     Enterprise enterprise = new Enterprise();
     UserAccount userAccount = new UserAccount();
-    Db db = new Db();
 
     public ManageEnterpriseJPanel(JPanel workJPanel) {
         initComponents();
@@ -266,10 +264,6 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
     private void updateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateJButtonActionPerformed
         // TODO add your handling code here:
-        try{
-            ResultSet rs = userAccount.checkIfUsernameIsUnique(usernameJTextField.getText());
-            boolean notExists = !rs.isBeforeFirst() && rs.getRow() == 0;
-            
             DefaultTableModel model = (DefaultTableModel) enterpriseJTable.getModel();
             int selectedRowIndex = enterpriseJTable.getSelectedRow();
 
@@ -284,16 +278,13 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
             else if(usernameJTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the username");
             }
-            else if(!notExists){
-                JOptionPane.showMessageDialog(this, "Enter a unique username");
-            }
             else if(jPasswordField.getText().equals((""))){
                 JOptionPane.showMessageDialog(this, "Enter the password");
             }
             else{
 
-                String condition1 = model.getValueAt(selectedRowIndex, 0).toString();
-                String condition2 = model.getValueAt(selectedRowIndex, 1).toString();
+                String condition1 = model.getValueAt(selectedRowIndex, 1).toString();
+                String condition2 = model.getValueAt(selectedRowIndex, 2).toString();
                 String username = usernameJTextField.getText();
                 String password = jPasswordField.getText();
                 String network = (String) networkJComboBox.getSelectedItem();
@@ -312,10 +303,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 usernameJTextField.setText("");
                 jPasswordField.setText("");
             }
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
+        
     }//GEN-LAST:event_updateJButtonActionPerformed
 
     private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed
@@ -348,8 +336,8 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         
         int selectedRowIndex = enterpriseJTable.getSelectedRow();
         
-        enterpriseJTextField.setText(model.getValueAt(selectedRowIndex, 0).toString());
-        usernameJTextField.setText(model.getValueAt(selectedRowIndex, 1).toString());
+        enterpriseJTextField.setText(model.getValueAt(selectedRowIndex, 1).toString());
+        usernameJTextField.setText(model.getValueAt(selectedRowIndex, 2).toString());
     }//GEN-LAST:event_enterpriseJTableMouseClicked
 
     private void populateEnterpriseTable() {

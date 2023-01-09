@@ -67,6 +67,11 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                 "Username", "Role"
             }
         ));
+        employeeJTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                employeeJTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(employeeJTable);
 
         passwordJLabel.setText("Password");
@@ -255,10 +260,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
 
     private void updateJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateJButtonActionPerformed
         // TODO add your handling code here:
-        try{
-            ResultSet rs = userAccount.checkIfUsernameIsUnique(usernameJTextField.getText());
-            boolean notExists = !rs.isBeforeFirst() && rs.getRow() == 0;
-            
+        
             DefaultTableModel model = (DefaultTableModel) employeeJTable.getModel();
             int selectedRowIndex = employeeJTable.getSelectedRow();
 
@@ -269,9 +271,6 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
 
             if(usernameJTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the username");
-            }
-            else if(!notExists){
-                JOptionPane.showMessageDialog(this, "Enter a unique username");
             }
             else if(jPasswordField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the password");
@@ -320,11 +319,17 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                 usernameJTextField.setText("");
                 jPasswordField.setText("");
             }
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
+        
     }//GEN-LAST:event_updateJButtonActionPerformed
+
+    private void employeeJTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeJTableMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) employeeJTable.getModel();
+        
+        int selectedRowIndex = employeeJTable.getSelectedRow();
+        
+        usernameJTextField.setText(model.getValueAt(selectedRowIndex, 0).toString());
+    }//GEN-LAST:event_employeeJTableMouseClicked
 
     private void populateEmployeeTable() {
         DefaultTableModel model = (DefaultTableModel) employeeJTable.getModel();
