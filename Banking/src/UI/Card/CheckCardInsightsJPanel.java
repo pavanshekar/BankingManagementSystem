@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.Loan;
+package UI.Card;
 
-import Model.Loan;
+import Model.Card;
 import java.awt.CardLayout;
 import java.sql.ResultSet;
 import javax.swing.JPanel;
@@ -17,16 +17,16 @@ import org.jfree.data.general.DefaultPieDataset;
  *
  * @author pavansomashekar
  */
-public class CheckLoanInsightsJPanel extends javax.swing.JPanel {
+public class CheckCardInsightsJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form CheckLoanInsightsJPanel
+     * Creates new form CheckCardInsightsJPanel
      */
     
     private JPanel workJPanel;
-    Loan loan = new Loan();
+    Card card = new Card();
     
-    public CheckLoanInsightsJPanel(JPanel workJPanel) {
+    public CheckCardInsightsJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
         showPieChart();
@@ -41,14 +41,12 @@ public class CheckLoanInsightsJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        cardInsightsJLabel = new javax.swing.JLabel();
         chartArea = new javax.swing.JPanel();
-        backJButton1 = new javax.swing.JButton();
+        backJButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        jLabel1.setText("Loan Approval Insights");
+        cardInsightsJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        cardInsightsJLabel.setText("Credit Card Approval Insights");
 
         javax.swing.GroupLayout chartAreaLayout = new javax.swing.GroupLayout(chartArea);
         chartArea.setLayout(chartAreaLayout);
@@ -61,10 +59,10 @@ public class CheckLoanInsightsJPanel extends javax.swing.JPanel {
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
-        backJButton1.setText("Back");
-        backJButton1.addActionListener(new java.awt.event.ActionListener() {
+        backJButton.setText("Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backJButton1ActionPerformed(evt);
+                backJButtonActionPerformed(evt);
             }
         });
 
@@ -73,47 +71,49 @@ public class CheckLoanInsightsJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backJButton1)
-                    .addComponent(chartArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(cardInsightsJLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addComponent(chartArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(backJButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(backJButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGap(49, 49, 49)
+                .addComponent(cardInsightsJLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(backJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(chartArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButton1ActionPerformed
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         // TODO add your handling code here:
         workJPanel.remove(this);
         CardLayout layout = (CardLayout) workJPanel.getLayout();
         layout.previous(workJPanel);
-    }//GEN-LAST:event_backJButton1ActionPerformed
+    }//GEN-LAST:event_backJButtonActionPerformed
 
     private void showPieChart(){
         DefaultPieDataset pieDataSet = new DefaultPieDataset();
         try{
-            ResultSet rs = loan.getApprovedLoans();
+            ResultSet rs = card.getApprovedCards();
             int index=0;
             while(rs.next()){
-                String loanType = rs.getString(1);
+                String cardType = rs.getString(1);
                 int count = rs.getInt(2);
-                pieDataSet.setValue(loanType, count);
+                pieDataSet.setValue(cardType, count);
             }
-            JFreeChart chart = ChartFactory.createPieChart("Loans Approved", pieDataSet);
+            JFreeChart chart = ChartFactory.createPieChart("Credit Cards Approved", pieDataSet);
             ChartPanel panel = new ChartPanel(chart, 300, 200, 300, 200, 300, 200, true, true, true, true, false, true);
             panel.setSize(500, 400);
             chartArea.add(panel);
@@ -123,10 +123,10 @@ public class CheckLoanInsightsJPanel extends javax.swing.JPanel {
             System.out.println(e);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backJButton1;
+    private javax.swing.JButton backJButton;
+    private javax.swing.JLabel cardInsightsJLabel;
     private javax.swing.JPanel chartArea;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

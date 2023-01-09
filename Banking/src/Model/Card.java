@@ -69,4 +69,8 @@ public class Card {
         db.updateCardStatus(cardNo, status);
     }
     
+    public ResultSet getApprovedCards(){
+        ResultSet rs = db.getApprovedCards();
+        return rs;
+    }
 }

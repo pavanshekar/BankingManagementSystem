@@ -576,7 +576,21 @@ public class Db {
         ResultSet rs = null;
         try {
             Connection connection = getConnection();
-            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select LoanType, Count(*) as Count from Loan where Status=?");
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select LoanType, Count(*) as Count from Loan where Status=? group by LoanType");
+            st.setString(1, "Approved");
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public ResultSet getApprovedCards() {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select CardType, Count(*) as Count from Card where Status=? group by CardType");
             st.setString(1, "Approved");
             rs = st.executeQuery();
             return rs;

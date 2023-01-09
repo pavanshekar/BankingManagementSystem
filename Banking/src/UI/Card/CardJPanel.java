@@ -5,6 +5,7 @@
 package UI.Card;
 
 import Model.Card;
+import java.awt.CardLayout;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,6 +24,7 @@ public class CardJPanel extends javax.swing.JPanel {
     private JPanel workJPanel;
     Card card = new Card();
     private String action;
+    CheckCardInsightsJPanel checkCardInsightsJPanel;
     
     public CardJPanel(JPanel workJPanel) {
         initComponents();
@@ -48,6 +50,7 @@ public class CardJPanel extends javax.swing.JPanel {
         rejectJRadioButton = new javax.swing.JRadioButton();
         processJButton = new javax.swing.JButton();
         sendForVerificationJButton = new javax.swing.JButton();
+        checkInsightsJButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -96,6 +99,13 @@ public class CardJPanel extends javax.swing.JPanel {
             }
         });
 
+        checkInsightsJButton.setText("Check Insights");
+        checkInsightsJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkInsightsJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,12 +121,15 @@ public class CardJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(rejectJRadioButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(processJButton)
-                        .addGap(71, 71, 71)
-                        .addComponent(sendForVerificationJButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(checkInsightsJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(processJButton)
+                                .addGap(71, 71, 71)
+                                .addComponent(sendForVerificationJButton)))
                         .addGap(23, 23, 23)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cardAdminJLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -124,9 +137,9 @@ public class CardJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addComponent(cardAdminJLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -137,7 +150,9 @@ public class CardJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(processJButton)
                     .addComponent(sendForVerificationJButton))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(checkInsightsJButton)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,6 +228,14 @@ public class CardJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_sendForVerificationJButtonActionPerformed
 
+    private void checkInsightsJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkInsightsJButtonActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout=(CardLayout)workJPanel.getLayout();
+        checkCardInsightsJPanel = new CheckCardInsightsJPanel(workJPanel);
+        workJPanel.add("workArea", checkCardInsightsJPanel);
+        layout.next(workJPanel);
+    }//GEN-LAST:event_checkInsightsJButtonActionPerformed
+
     private void populateCardTable() {
         DefaultTableModel model = (DefaultTableModel) cardJTable.getModel();
 
@@ -240,6 +263,7 @@ public class CardJPanel extends javax.swing.JPanel {
     private javax.swing.JRadioButton approveJRadioButton;
     private javax.swing.JLabel cardAdminJLabel;
     private javax.swing.JTable cardJTable;
+    private javax.swing.JButton checkInsightsJButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.ButtonGroup processCardRequestButtonGroup;
     private javax.swing.JLabel processCardRequestJLabel;
