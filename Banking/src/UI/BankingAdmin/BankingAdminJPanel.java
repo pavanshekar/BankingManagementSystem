@@ -74,7 +74,7 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        jLabel1.setText("Banking Admin");
+        jLabel1.setText("Banking Officer");
 
         customerJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,9 +207,9 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(deleteCustomerJButton)

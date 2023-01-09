@@ -51,7 +51,7 @@ public class CardVerificationAdminJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(204, 204, 204));
 
         verificationAdminJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
-        verificationAdminJLabel.setText("Card Verification Admin");
+        verificationAdminJLabel.setText("Card Verification Officer");
 
         cardJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,17 +102,17 @@ public class CardVerificationAdminJPanel extends javax.swing.JPanel {
                         .addComponent(processJButton)
                         .addGap(138, 138, 138)))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(verificationAdminJLabel)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(verificationAdminJLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
