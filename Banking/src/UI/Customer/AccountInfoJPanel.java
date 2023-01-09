@@ -7,9 +7,12 @@ package UI.Customer;
 import Model.Customer;
 import Model.Transaction;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -31,6 +34,9 @@ public class AccountInfoJPanel extends javax.swing.JPanel {
         initComponents();
         this.workJPanel = workJPanel;
         this.username = username;
+        JTableHeader thead = transactionJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateTransactionTable();
         populateInfo();
         

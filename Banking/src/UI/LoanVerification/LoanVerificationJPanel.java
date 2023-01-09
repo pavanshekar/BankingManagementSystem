@@ -5,10 +5,13 @@
 package UI.LoanVerification;
 
 import Model.Loan;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -27,6 +30,9 @@ public class LoanVerificationJPanel extends javax.swing.JPanel {
     public LoanVerificationJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
+        JTableHeader thead = loanJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateLoanTable();
     }
 
@@ -76,6 +82,7 @@ public class LoanVerificationJPanel extends javax.swing.JPanel {
         rejectJRadioButton.setText("Reject");
         rejectJRadioButton.setActionCommand("Reject");
 
+        processJButton.setBackground(new java.awt.Color(204, 204, 0));
         processJButton.setText("Process");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,21 +101,19 @@ public class LoanVerificationJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(processLoanRequestJLabel)
-                                .addGap(70, 70, 70)
-                                .addComponent(approveJRadioButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(rejectJRadioButton))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(processJButton)
-                                .addGap(140, 140, 140)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(processLoanRequestJLabel)
+                                    .addGap(70, 70, 70)
+                                    .addComponent(approveJRadioButton)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(rejectJRadioButton))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(processJButton)
+                                    .addGap(140, 140, 140)))
+                            .addComponent(jLabel1))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

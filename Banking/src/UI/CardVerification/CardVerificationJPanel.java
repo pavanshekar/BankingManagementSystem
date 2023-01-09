@@ -5,10 +5,13 @@
 package UI.CardVerification;
 
 import Model.Card;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -27,6 +30,9 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
     public CardVerificationJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
+        JTableHeader thead = cardJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateCardTable();
     }
 
@@ -76,7 +82,7 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
         rejectJRadioButton.setText("Reject");
         rejectJRadioButton.setActionCommand("Reject");
 
-        processJButton.setBackground(new java.awt.Color(204, 204, 204));
+        processJButton.setBackground(new java.awt.Color(204, 204, 0));
         processJButton.setText("Process");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

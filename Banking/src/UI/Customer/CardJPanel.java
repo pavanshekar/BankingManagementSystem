@@ -7,11 +7,14 @@ package UI.Customer;
 import Model.Card;
 import Model.Customer;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import javax.swing.JPanel;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -44,6 +47,9 @@ public class CardJPanel extends javax.swing.JPanel {
         {
             System.out.println(e);
         }
+        JTableHeader thead = cardJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateCardTable();
     }
 
@@ -97,6 +103,7 @@ public class CardJPanel extends javax.swing.JPanel {
 
         cardTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Black", "Silver", "Gold", "Platinum" }));
 
+        applyJButton.setBackground(new java.awt.Color(0, 255, 0));
         applyJButton.setText("Apply");
         applyJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,13 +152,13 @@ public class CardJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(cardApplyJLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cardTypeJLabel)
                     .addComponent(cardTypeJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(26, 26, 26)
                 .addComponent(applyJButton)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -168,7 +175,7 @@ public class CardJPanel extends javax.swing.JPanel {
         Random r = new Random();
         int postfix = 1000 + r.nextInt(10000);
         String cardNo = "37272494357"+String.valueOf(postfix);
-        String status = "Sent to Card Admin";
+        String status = "Sent to Card Officer";
         
         card.addCard(accNo, cardNo, cardType, status);
         

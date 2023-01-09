@@ -44,6 +44,7 @@ public class AdministratorJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 204, 204));
 
+        orgJButton.setBackground(new java.awt.Color(204, 204, 0));
         orgJButton.setText("Manage Organisation");
         orgJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,6 +55,7 @@ public class AdministratorJPanel extends javax.swing.JPanel {
         administratorJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         administratorJLabel.setText("Administrator");
 
+        empJButton.setBackground(new java.awt.Color(204, 204, 0));
         empJButton.setText("Manage Employee");
         empJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

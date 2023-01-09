@@ -60,6 +60,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="orgJButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="cc" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Manage Organisation"/>
       </Properties>
       <Events>
@@ -76,6 +79,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="empJButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="cc" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Manage Employee"/>
       </Properties>
       <Events>

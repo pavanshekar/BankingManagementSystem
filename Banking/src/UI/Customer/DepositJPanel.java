@@ -70,7 +70,7 @@ public class DepositJPanel extends javax.swing.JPanel {
         accountBalanceJLabel.setBackground(new java.awt.Color(204, 204, 204));
         accountBalanceJLabel.setText("Account Balance: ");
 
-        depositJButton.setBackground(new java.awt.Color(204, 204, 204));
+        depositJButton.setBackground(new java.awt.Color(0, 255, 0));
         depositJButton.setText("Deposit");
         depositJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,11 +101,9 @@ public class DepositJPanel extends javax.swing.JPanel {
                 .addContainerGap(90, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(depositJLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(depositJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(depositJLabel)
+                    .addComponent(depositJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

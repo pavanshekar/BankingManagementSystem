@@ -8,10 +8,13 @@ import Model.Customer;
 import Model.Enterprise;
 import Model.Network;
 import Model.UserAccount;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -31,6 +34,9 @@ public class BankingJPanel extends javax.swing.JPanel {
     public BankingJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
+        JTableHeader thead = customerJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateCustomerTable();
         populateNetworkComboBox();
     }
@@ -119,6 +125,7 @@ public class BankingJPanel extends javax.swing.JPanel {
         networkJLabel.setBackground(new java.awt.Color(204, 204, 204));
         networkJLabel.setText("Network");
 
+        addCustomerJButton.setBackground(new java.awt.Color(0, 255, 0));
         addCustomerJButton.setText("Add");
         addCustomerJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +133,7 @@ public class BankingJPanel extends javax.swing.JPanel {
             }
         });
 
+        updateCustomerJButton.setBackground(new java.awt.Color(0, 255, 0));
         updateCustomerJButton.setText("Update");
         updateCustomerJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +141,7 @@ public class BankingJPanel extends javax.swing.JPanel {
             }
         });
 
+        deleteCustomerJButton.setBackground(new java.awt.Color(255, 0, 0));
         deleteCustomerJButton.setText("Delete");
         deleteCustomerJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +208,7 @@ public class BankingJPanel extends javax.swing.JPanel {
                             .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(updateCustomerJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -207,9 +216,9 @@ public class BankingJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(deleteCustomerJButton)

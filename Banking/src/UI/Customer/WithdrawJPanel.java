@@ -68,7 +68,7 @@ public class WithdrawJPanel extends javax.swing.JPanel {
 
         accountBalanceJLabel.setText("Account Balance: ");
 
-        withdrawJButton.setBackground(new java.awt.Color(204, 204, 204));
+        withdrawJButton.setBackground(new java.awt.Color(0, 255, 0));
         withdrawJButton.setText("Withdraw");
         withdrawJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,9 +119,9 @@ public class WithdrawJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(withdrawAmountJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(withdrawAmountJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
+                .addGap(74, 74, 74)
                 .addComponent(withdrawJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

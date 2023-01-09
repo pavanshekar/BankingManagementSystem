@@ -6,10 +6,13 @@ package UI.Card;
 
 import Model.Card;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -29,6 +32,9 @@ public class CardJPanel extends javax.swing.JPanel {
     public CardJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
+        JTableHeader thead = cardJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateCardTable();
     }
 
@@ -83,7 +89,7 @@ public class CardJPanel extends javax.swing.JPanel {
         rejectJRadioButton.setText("Reject");
         rejectJRadioButton.setActionCommand("Reject");
 
-        processJButton.setBackground(new java.awt.Color(204, 204, 204));
+        processJButton.setBackground(new java.awt.Color(204, 204, 0));
         processJButton.setText("Process");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +97,7 @@ public class CardJPanel extends javax.swing.JPanel {
             }
         });
 
-        sendForVerificationJButton.setBackground(new java.awt.Color(204, 204, 204));
+        sendForVerificationJButton.setBackground(new java.awt.Color(204, 204, 0));
         sendForVerificationJButton.setText("Send for Verification");
         sendForVerificationJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +105,7 @@ public class CardJPanel extends javax.swing.JPanel {
             }
         });
 
+        checkInsightsJButton.setBackground(new java.awt.Color(0, 255, 0));
         checkInsightsJButton.setText("Check Insights");
         checkInsightsJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

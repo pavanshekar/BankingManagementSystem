@@ -6,10 +6,13 @@ package UI.SystemAdmin;
 
 import Model.Network;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -27,6 +30,9 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
     public ManageNetworkJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
+        JTableHeader thead = networkJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateNetworkTable();
     }
 
@@ -73,6 +79,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 
         cityJLabel.setText("Enter the city");
 
+        addJButton.setBackground(new java.awt.Color(0, 255, 0));
         addJButton.setText("Add");
         addJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +94,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
             }
         });
 
+        updateJButton.setBackground(new java.awt.Color(0, 255, 0));
         updateJButton.setText("Update");
         updateJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +102,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
             }
         });
 
+        deleteJButton.setBackground(new java.awt.Color(255, 0, 0));
         deleteJButton.setText("Delete");
         deleteJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

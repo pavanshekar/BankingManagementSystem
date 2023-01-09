@@ -6,10 +6,13 @@ package UI.Administrator;
 
 import Model.Organisation;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -29,6 +32,9 @@ public class ManageOrganisationJPanel extends javax.swing.JPanel {
         initComponents();
         this.workJPanel = workJPanel;
         this.role = role;
+        JTableHeader thead = orgJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateOrganisationTable();
     }
 
@@ -74,7 +80,8 @@ public class ManageOrganisationJPanel extends javax.swing.JPanel {
 
         orgJLabel.setText("Enter the organisation");
 
-        submitJButton.setText("Submit");
+        submitJButton.setBackground(new java.awt.Color(0, 255, 0));
+        submitJButton.setText("Add");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitJButtonActionPerformed(evt);
@@ -88,6 +95,7 @@ public class ManageOrganisationJPanel extends javax.swing.JPanel {
             }
         });
 
+        deleteJButton.setBackground(new java.awt.Color(255, 0, 0));
         deleteJButton.setText("Delete");
         deleteJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +103,7 @@ public class ManageOrganisationJPanel extends javax.swing.JPanel {
             }
         });
 
+        updateJButton.setBackground(new java.awt.Color(0, 255, 0));
         updateJButton.setText("Update");
         updateJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
