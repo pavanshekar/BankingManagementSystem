@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.Admin;
+package UI.SystemAdmin;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  *
  * @author pavansomashekar
  */
-public class AdminJPanel extends javax.swing.JPanel {
+public class SystemAdminJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form AdminJPanel
@@ -20,7 +20,7 @@ public class AdminJPanel extends javax.swing.JPanel {
     ManageNetworkJPanel manageNetworkJPanel;
     ManageEnterpriseJPanel manageEnterpriseJPanel;
     
-    public AdminJPanel(JPanel workJPanel) {
+    public SystemAdminJPanel(JPanel workJPanel) {
         initComponents();
         this.workJPanel = workJPanel;
     }

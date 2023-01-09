@@ -9,7 +9,9 @@ package UI;
  * @author pavansomashekar
  */
 import Model.Enterprise;
-import UI.Admin.AdminJPanel;
+import Model.UserAccount;
+import UI.Administrator.AdministratorJPanel;
+import UI.SystemAdmin.SystemAdminJPanel;
 import UI.BankingAdmin.BankingAdminJPanel;
 import UI.CardAdmin.CardAdminJPanel;
 import UI.Customer.CustomerJPanel;
@@ -29,7 +31,8 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     
-    AdminJPanel adminJPanel;
+    SystemAdminJPanel adminJPanel;
+    AdministratorJPanel administratorJPanel;
     BankingAdminJPanel bankingAdminJPanel;
     CustomerJPanel customerJPanel;
     CardAdminJPanel cardAdminJPanel;
@@ -37,7 +40,7 @@ public class MainJFrame extends javax.swing.JFrame {
     LoanAdminJPanel loanAdminJPanel;
     LoanVerificationAdminJPanel loanVerificationAdminJPanel;
     
-    Enterprise employee = new Enterprise();
+    UserAccount userAccount = new UserAccount();
     
     public MainJFrame() {
         initComponents();
@@ -188,7 +191,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 String username = usernameJTextField.getText();
                 String password = jPasswordField.getText();
 
-                String role = employee.checkCredentials(username, password);
+                String role = userAccount.checkCredentials(username, password);
 
                 if(role.equals("admin")){
                     usernameJTextField.setText("");
@@ -196,7 +199,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     loginJButton.setEnabled(false);
                     logoutJButton.setEnabled(true);
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
-                    adminJPanel = new AdminJPanel(workJPanel);
+                    adminJPanel = new SystemAdminJPanel(workJPanel);
                     workJPanel.add("workArea", adminJPanel);
                     layout.next(workJPanel);
                 }
@@ -206,8 +209,8 @@ public class MainJFrame extends javax.swing.JFrame {
                     loginJButton.setEnabled(false);
                     logoutJButton.setEnabled(true);
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
-                    bankingAdminJPanel = new BankingAdminJPanel(workJPanel);
-                    workJPanel.add("workArea", bankingAdminJPanel);
+                    administratorJPanel = new AdministratorJPanel(workJPanel, role);
+                    workJPanel.add("workArea", administratorJPanel);
                     layout.next(workJPanel);
                 }
                 else if(role.equals("Customer")){
@@ -226,11 +229,61 @@ public class MainJFrame extends javax.swing.JFrame {
                     loginJButton.setEnabled(false);
                     logoutJButton.setEnabled(true);
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    administratorJPanel = new AdministratorJPanel(workJPanel, role);
+                    workJPanel.add("workArea", administratorJPanel);
+                    layout.next(workJPanel);
+                }
+                else if(role.equals("CardVerificationAdmin")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    administratorJPanel = new AdministratorJPanel(workJPanel, role);
+                    workJPanel.add("workArea", administratorJPanel);
+                    layout.next(workJPanel);
+                }
+                else if(role.equals("LoanAdmin")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    administratorJPanel = new AdministratorJPanel(workJPanel, role);
+                    workJPanel.add("workArea", administratorJPanel);
+                    layout.next(workJPanel);
+                }
+                else if(role.equals("LoanVerificationAdmin")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    administratorJPanel = new AdministratorJPanel(workJPanel, role);
+                    workJPanel.add("workArea", administratorJPanel);
+                    layout.next(workJPanel);
+                } 
+                else if(role.equals("Banking")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    bankingAdminJPanel = new BankingAdminJPanel(workJPanel);
+                    workJPanel.add("workArea", bankingAdminJPanel);
+                    layout.next(workJPanel);
+                }
+                else if(role.equals("Card")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
                     cardAdminJPanel = new CardAdminJPanel(workJPanel);
                     workJPanel.add("workArea", cardAdminJPanel);
                     layout.next(workJPanel);
                 }
-                else if(role.equals("CardVerificationAdmin")){
+                else if(role.equals("CardVerification")){
                     usernameJTextField.setText("");
                     jPasswordField.setText("");
                     loginJButton.setEnabled(false);
@@ -240,7 +293,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     workJPanel.add("workArea", cardVerificationAdminJPanel);
                     layout.next(workJPanel);
                 }
-                else if(role.equals("LoanAdmin")){
+                else if(role.equals("Loan")){
                     usernameJTextField.setText("");
                     jPasswordField.setText("");
                     loginJButton.setEnabled(false);
@@ -250,7 +303,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     workJPanel.add("workArea", loanAdminJPanel);
                     layout.next(workJPanel);
                 }
-                else if(role.equals("LoanVerificationAdmin")){
+                else if(role.equals("LoanVerification")){
                     usernameJTextField.setText("");
                     jPasswordField.setText("");
                     loginJButton.setEnabled(false);

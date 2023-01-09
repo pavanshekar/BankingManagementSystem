@@ -12,12 +12,37 @@ import java.sql.ResultSet;
  */
 public class Enterprise {
     
+    private String EnterpriseName;
+    private String EnterpriseType;
+    private String Network;
     private String username;
     private String password;
-    private String role;
-    private String network;
     
     Db db = new Db();
+
+    public String getEnterpriseName() {
+        return EnterpriseName;
+    }
+
+    public void setEnterpriseName(String EnterpriseName) {
+        this.EnterpriseName = EnterpriseName;
+    }
+
+    public String getEnterpriseType() {
+        return EnterpriseType;
+    }
+
+    public void setEnterpriseType(String EnterpriseType) {
+        this.EnterpriseType = EnterpriseType;
+    }
+
+    public String getNetwork() {
+        return Network;
+    }
+
+    public void setNetwork(String Network) {
+        this.Network = Network;
+    }
 
     public String getUsername() {
         return username;
@@ -34,67 +59,22 @@ public class Enterprise {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getNetwork() {
-        return network;
-    }
-
-    public void setNetwork(String network) {
-        this.network = network;
-    }
-    
-    public String checkCredentials(String username, String password){
-        String role = "";
-        ResultSet rs = db.getEnterpriseDetails(username, password);
-
-        try{
-            if(rs != null){
-                role = rs.getString("role");
-                return role;
-            }
-            else{
-                return null;
-            }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        if (rs == null) {
-            return null;
-        }
-        return role;
-
-    }
     
     public ResultSet getEnterpriseList() {
         ResultSet rs = db.getAllEnterprises();
         return rs;
     }
-    
-    public void addEnterprise(String username, String password, String role, String network){
-        db.addEnterprise(username, password, role, network);
+
+    public void addEnterprise(String enterpriseName, String enterpriseType, String network, String username, String password){
+        db.addEnterprise(enterpriseName, enterpriseType, network, username, password);
     }
     
-    public void updateEnterprise(String condition, String username, String password, String role, String network){
-        db.updateEnterprise(condition, username, password, role, network);
+    public void updateEnterprise(String condition, String enterpriseName, String enterpriseType, String network, String username, String password){
+        db.updateEnterprise(condition, enterpriseName, enterpriseType, network, username, password);
     }
     
-    public void deleteEnterprise(String username){
-        db.deleteEnterprise(username);
-    }
-    
-    public ResultSet checkIfUsernameIsUnique(String username){
-        ResultSet rs = db.checkIfUsernameIsUnique(username);
-        return rs;
+    public void deleteEnterprise(String enterpriseName){
+        db.deleteEnterprise(enterpriseName);
     }
     
 }

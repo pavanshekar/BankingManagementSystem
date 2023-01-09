@@ -7,6 +7,7 @@ package UI.BankingAdmin;
 import Model.Customer;
 import Model.Enterprise;
 import Model.Network;
+import Model.UserAccount;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,6 +26,7 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
     Customer customer = new Customer();
     Network network = new Network();
     Enterprise enterprise = new Enterprise();
+    UserAccount userAccount = new UserAccount();
     
     public BankingAdminJPanel(JPanel workJPanel) {
         initComponents();
@@ -252,7 +254,7 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
     private void updateCustomerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCustomerJButtonActionPerformed
         // TODO add your handling code here:
         try{
-            ResultSet rs1 = enterprise.checkIfUsernameIsUnique(usernameJTextField.getText());
+            ResultSet rs1 = userAccount.checkIfUsernameIsUnique(usernameJTextField.getText());
             boolean usernameNotExists = !rs1.isBeforeFirst() && rs1.getRow() == 0;
             
             ResultSet rs2 = customer.checkIfAccNoIsUnique(accNoJTextField.getText());
@@ -314,7 +316,7 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
                 String role = "Customer";
                 String network = (String) networkJComboBox.getSelectedItem();
 
-                enterprise.updateEnterprise(condition, username, password, role, network);
+                userAccount.updateUserAccount(condition, username, password, role);
                 customer.updateCustomer(condition, accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
 
                 JOptionPane.showMessageDialog(this,"Customer Details updated.");
@@ -340,7 +342,7 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
     private void addCustomerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerJButtonActionPerformed
         // TODO add your handling code here:
         try{
-            ResultSet rs1 = enterprise.checkIfUsernameIsUnique(usernameJTextField.getText());
+            ResultSet rs1 = userAccount.checkIfUsernameIsUnique(usernameJTextField.getText());
             boolean usernameNotExists = !rs1.isBeforeFirst() && rs1.getRow() == 0;
             
             ResultSet rs2 = customer.checkIfAccNoIsUnique(accNoJTextField.getText());
@@ -393,7 +395,7 @@ public class BankingAdminJPanel extends javax.swing.JPanel {
                 String role = "Customer";
                 String network = (String) networkJComboBox.getSelectedItem();
 
-                enterprise.addEnterprise(username, password, role, network);
+                userAccount.addUserAccount(username, password, role);
                 customer.addCustomer(accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
 
                 JOptionPane.showMessageDialog(this, "Customer added successfully");

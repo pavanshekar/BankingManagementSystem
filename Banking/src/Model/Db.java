@@ -24,11 +24,11 @@ public class Db {
         return connection;
     }
     
-    public ResultSet getEnterpriseDetails(String username, String password) {
+    public ResultSet getUserAccountDetails(String username, String password) {
         ResultSet rs = null;
         try {
             Connection connection = getConnection();
-            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Enterprise where username=? and password=?");
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from UserAccount where username=? and password=?");
             st.setString(1, username);
             st.setString(2, password);
             rs = st.executeQuery();
@@ -105,47 +105,201 @@ public class Db {
         return rs;
     }
     
-    public void addEnterprise(String username, String password, String role, String network) {
+    public void addEnterprise(String enterpriseName, String enterpriseType, String network, String username, String password) {
         try {
             Connection connection = getConnection();
-            String sql = "insert into Enterprise values(?,?,?,?)";
+            String sql = "insert into Enterprise values(?,?,?,?,?)";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
-            st.setString(1, username);
-            st.setString(2, password);
-            st.setString(3, role);
-            st.setString(4, network);
+            st.setString(1, enterpriseName);
+            st.setString(2, enterpriseType);
+            st.setString(3, network);
+            st.setString(4, username);
+            st.setString(5, password);
             st.executeUpdate();
         } catch(Exception e) {
             System.out.println(e);
         }
     }
     
-    public void updateEnterprise(String condition, String username, String password, String role, String network) {
+    public void updateEnterprise(String condition, String enterpriseName, String enterpriseType, String network, String username, String password) {
         try {
             Connection connection = getConnection();
-            String sql = "update Enterprise set username=?, password=?, role=?, network=? where username=?";
+            String sql = "update Enterprise set EnterpriseName=?, EnterpriseType=?, Network=?, username=?, password=? where EnterpriseName=?";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
-            st.setString(1, username);
-            st.setString(2, password);
-            st.setString(3, role);
-            st.setString(4, network);
-            st.setString(5, condition);
+            st.setString(1, enterpriseName);
+            st.setString(2, enterpriseType);
+            st.setString(3, network);
+            st.setString(4, username);
+            st.setString(5, password);
+            st.setString(6, condition);
             st.executeUpdate();
         } catch(Exception e) {
             System.out.println(e);
         }
     }
     
-    public void deleteEnterprise(String username) {
+    public void updateOrganisation(String condition, String orgName) {
         try {
             Connection connection = getConnection();
-            String sql = "delete from Enterprise where username=?";
+            String sql = "update Organisation set OrgName=? where OrgName=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, orgName);
+            st.setString(2, condition);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+   
+    public void deleteEnterprise(String enterpriseName) {
+        try {
+            Connection connection = getConnection();
+            String sql = "delete from Enterprise where EnterpriseName=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, enterpriseName);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void deleteOrganisation(String orgName) {
+        try {
+            Connection connection = getConnection();
+            String sql = "delete from Organisation where OrgName=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, orgName);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public ResultSet getUserAccountsList() {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from UserAccount");
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public void addUserAccount(String username, String password, String role) {
+        try {
+            Connection connection = getConnection();
+            String sql = "insert into UserAccount values(?,?,?)";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, password);
+            st.setString(3, role);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void updateUserAccount(String condition, String username, String password, String role) {
+        try {
+            Connection connection = getConnection();
+            String sql = "update UserAccount set username=?, password=?, role=? where username=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, password);
+            st.setString(3, role);
+            st.setString(4, condition);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void deleteUserAccount(String username) {
+        try {
+            Connection connection = getConnection();
+            String sql = "delete from UserAccount where username=?";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
             st.setString(1, username);
             st.executeUpdate();
         } catch(Exception e) {
             System.out.println(e);
         }
+    }
+    
+    public void addOrganisation(String orgName, String orgType) {
+        try {
+            Connection connection = getConnection();
+            String sql = "insert into Organisation values(?,?)";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, orgName);
+            st.setString(2, orgType);
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public ResultSet getOrganisations(String role) {
+        ResultSet rs = null;
+        try {
+            String orgType = "";
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Organisation where orgType=?");
+            if(role.equals("BankingAdmin")){
+                orgType = "BankingOrganisation";
+            }
+            else if(role.equals("CardAdmin")){
+                orgType = "CardOrganisation";
+            }
+            else if(role.equals("CardVerificationAdmin")){
+                orgType = "CardVerificationOrganisation";
+            }
+            else if(role.equals("LoanAdmin")){
+                orgType = "LoanOrganisation";
+            }
+            else if(role.equals("LoanVerificationAdmin")){
+                orgType = "LoanVerificationOrganisation";
+            }
+            st.setString(1, orgType);
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public ResultSet getUserAccounts(String role) {
+        ResultSet rs = null;
+        try {
+            String empRole = "";
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from UserAccount where role=?");
+            if(role.equals("BankingAdmin")){
+                empRole = "Banking";
+            }
+            else if(role.equals("CardAdmin")){
+                empRole = "Card";
+            }
+            else if(role.equals("CardVerificationAdmin")){
+                empRole = "CardVerification";
+            }
+            else if(role.equals("LoanAdmin")){
+                empRole = "Loan";
+            }
+            else if(role.equals("LoanVerificationAdmin")){
+                empRole = "LoanVerification";
+            }
+            st.setString(1, empRole);
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
     }
     
     public ResultSet getAllCustomers() {
@@ -394,7 +548,7 @@ public class Db {
         ResultSet rs = null;
         try {
             Connection connection = getConnection();
-            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Enterprise where username=?");
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from UserAccount where username=?");
             st.setString(1, username);
             rs = st.executeQuery();     
             return rs;
