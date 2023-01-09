@@ -462,6 +462,7 @@ public class BankingJPanel extends javax.swing.JPanel {
         
         int selectedRowIndex = customerJTable.getSelectedRow();
         
+        
         accNoJTextField.setText(model.getValueAt(selectedRowIndex, 0).toString());
         fNameJTextField.setText(model.getValueAt(selectedRowIndex, 1).toString());
         lNameJTextField.setText(model.getValueAt(selectedRowIndex, 2).toString());
@@ -469,7 +470,6 @@ public class BankingJPanel extends javax.swing.JPanel {
         phNoJTextField.setText(model.getValueAt(selectedRowIndex, 4).toString());
         addressJTextField.setText(model.getValueAt(selectedRowIndex, 5).toString());
         usernameJTextField.setText(model.getValueAt(selectedRowIndex, 6).toString());
-        jPasswordField.setText(model.getValueAt(selectedRowIndex, 7).toString());
         balanceJTextField.setText(model.getValueAt(selectedRowIndex, 8).toString());
         
     }//GEN-LAST:event_customerJTableMouseClicked

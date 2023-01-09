@@ -244,7 +244,7 @@ public class ManageOrganisationJPanel extends javax.swing.JPanel {
 
             organisation.updateOrganisation(condition, orgName);
 
-            JOptionPane.showMessageDialog(this,"Employee updated.");
+            JOptionPane.showMessageDialog(this,"Organisation updated.");
 
             populateOrganisationTable();
 
