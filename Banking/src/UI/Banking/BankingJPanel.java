@@ -263,6 +263,8 @@ public class BankingJPanel extends javax.swing.JPanel {
     private void updateCustomerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCustomerJButtonActionPerformed
         // TODO add your handling code here:
         
+            String emailPattern = "^(.+)@(.+)$";
+        
             DefaultTableModel model = (DefaultTableModel) customerJTable.getModel();
             int selectedRowIndex = customerJTable.getSelectedRow();
 
@@ -282,11 +284,11 @@ public class BankingJPanel extends javax.swing.JPanel {
             else if(lNameJTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the last name");
             }
-            else if(emailJTextField.getText().equals("")){
-                JOptionPane.showMessageDialog(this, "Enter the email");
+            else if(emailJTextField.getText().equals("") || !emailJTextField.getText().matches(emailPattern)){
+                JOptionPane.showMessageDialog(this, "Enter a valid email");
             }
-            else if(phNoJTextField.getText().equals("")){
-                JOptionPane.showMessageDialog(this, "Enter the phone number");
+            else if(phNoJTextField.getText().equals("") || phNoJTextField.getText().length()<10){
+                JOptionPane.showMessageDialog(this, "Enter a valid phone number");
             }
             else if(addressJTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the address");
@@ -335,6 +337,9 @@ public class BankingJPanel extends javax.swing.JPanel {
     private void addCustomerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerJButtonActionPerformed
         // TODO add your handling code here:
         try{
+            
+            String emailPattern = "^(.+)@(.+)$";
+            
             ResultSet rs1 = userAccount.checkIfUsernameIsUnique(usernameJTextField.getText());
             boolean usernameNotExists = !rs1.isBeforeFirst() && rs1.getRow() == 0;
             
@@ -356,11 +361,11 @@ public class BankingJPanel extends javax.swing.JPanel {
             else if(lNameJTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the last name");
             }
-            else if(emailJTextField.getText().equals("")){
-                JOptionPane.showMessageDialog(this, "Enter the email");
+            else if(emailJTextField.getText().equals("") || !emailJTextField.getText().matches(emailPattern)){
+                JOptionPane.showMessageDialog(this, "Enter a valid email");
             }
-            else if(phNoJTextField.getText().equals("")){
-                JOptionPane.showMessageDialog(this, "Enter the phone number");
+            else if(phNoJTextField.getText().equals("") || phNoJTextField.getText().length()<10){
+                JOptionPane.showMessageDialog(this, "Enter a valid phone number");
             }
             else if(addressJTextField.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Enter the address");
