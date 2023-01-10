@@ -56,7 +56,7 @@ public class UserAccount {
             }
         }
         catch(Exception e){
-            e.printStackTrace();
+            System.out.println("Invalid Credentials");
         }
         
         if (rs == null) {
