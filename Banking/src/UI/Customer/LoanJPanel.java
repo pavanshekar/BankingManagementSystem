@@ -9,6 +9,7 @@ import Model.Loan;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.util.Random;
 import javax.swing.JOptionPane;
@@ -107,6 +108,12 @@ public class LoanJPanel extends javax.swing.JPanel {
 
         loanAmountJLabel.setText("Loan Amount");
 
+        loanAmountJTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                loanAmountJTextFieldKeyPressed(evt);
+            }
+        });
+
         applyJButton.setBackground(new java.awt.Color(0, 255, 0));
         applyJButton.setText("Apply");
         applyJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -130,21 +137,17 @@ public class LoanJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(loanAmountJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(loanTypeJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(loanTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(loanAmountJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(applyJButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(applyForLoanJLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(loanAmountJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(loanTypeJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(82, 82, 82)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(loanTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(loanAmountJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(applyJButton)
+                    .addComponent(applyForLoanJLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -201,6 +204,31 @@ public class LoanJPanel extends javax.swing.JPanel {
             loanAmountJTextField.setText("");
         }
     }//GEN-LAST:event_applyJButtonActionPerformed
+
+    private void loanAmountJTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loanAmountJTextFieldKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        String phNo = loanAmountJTextField.getText();
+        int length = phNo.length();
+        
+        if(Character.isDigit(c)){
+            if(length<10){
+                loanAmountJTextField.setEditable(true);
+            }
+            else{
+                loanAmountJTextField.setEditable(false);
+            }
+        }
+        else{
+            if(evt.getExtendedKeyCode()==KeyEvent.VK_BACK_SPACE || evt.getExtendedKeyCode()==KeyEvent.VK_DELETE){
+                loanAmountJTextField.setEditable(true);
+            } 
+            else{
+                loanAmountJTextField.setEditable(false);
+            }
+        }
+    }//GEN-LAST:event_loanAmountJTextFieldKeyPressed
 
     private void populateLoanTable() {
         DefaultTableModel model = (DefaultTableModel) loanJTable.getModel();

@@ -34,25 +34,21 @@
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="loanAmountJLabel" max="32767" attributes="0"/>
-                  <Component id="loanTypeJLabel" min="-2" pref="76" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="loanAmountJLabel" max="32767" attributes="0"/>
+                          <Component id="loanTypeJLabel" min="-2" pref="76" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="loanTypeJComboBox" max="32767" attributes="0"/>
+                          <Component id="loanAmountJTextField" min="-2" pref="117" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="applyJButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="applyForLoanJLabel" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="loanTypeJComboBox" max="32767" attributes="0"/>
-                  <Component id="loanAmountJTextField" min="-2" pref="117" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="applyJButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="applyForLoanJLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -184,6 +180,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="loanAmountJTextField">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="loanAmountJTextFieldKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="applyJButton">
       <Properties>

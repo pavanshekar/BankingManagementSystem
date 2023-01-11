@@ -7,6 +7,7 @@ package UI.Customer;
 import Model.Customer;
 import Model.Transaction;
 import java.awt.CardLayout;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -66,6 +67,12 @@ public class DepositJPanel extends javax.swing.JPanel {
 
         depositAmountJLabel.setBackground(new java.awt.Color(204, 204, 204));
         depositAmountJLabel.setText("Enter the amount to be deposited: ");
+
+        depositAmountJTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                depositAmountJTextFieldKeyPressed(evt);
+            }
+        });
 
         accountBalanceJLabel.setBackground(new java.awt.Color(204, 204, 204));
         accountBalanceJLabel.setText("Account Balance: ");
@@ -150,6 +157,31 @@ public class DepositJPanel extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_depositJButtonActionPerformed
+
+    private void depositAmountJTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_depositAmountJTextFieldKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        String phNo = depositAmountJTextField.getText();
+        int length = phNo.length();
+        
+        if(Character.isDigit(c)){
+            if(length<10){
+                depositAmountJTextField.setEditable(true);
+            }
+            else{
+                depositAmountJTextField.setEditable(false);
+            }
+        }
+        else{
+            if(evt.getExtendedKeyCode()==KeyEvent.VK_BACK_SPACE || evt.getExtendedKeyCode()==KeyEvent.VK_DELETE){
+                depositAmountJTextField.setEditable(true);
+            } 
+            else{
+                depositAmountJTextField.setEditable(false);
+            }
+        }
+    }//GEN-LAST:event_depositAmountJTextFieldKeyPressed
 
     private void populateAccountBalance() {
         

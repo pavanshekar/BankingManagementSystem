@@ -7,6 +7,7 @@ package UI.Customer;
 import Model.Customer;
 import Model.Transaction;
 import java.awt.CardLayout;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -66,6 +67,12 @@ public class WithdrawJPanel extends javax.swing.JPanel {
 
         withdrawAmountJLabel.setText("Enter the amount to be withdrawn: ");
 
+        withdrawAmountJTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                withdrawAmountJTextFieldKeyPressed(evt);
+            }
+        });
+
         accountBalanceJLabel.setText("Account Balance: ");
 
         withdrawJButton.setBackground(new java.awt.Color(0, 255, 0));
@@ -92,16 +99,15 @@ public class WithdrawJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(withdrawAmountJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(accountBalanceJLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(withdrawAmountJTextField)
-                    .addComponent(accountBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(withdrawJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(withdrawAmountJLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(accountBalanceJLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(withdrawAmountJTextField)
+                            .addComponent(accountBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(withdrawJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -152,6 +158,31 @@ public class WithdrawJPanel extends javax.swing.JPanel {
             }
         } 
     }//GEN-LAST:event_withdrawJButtonActionPerformed
+
+    private void withdrawAmountJTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_withdrawAmountJTextFieldKeyPressed
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        String phNo = withdrawAmountJTextField.getText();
+        int length = phNo.length();
+        
+        if(Character.isDigit(c)){
+            if(length<10){
+                withdrawAmountJTextField.setEditable(true);
+            }
+            else{
+                withdrawAmountJTextField.setEditable(false);
+            }
+        }
+        else{
+            if(evt.getExtendedKeyCode()==KeyEvent.VK_BACK_SPACE || evt.getExtendedKeyCode()==KeyEvent.VK_DELETE){
+                withdrawAmountJTextField.setEditable(true);
+            } 
+            else{
+                withdrawAmountJTextField.setEditable(false);
+            }
+        }
+    }//GEN-LAST:event_withdrawAmountJTextFieldKeyPressed
 
     private void populateAccountBalance() {
         
