@@ -28,7 +28,7 @@ Tech Stack: Java, Java Swing (UI), MySQL (Database)
 
 Class Diagram: 
 
-![classDiagram](https://user-images.githubusercontent.com/114622393/211340037-4419a5db-c483-4a1f-945a-5954f8f53e1a.jpeg)
+![bankingModel](https://user-images.githubusercontent.com/114622393/212471411-9c964340-465a-45a9-8a63-6a7ea20eab78.png)
 
 
 Object / Workflow Diagram: 
