@@ -24,12 +24,14 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
+    private String username;
     Card card = new Card();
     private String action;
     
-    public CardVerificationJPanel(JPanel workJPanel) {
+    public CardVerificationJPanel(JPanel workJPanel, String username) {
         initComponents();
         this.workJPanel = workJPanel;
+        this.username = username;
         JTableHeader thead = cardJTable.getTableHeader();
         thead.setForeground(Color.BLUE);
         thead.setFont(thead.getFont().deriveFont(Font.BOLD));
@@ -53,6 +55,7 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
         approveJRadioButton = new javax.swing.JRadioButton();
         rejectJRadioButton = new javax.swing.JRadioButton();
         processJButton = new javax.swing.JButton();
+        assignJButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -61,13 +64,13 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
 
         cardJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Acc No", "Card No", "Card Type", "Status"
+                "Acc No", "Card No", "Card Type", "Card Officer", "Card Verification Officer", "Status"
             }
         ));
         jScrollPane1.setViewportView(cardJTable);
@@ -87,6 +90,14 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
         processJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 processJButtonActionPerformed(evt);
+            }
+        });
+
+        assignJButton.setBackground(new java.awt.Color(0, 255, 0));
+        assignJButton.setText("Assign");
+        assignJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButtonActionPerformed(evt);
             }
         });
 
@@ -112,6 +123,10 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(verificationAdminJLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(assignJButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +135,9 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
                 .addComponent(verificationAdminJLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(assignJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(processCardRequestJLabel)
                     .addComponent(approveJRadioButton)
@@ -141,8 +158,12 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
             return;
         }
 
-        String status = model.getValueAt(selectedRowIndex, 3).toString();
-        if(status.equals("Sent for Verification")){
+        String cardVerificationOrg = model.getValueAt(selectedRowIndex, 4).toString();
+        String status = model.getValueAt(selectedRowIndex, 5).toString();
+        if(cardVerificationOrg.equals("")){
+            JOptionPane.showMessageDialog(this,"Request not assigned");
+        } 
+        else if(status.equals("Sent for Verification")){
             if(processCardRequestButtonGroup.getSelection()==null){
                 JOptionPane.showMessageDialog(this, "Select the option");
             }
@@ -175,6 +196,27 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_processJButtonActionPerformed
 
+    private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) cardJTable.getModel();
+        int selectedRowIndex = cardJTable.getSelectedRow();
+
+        if(selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this,"Please select a row.");
+            return;
+        }
+        String cardNo = model.getValueAt(selectedRowIndex, 1).toString();
+        String cardVerificationOrg = model.getValueAt(selectedRowIndex, 4).toString();
+        if(cardVerificationOrg.equals("")){
+            card.assignCardVerificationOfficer(cardNo, username);
+            JOptionPane.showMessageDialog(this,"Request is assigned");
+            populateCardTable();
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Request has already been assigned");
+        }
+    }//GEN-LAST:event_assignJButtonActionPerformed
+
     private void populateCardTable() {
         DefaultTableModel model = (DefaultTableModel) cardJTable.getModel();
 
@@ -183,11 +225,13 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
         try{ 
             ResultSet rs = card.getCards();
             while(rs.next()){
-            Object[] rows = new Object[4];
+            Object[] rows = new Object[6];
             rows[0] = rs.getString(1);
             rows[1] = rs.getString(2);
             rows[2] = rs.getString(3);
             rows[3] = rs.getString(4);
+            rows[4] = rs.getString(5);
+            rows[5] = rs.getString(6);
             model.addRow(rows);
             }
         }
@@ -200,6 +244,7 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton approveJRadioButton;
+    private javax.swing.JButton assignJButton;
     private javax.swing.JTable cardJTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.ButtonGroup processCardRequestButtonGroup;

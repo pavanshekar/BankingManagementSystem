@@ -83,4 +83,12 @@ public class Loan {
         return rs;
     }
     
+    public void assignLoanOfficer(String loanNo, String username){
+        db.assignLoanOfficer(loanNo, username);
+    }
+    
+    public void assignLoanVerificationOfficer(String loanNo, String username){
+        db.assignLoanVerificationOfficer(loanNo, username);
+    }
+    
 }

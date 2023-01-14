@@ -25,13 +25,15 @@ public class LoanJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
+    private String username;
     Loan loan = new Loan();
     private String action;
     CheckLoanInsightsJPanel checkLoanInsightsJPanel;
     
-    public LoanJPanel(JPanel workJPanel) {
+    public LoanJPanel(JPanel workJPanel, String username) {
         initComponents();
         this.workJPanel = workJPanel;
+        this.username = username;
         JTableHeader thead = loanJTable.getTableHeader();
         thead.setForeground(Color.BLUE);
         thead.setFont(thead.getFont().deriveFont(Font.BOLD));
@@ -57,6 +59,7 @@ public class LoanJPanel extends javax.swing.JPanel {
         processJButton = new javax.swing.JButton();
         sendForVerificationJButton = new javax.swing.JButton();
         checkInsightsJButton = new javax.swing.JButton();
+        assignJButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -65,13 +68,13 @@ public class LoanJPanel extends javax.swing.JPanel {
 
         loanJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Acc No", "Loan No", "Loan Type", "Loan Amount", "Status"
+                "Acc No", "Loan No", "Loan Type", "Loan Amount", "LoanOfficer", "Status"
             }
         ));
         jScrollPane1.setViewportView(loanJTable);
@@ -110,11 +113,27 @@ public class LoanJPanel extends javax.swing.JPanel {
             }
         });
 
+        assignJButton.setBackground(new java.awt.Color(0, 255, 0));
+        assignJButton.setText("Assign");
+        assignJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loanAdminJLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(assignJButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,19 +152,17 @@ public class LoanJPanel extends javax.swing.JPanel {
                                 .addComponent(sendForVerificationJButton)))
                         .addGap(23, 23, 23)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(loanAdminJLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(loanAdminJLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(assignJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(processLoanRequestJLabel)
                     .addComponent(approveJRadioButton)
@@ -154,9 +171,9 @@ public class LoanJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(processJButton)
                     .addComponent(sendForVerificationJButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(checkInsightsJButton)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -170,8 +187,12 @@ public class LoanJPanel extends javax.swing.JPanel {
             return;
         }
 
-        String status = model.getValueAt(selectedRowIndex, 4).toString();
-        if(status.equals("Sent to Loan Officer")){
+        String loanOrg = model.getValueAt(selectedRowIndex, 4).toString();
+        String status = model.getValueAt(selectedRowIndex, 5).toString();
+        if(loanOrg.equals("")){
+            JOptionPane.showMessageDialog(this,"Request not assigned");
+        }
+        else if(status.equals("Sent to Loan Officer")){
             if(processLoanRequestButtonGroup.getSelection()==null){
                 JOptionPane.showMessageDialog(this, "Select the option");
             }
@@ -210,9 +231,12 @@ public class LoanJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Please select a row.");
             return;
         }
-
-        String status = model.getValueAt(selectedRowIndex, 4).toString();
-        if(status.equals("Approved by Loan Officer")){
+        String loanOrg = model.getValueAt(selectedRowIndex, 4).toString();
+        String status = model.getValueAt(selectedRowIndex, 5).toString();
+        if(loanOrg.equals("")){
+            JOptionPane.showMessageDialog(this,"Request not assigned");
+        } 
+        else if(status.equals("Approved by Loan Officer")){
             String loanNo = model.getValueAt(selectedRowIndex, 1).toString();
             loan.updateLoanStatus(loanNo, "Sent for Verification");
             JOptionPane.showMessageDialog(this,"Loan request sent for verification");
@@ -240,6 +264,27 @@ public class LoanJPanel extends javax.swing.JPanel {
         layout.next(workJPanel);
     }//GEN-LAST:event_checkInsightsJButtonActionPerformed
 
+    private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) loanJTable.getModel();
+        int selectedRowIndex = loanJTable.getSelectedRow();
+
+        if(selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this,"Please select a row.");
+            return;
+        }
+        String loanNo = model.getValueAt(selectedRowIndex, 1).toString();
+        String loanOrg = model.getValueAt(selectedRowIndex, 4).toString();
+        if(loanOrg.equals("")){
+            loan.assignLoanOfficer(loanNo, username);
+            JOptionPane.showMessageDialog(this,"Request is assigned");
+            populateLoanTable();
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Request has been assigned");
+        }
+    }//GEN-LAST:event_assignJButtonActionPerformed
+
     private void populateLoanTable() {
         DefaultTableModel model = (DefaultTableModel) loanJTable.getModel();
 
@@ -248,12 +293,13 @@ public class LoanJPanel extends javax.swing.JPanel {
         try{
             ResultSet rs = loan.getLoans();
             while(rs.next()){
-            Object[] rows = new Object[5];
+            Object[] rows = new Object[6];
             rows[0]= rs.getString(1);
             rows[1]= rs.getString(2);
             rows[2]= rs.getString(3);
             rows[3]= rs.getString(4);
             rows[4]= rs.getString(5);
+            rows[5]= rs.getString(7);
             model.addRow(rows);
             }
         }
@@ -266,6 +312,7 @@ public class LoanJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton approveJRadioButton;
+    private javax.swing.JButton assignJButton;
     private javax.swing.JButton checkInsightsJButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel loanAdminJLabel;

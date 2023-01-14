@@ -278,7 +278,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     loginJButton.setEnabled(false);
                     logoutJButton.setEnabled(true);
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
-                    cardJPanel = new CardJPanel(workJPanel);
+                    cardJPanel = new CardJPanel(workJPanel, username);
                     workJPanel.add("workArea", cardJPanel);
                     layout.next(workJPanel);
                 }
@@ -288,7 +288,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     loginJButton.setEnabled(false);
                     logoutJButton.setEnabled(true);
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
-                    cardVerificationJPanel = new CardVerificationJPanel(workJPanel);
+                    cardVerificationJPanel = new CardVerificationJPanel(workJPanel, username);
                     workJPanel.add("workArea", cardVerificationJPanel);
                     layout.next(workJPanel);
                 }
@@ -298,7 +298,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     loginJButton.setEnabled(false);
                     logoutJButton.setEnabled(true);
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
-                    loanJPanel = new LoanJPanel(workJPanel);
+                    loanJPanel = new LoanJPanel(workJPanel, username);
                     workJPanel.add("workArea", loanJPanel);
                     layout.next(workJPanel);
                 }
@@ -308,7 +308,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     loginJButton.setEnabled(false);
                     logoutJButton.setEnabled(true);
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
-                    loanVerificationJPanel = new LoanVerificationJPanel(workJPanel);
+                    loanVerificationJPanel = new LoanVerificationJPanel(workJPanel, username);
                     workJPanel.add("workArea", loanVerificationJPanel);
                     layout.next(workJPanel);
                 }

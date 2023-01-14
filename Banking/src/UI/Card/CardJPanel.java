@@ -25,13 +25,15 @@ public class CardJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
+    private String username;
     Card card = new Card();
     private String action;
     CheckCardInsightsJPanel checkCardInsightsJPanel;
     
-    public CardJPanel(JPanel workJPanel) {
+    public CardJPanel(JPanel workJPanel, String username) {
         initComponents();
         this.workJPanel = workJPanel;
+        this.username = username;
         JTableHeader thead = cardJTable.getTableHeader();
         thead.setForeground(Color.BLUE);
         thead.setFont(thead.getFont().deriveFont(Font.BOLD));
@@ -57,6 +59,7 @@ public class CardJPanel extends javax.swing.JPanel {
         processJButton = new javax.swing.JButton();
         sendForVerificationJButton = new javax.swing.JButton();
         checkInsightsJButton = new javax.swing.JButton();
+        assignJButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -65,13 +68,13 @@ public class CardJPanel extends javax.swing.JPanel {
 
         cardJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Acc No", "Card No", "Card Type", "Status"
+                "Acc No", "Card No", "Card Type", "Card Officer", "Status"
             }
         ));
         jScrollPane1.setViewportView(cardJTable);
@@ -113,11 +116,23 @@ public class CardJPanel extends javax.swing.JPanel {
             }
         });
 
+        assignJButton.setBackground(new java.awt.Color(0, 255, 0));
+        assignJButton.setText("Assign");
+        assignJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(assignJButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +151,7 @@ public class CardJPanel extends javax.swing.JPanel {
                                 .addComponent(sendForVerificationJButton)))
                         .addGap(23, 23, 23)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cardAdminJLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -144,11 +159,13 @@ public class CardJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(61, Short.MAX_VALUE)
                 .addComponent(cardAdminJLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(assignJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(processCardRequestJLabel)
                     .addComponent(approveJRadioButton)
@@ -173,8 +190,12 @@ public class CardJPanel extends javax.swing.JPanel {
             return;
         }
         
-        String status = model.getValueAt(selectedRowIndex, 3).toString();
-        if(status.equals("Sent to Card Officer")){
+        String cardOrg = model.getValueAt(selectedRowIndex, 3).toString();
+        String status = model.getValueAt(selectedRowIndex, 4).toString();
+        if(cardOrg.equals("")){
+            JOptionPane.showMessageDialog(this,"Request not assigned");
+        } 
+        else if(status.equals("Sent to Card Officer")){
             if(processCardRequestButtonGroup.getSelection()==null){
                 JOptionPane.showMessageDialog(this, "Select the option");
             }
@@ -213,9 +234,12 @@ public class CardJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Please select a row.");
             return;
         }
-        
-        String status = model.getValueAt(selectedRowIndex, 3).toString();
-        if(status.equals("Approved by Card Officer")){
+        String cardOrg = model.getValueAt(selectedRowIndex, 3).toString();
+        String status = model.getValueAt(selectedRowIndex, 4).toString();
+        if(cardOrg.equals("")){
+            JOptionPane.showMessageDialog(this,"Request not assigned");
+        } 
+        else if(status.equals("Approved by Card Officer")){
             String cardNo = model.getValueAt(selectedRowIndex, 1).toString();
             card.updateCardStatus(cardNo, "Sent for Verification");
             JOptionPane.showMessageDialog(this,"Credit card request sent for verification");
@@ -243,6 +267,27 @@ public class CardJPanel extends javax.swing.JPanel {
         layout.next(workJPanel);
     }//GEN-LAST:event_checkInsightsJButtonActionPerformed
 
+    private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) cardJTable.getModel();
+        int selectedRowIndex = cardJTable.getSelectedRow();
+
+        if(selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this,"Please select a row.");
+            return;
+        }
+        String cardNo = model.getValueAt(selectedRowIndex, 1).toString();
+        String cardOrg = model.getValueAt(selectedRowIndex, 3).toString();
+        if(cardOrg.equals("")){
+            card.assignCardOfficer(cardNo, username);
+            JOptionPane.showMessageDialog(this,"Request is assigned");
+            populateCardTable();
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Request has been assigned");
+        }
+    }//GEN-LAST:event_assignJButtonActionPerformed
+
     private void populateCardTable() {
         DefaultTableModel model = (DefaultTableModel) cardJTable.getModel();
 
@@ -251,11 +296,12 @@ public class CardJPanel extends javax.swing.JPanel {
         try{ 
             ResultSet rs = card.getCards();
             while(rs.next()){
-            Object[] rows = new Object[4];
+            Object[] rows = new Object[5];
             rows[0] = rs.getString(1);
             rows[1] = rs.getString(2);
             rows[2] = rs.getString(3);
             rows[3] = rs.getString(4);
+            rows[4] = rs.getString(6);
             model.addRow(rows);
             }
         }
@@ -268,6 +314,7 @@ public class CardJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton approveJRadioButton;
+    private javax.swing.JButton assignJButton;
     private javax.swing.JLabel cardAdminJLabel;
     private javax.swing.JTable cardJTable;
     private javax.swing.JButton checkInsightsJButton;

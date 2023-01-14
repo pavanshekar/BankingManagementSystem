@@ -403,12 +403,14 @@ public class Db {
     public void addCard(String accNo, String cardNo, String cardType, String status) {
         try {
             Connection connection = getConnection();
-            String sql = "insert into Card values(?,?,?,?)";
+            String sql = "insert into Card values(?,?,?,?,?,?)";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
             st.setString(1, accNo);
             st.setString(2, cardNo);
             st.setString(3, cardType);
-            st.setString(4, status);
+            st.setString(4, "");
+            st.setString(5, "");
+            st.setString(6, status);
             st.executeUpdate();
         } catch(Exception e) {
             System.out.println(e);
@@ -460,13 +462,15 @@ public class Db {
     public void applyLoan(String accNo, String loanNo, String loanType, String loanAmount, String status) {
         try {
             Connection connection = getConnection();
-            String sql = "insert into Loan values(?,?,?,?,?)";
+            String sql = "insert into Loan values(?,?,?,?,?,?,?)";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
             st.setString(1, accNo);
             st.setString(2, loanNo);
             st.setString(3, loanType);
             st.setString(4, loanAmount);
-            st.setString(5, status);
+            st.setString(5, "");
+            st.setString(6, "");
+            st.setString(7, status);
             st.executeUpdate();
         } catch(Exception e) {
             System.out.println(e);
@@ -598,6 +602,62 @@ public class Db {
             System.out.println(e);
         }
         return rs;
+    }
+    
+    public void assignCardOfficer(String cardNo, String username){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Card set CardOfficer=? where cardNo=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, cardNo);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public void assignCardVerificationOfficer(String cardNo, String username){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Card set CardVerificationOfficer=? where cardNo=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, cardNo);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public void assignLoanOfficer(String loanNo, String username){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Loan set LoanOfficer=? where loanNo=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, loanNo);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public void assignLoanVerificationOfficer(String loanNo, String username){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Loan set LoanVerificationOfficer=? where loanNo=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, loanNo);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
     
 }

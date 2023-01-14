@@ -73,4 +73,12 @@ public class Card {
         ResultSet rs = db.getApprovedCards();
         return rs;
     }
+    
+    public void assignCardOfficer(String cardNo, String username){
+        db.assignCardOfficer(cardNo, username);
+    }
+    
+    public void assignCardVerificationOfficer(String cardNo, String username){
+        db.assignCardVerificationOfficer(cardNo, username);
+    }
 }
