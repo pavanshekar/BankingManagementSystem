@@ -16,6 +16,8 @@ public class Loan {
     private String LoanNo;
     private String LoanType;
     private String LoanAmount;
+    private String LoanOfficer;
+    private String LoanVerificationOfficer;
     private String Status;
 
     public String getAccNo() {
@@ -49,6 +51,24 @@ public class Loan {
     public void setLoanAmount(String LoanAmount) {
         this.LoanAmount = LoanAmount;
     }
+
+    public String getLoanOfficer() {
+        return LoanOfficer;
+    }
+
+    public void setLoanOfficer(String LoanOfficer) {
+        this.LoanOfficer = LoanOfficer;
+    }
+
+    public String getLoanVerificationOfficer() {
+        return LoanVerificationOfficer;
+    }
+
+    public void setLoanVerificationOfficer(String LoanVerificationOfficer) {
+        this.LoanVerificationOfficer = LoanVerificationOfficer;
+    }
+    
+    
 
     public String getStatus() {
         return Status;

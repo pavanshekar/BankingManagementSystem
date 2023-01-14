@@ -15,6 +15,8 @@ public class Card {
     private String AccNo;
     private String CardNo;
     private String CardType;
+    private String CardOfficer;
+    private String CardVerificationOfficer;
     private String Status;
 
     public String getAccNo() {
@@ -40,6 +42,24 @@ public class Card {
     public void setCardType(String CardType) {
         this.CardType = CardType;
     }
+
+    public String getCardOfficer() {
+        return CardOfficer;
+    }
+
+    public void setCardOfficer(String CardOfficer) {
+        this.CardOfficer = CardOfficer;
+    }
+
+    public String getCardVerificationOfficer() {
+        return CardVerificationOfficer;
+    }
+
+    public void setCardVerificationOfficer(String CardVerificationOfficer) {
+        this.CardVerificationOfficer = CardVerificationOfficer;
+    }
+    
+    
 
     public String getStatus() {
         return Status;
