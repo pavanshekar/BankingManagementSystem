@@ -54,6 +54,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
         customerJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         customerJLabel.setText("Customer");
 
+        accInfoJButton.setBackground(new java.awt.Color(204, 204, 0));
         accInfoJButton.setText("View Account Info");
         accInfoJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +62,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        depositJButton.setBackground(new java.awt.Color(204, 204, 0));
         depositJButton.setText("Deposit");
         depositJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +70,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        withdrawJButton.setBackground(new java.awt.Color(204, 204, 0));
         withdrawJButton.setText("Withdraw");
         withdrawJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +78,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        cardsJButton.setBackground(new java.awt.Color(204, 204, 0));
         cardsJButton.setText("Credit Card");
         cardsJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +86,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        loanJButton.setBackground(new java.awt.Color(204, 204, 0));
         loanJButton.setText("Loan");
         loanJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +94,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        transferJButton.setBackground(new java.awt.Color(204, 204, 0));
         transferJButton.setText("Transfer");
         transferJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +129,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(customerJLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(accInfoJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
