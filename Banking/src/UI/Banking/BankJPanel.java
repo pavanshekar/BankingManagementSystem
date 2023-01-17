@@ -45,6 +45,7 @@ public class BankJPanel extends javax.swing.JPanel {
         bankJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         bankJLabel.setText("Bank");
 
+        bankingJButton.setBackground(new java.awt.Color(204, 204, 0));
         bankingJButton.setText("Banking");
         bankingJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,6 +53,7 @@ public class BankJPanel extends javax.swing.JPanel {
             }
         });
 
+        fundingJButton.setBackground(new java.awt.Color(204, 204, 0));
         fundingJButton.setText("Funding");
         fundingJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +61,7 @@ public class BankJPanel extends javax.swing.JPanel {
             }
         });
 
+        insuranceJButton.setBackground(new java.awt.Color(204, 204, 0));
         insuranceJButton.setText("Insurance");
         insuranceJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,9 +88,9 @@ public class BankJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addContainerGap(70, Short.MAX_VALUE)
                 .addComponent(bankJLabel)
-                .addGap(103, 103, 103)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(bankingJButton)
                 .addGap(69, 69, 69)
                 .addComponent(fundingJButton)

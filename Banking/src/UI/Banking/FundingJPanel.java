@@ -6,10 +6,13 @@ package UI.Banking;
 
 import Model.NGO;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -30,6 +33,9 @@ public class FundingJPanel extends javax.swing.JPanel {
         initComponents();
         this.workJPanel = workJPanel;
         this.enterpriseName = enterpriseName;
+        JTableHeader thead = fundsJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateFundsTable();
     }
 

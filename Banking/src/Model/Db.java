@@ -278,6 +278,12 @@ public class Db {
             else if(role.equals("LoanVerificationAdmin")){
                 orgType = "LoanVerificationOrganisation";
             }
+            else if(role.equals("NGOAdmin")){
+                orgType = "NGOOrganisation";
+            }
+            else if(role.equals("InsuranceAdmin")){
+                orgType = "InsuranceOrganisation";
+            }
             st.setString(1, orgType);
             rs = st.executeQuery();
             return rs;
@@ -307,6 +313,12 @@ public class Db {
             }
             else if(role.equals("LoanVerificationAdmin")){
                 empRole = "LoanVerification";
+            }
+            else if(role.equals("NGOAdmin")){
+                empRole = "NGO";
+            }
+            else if(role.equals("InsuranceAdmin")){
+                empRole = "Insurance";
             }
             st.setString(1, empRole);
             rs = st.executeQuery();

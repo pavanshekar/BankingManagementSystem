@@ -6,9 +6,12 @@ package UI.Insurance;
 
 import Model.Insurance;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -29,6 +32,9 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         initComponents();
         this.workJPanel = workJPanel;
         this.enterpriseName = enterpriseName;
+        JTableHeader thead = insuranceJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateInsuranceTable();
     }
 
@@ -98,13 +104,13 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(insuranceJLabel)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(refreshJButton)
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(insureJButton)
                 .addContainerGap(151, Short.MAX_VALUE))
         );

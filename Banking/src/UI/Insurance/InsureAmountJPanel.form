@@ -17,7 +17,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+              <EmptySpace pref="161" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="insuranceAmtJLabel" max="32767" attributes="0"/>
                   <Component id="insuranceTypeJLabel" max="32767" attributes="0"/>
@@ -47,11 +47,11 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
               <Component id="insureJLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <EmptySpace pref="39" max="32767" attributes="0"/>
               <Component id="backJButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <EmptySpace pref="58" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="insuranceTypeJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="insuranceTypeJComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -61,7 +61,7 @@
                   <Component id="insuranceAmtJLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="insuranceAmountJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+              <EmptySpace pref="72" max="32767" attributes="0"/>
               <Component id="insureJButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="258" max="32767" attributes="0"/>
           </Group>

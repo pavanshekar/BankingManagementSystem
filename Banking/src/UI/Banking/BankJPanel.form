@@ -35,9 +35,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+              <EmptySpace pref="70" max="32767" attributes="0"/>
               <Component id="bankJLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+              <EmptySpace pref="103" max="32767" attributes="0"/>
               <Component id="bankingJButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
               <Component id="fundingJButton" min="-2" max="-2" attributes="0"/>
@@ -59,6 +59,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="bankingJButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="cc" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Banking"/>
       </Properties>
       <Events>
@@ -67,6 +70,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="fundingJButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="cc" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Funding"/>
       </Properties>
       <Events>
@@ -75,6 +81,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="insuranceJButton">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="cc" red="cc" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Insurance"/>
       </Properties>
       <Events>

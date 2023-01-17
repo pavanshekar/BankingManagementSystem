@@ -25,7 +25,6 @@ public class AdministratorJPanel extends javax.swing.JPanel {
     
     public AdministratorJPanel(JPanel workJPanel, String enterpriseName, String role) {
         initComponents();
-        System.out.println(enterpriseName);
         this.workJPanel = workJPanel;
         this.enterpriseName = enterpriseName;
         this.role = role;

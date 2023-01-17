@@ -6,9 +6,12 @@ package UI.NGO;
 
 import Model.NGO;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -28,6 +31,9 @@ public class NGOJPanel extends javax.swing.JPanel {
         initComponents();
         this.workJPanel = workJPanel;
         this.enterpriseName = enterpriseName;
+        JTableHeader thead = ngoJTable.getTableHeader();
+        thead.setForeground(Color.BLUE);
+        thead.setFont(thead.getFont().deriveFont(Font.BOLD));
         populateNGOTable();
         populateFundsAvailable();
     }
