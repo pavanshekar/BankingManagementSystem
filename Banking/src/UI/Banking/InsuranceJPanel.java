@@ -4,8 +4,12 @@
  */
 package UI.Banking;
 
+import Model.Insurance;
 import java.awt.CardLayout;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,10 +21,16 @@ public class InsuranceJPanel extends javax.swing.JPanel {
      * Creates new form InsuranceJPanel
      */
     private JPanel workJPanel;
+    private String enterpriseName;
+    private String action;
     
-    public InsuranceJPanel(JPanel workJPanel) {
+    Insurance insurance = new Insurance();
+    
+    public InsuranceJPanel(JPanel workJPanel, String enterpriseName) {
         initComponents();
         this.workJPanel = workJPanel;
+        this.enterpriseName = enterpriseName;
+        populateInsuranceTable();
     }
 
     /**
@@ -32,8 +42,16 @@ public class InsuranceJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        processButtonGroup = new javax.swing.ButtonGroup();
         insuranceJLabel = new javax.swing.JLabel();
         backJButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        insurancejTable = new javax.swing.JTable();
+        assignJButton = new javax.swing.JButton();
+        approveJRadioButton = new javax.swing.JRadioButton();
+        rejectJRadioButton = new javax.swing.JRadioButton();
+        processJButton = new javax.swing.JButton();
+        processInsuranceRequestJLabel = new javax.swing.JLabel();
 
         insuranceJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         insuranceJLabel.setText("Insurance");
@@ -45,17 +63,72 @@ public class InsuranceJPanel extends javax.swing.JPanel {
             }
         });
 
+        insurancejTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Insurance", "Insurance Id", "Insurance Type", "Insurance Amount", "Bank", "Status"
+            }
+        ));
+        jScrollPane1.setViewportView(insurancejTable);
+
+        assignJButton.setBackground(new java.awt.Color(0, 255, 0));
+        assignJButton.setText("Assign");
+        assignJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButtonActionPerformed(evt);
+            }
+        });
+
+        processButtonGroup.add(approveJRadioButton);
+        approveJRadioButton.setText("Approve");
+        approveJRadioButton.setActionCommand("Approve");
+
+        processButtonGroup.add(rejectJRadioButton);
+        rejectJRadioButton.setText("Reject");
+        rejectJRadioButton.setActionCommand("Reject");
+
+        processJButton.setBackground(new java.awt.Color(204, 204, 0));
+        processJButton.setText("Process");
+        processJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                processJButtonActionPerformed(evt);
+            }
+        });
+
+        processInsuranceRequestJLabel.setText("Process Insurance Request");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(243, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(insuranceJLabel)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backJButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(processInsuranceRequestJLabel)
+                        .addGap(48, 48, 48)
+                        .addComponent(approveJRadioButton)
+                        .addGap(33, 33, 33)
+                        .addComponent(rejectJRadioButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(backJButton1)
+                            .addComponent(assignJButton))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(processJButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -65,7 +138,18 @@ public class InsuranceJPanel extends javax.swing.JPanel {
                 .addComponent(insuranceJLabel)
                 .addGap(46, 46, 46)
                 .addComponent(backJButton1)
-                .addContainerGap(472, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(assignJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(approveJRadioButton)
+                    .addComponent(rejectJRadioButton)
+                    .addComponent(processInsuranceRequestJLabel))
+                .addGap(35, 35, 35)
+                .addComponent(processJButton)
+                .addGap(65, 65, 65))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -76,9 +160,114 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         layout.previous(workJPanel);
     }//GEN-LAST:event_backJButton1ActionPerformed
 
+    private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) insurancejTable.getModel();
+        int selectedRowIndex = insurancejTable.getSelectedRow();
 
+        if(selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this,"Please select a row.");
+            return;
+        }
+        String insuranceName = model.getValueAt(selectedRowIndex, 0).toString();
+        int insuranceId = Integer.parseInt(model.getValueAt(selectedRowIndex, 1).toString());
+        String insuranceType = model.getValueAt(selectedRowIndex, 2).toString();
+        int insuranceAmount = Integer.parseInt(model.getValueAt(selectedRowIndex, 3).toString());
+        String bank = model.getValueAt(selectedRowIndex, 4).toString();
+        String status = model.getValueAt(selectedRowIndex, 5).toString();
+
+        if(bank.equals("")){
+            insurance.assignBankInsurance(insuranceName, insuranceId, insuranceType, insuranceAmount, enterpriseName, status);
+            JOptionPane.showMessageDialog(this,"Request is assigned");
+            populateInsuranceTable();
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Request has already been assigned");
+        }
+    }//GEN-LAST:event_assignJButtonActionPerformed
+
+    private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) insurancejTable.getModel();
+        int selectedRowIndex = insurancejTable.getSelectedRow();
+
+        if(selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this,"Please select a row.");
+            return;
+        }
+
+        String insuranceName = model.getValueAt(selectedRowIndex, 0).toString();
+        int insuranceId = Integer.parseInt(model.getValueAt(selectedRowIndex, 1).toString());
+        String insuranceType = model.getValueAt(selectedRowIndex, 2).toString();
+        int insuranceAmount = Integer.parseInt(model.getValueAt(selectedRowIndex, 3).toString());
+        String bank = model.getValueAt(selectedRowIndex, 4).toString();
+        String status = model.getValueAt(selectedRowIndex, 5).toString();
+
+        if(bank.equals("")){
+            JOptionPane.showMessageDialog(this,"Request not assigned");
+        }
+        else if(status.equals("Insurance Requested")){
+            if(processButtonGroup.getSelection()==null){
+                JOptionPane.showMessageDialog(this, "Select the option");
+            }
+            else{
+                action = processButtonGroup.getSelection().getActionCommand();
+                if(action.equals("Approve")){
+                    insurance.updateInsuranceRequestStatus(insuranceName, insuranceId, insuranceType, insuranceAmount, bank, "Approved");
+                    
+                    JOptionPane.showMessageDialog(this, "Insurance request approved");
+                    populateInsuranceTable();
+                }
+                else{
+                    insurance.updateInsuranceRequestStatus(insuranceName, insuranceId, insuranceType, insuranceAmount, bank, "Rejected");
+                    JOptionPane.showMessageDialog(this, "Fund request rejected");
+                    populateInsuranceTable();
+                }
+            }
+        }
+        else if(status.equals("Approved")){
+            JOptionPane.showMessageDialog(this, "Insurance request has been approved");
+        }
+        else if(status.equals("Rejected")){
+            JOptionPane.showMessageDialog(this, "Insurance request has been rejected");
+        }
+    }//GEN-LAST:event_processJButtonActionPerformed
+
+    private void populateInsuranceTable() {
+        DefaultTableModel model = (DefaultTableModel) insurancejTable.getModel();
+
+        model.setRowCount(0);
+        
+        try{
+            ResultSet rs = insurance.getAllInsurance();
+            while(rs.next()){
+            Object[] rows = new Object[6];
+            rows[0] = rs.getString(1);
+            rows[1]= rs.getString(2);
+            rows[2]= rs.getString(3);
+            rows[3]= rs.getString(4);
+            rows[4]= rs.getString(5);
+            rows[5]= rs.getString(6);
+            model.addRow(rows);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton approveJRadioButton;
+    private javax.swing.JButton assignJButton;
     private javax.swing.JButton backJButton1;
     private javax.swing.JLabel insuranceJLabel;
+    private javax.swing.JTable insurancejTable;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.ButtonGroup processButtonGroup;
+    private javax.swing.JLabel processInsuranceRequestJLabel;
+    private javax.swing.JButton processJButton;
+    private javax.swing.JRadioButton rejectJRadioButton;
     // End of variables declaration//GEN-END:variables
 }

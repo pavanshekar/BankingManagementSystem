@@ -43,6 +43,8 @@ public class RequestFundsJPanel extends javax.swing.JPanel {
         amountJTextField = new javax.swing.JTextField();
         requestJButton = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
+        reasonJLabel = new javax.swing.JLabel();
+        reasonJTextField = new javax.swing.JTextField();
 
         requestFundsJLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         requestFundsJLabel.setText("Request Funds");
@@ -70,6 +72,14 @@ public class RequestFundsJPanel extends javax.swing.JPanel {
             }
         });
 
+        reasonJLabel.setText("Enter the reason");
+
+        reasonJTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                reasonJTextFieldKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,16 +92,20 @@ public class RequestFundsJPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(requestFundsJLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(171, 171, 171)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(reasonJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(amountJLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(reasonJTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(amountJTextField))
+                .addGap(137, 137, 137))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(requestJButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
-                .addComponent(amountJLabel)
-                .addGap(58, 58, 58)
-                .addComponent(amountJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,13 +114,17 @@ public class RequestFundsJPanel extends javax.swing.JPanel {
                 .addComponent(requestFundsJLabel)
                 .addGap(46, 46, 46)
                 .addComponent(backJButton)
-                .addGap(138, 138, 138)
+                .addGap(97, 97, 97)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(reasonJLabel)
+                    .addComponent(reasonJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(amountJLabel)
                     .addComponent(amountJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addGap(58, 58, 58)
                 .addComponent(requestJButton)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -119,15 +137,19 @@ public class RequestFundsJPanel extends javax.swing.JPanel {
 
     private void requestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestJButtonActionPerformed
         // TODO add your handling code here:
-        if(amountJTextField.getText().equals("")){
+        if(reasonJTextField.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Enter the reason");
+        }
+        else if(amountJTextField.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Enter the amount");
         }
         else{
             int fundsRequested = Integer.parseInt(amountJTextField.getText());
-            ngo.requestFunds(enterpriseName, fundsRequested);
+            ngo.requestFunds(enterpriseName, reasonJTextField.getText(), fundsRequested);
             
             JOptionPane.showMessageDialog(this, "Funds request sent");
 
+            reasonJTextField.setText("");
             amountJTextField.setText("");
         }
     }//GEN-LAST:event_requestJButtonActionPerformed
@@ -157,11 +179,17 @@ public class RequestFundsJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_amountJTextFieldKeyPressed
 
+    private void reasonJTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_reasonJTextFieldKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reasonJTextFieldKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel amountJLabel;
     private javax.swing.JTextField amountJTextField;
     private javax.swing.JButton backJButton;
+    private javax.swing.JLabel reasonJLabel;
+    private javax.swing.JTextField reasonJTextField;
     private javax.swing.JLabel requestFundsJLabel;
     private javax.swing.JButton requestJButton;
     // End of variables declaration//GEN-END:variables

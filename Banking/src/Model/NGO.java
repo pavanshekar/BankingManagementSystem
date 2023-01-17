@@ -38,8 +38,8 @@ public class NGO {
         return rs;
     }
     
-    public void requestFunds(String ngo, int fundsRequested){
-        db.requestFunds(ngo, fundsRequested);
+    public void requestFunds(String ngo, String reason, int fundsRequested){
+        db.requestFunds(ngo, reason, fundsRequested);
     }
     
     public ResultSet getFunds() {
@@ -47,12 +47,12 @@ public class NGO {
         return rs;
     }
     
-    public void assignBank(String ngo, String bank, int fundsRequested, String status){
-        db.assignBank(ngo, bank, fundsRequested, status);
+    public void assignBank(String ngo, String bank, String reason, int fundsRequested, String status){
+        db.assignBank(ngo, bank, reason, fundsRequested, status);
     }
     
-    public void updateFundRequestStatus(String ngo, String bank, int fundsRequested, String status){
-        db.updateFundRequestStatus(ngo, bank, fundsRequested, status);
+    public void updateFundRequestStatus(String ngo, String bank, String reason, int fundsRequested, String status){
+        db.updateFundRequestStatus(ngo, bank, reason, fundsRequested, status);
     }
     
     public ResultSet getFundsAvailable(String ngo) {

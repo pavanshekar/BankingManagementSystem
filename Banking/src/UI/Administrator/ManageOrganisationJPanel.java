@@ -188,6 +188,9 @@ public class ManageOrganisationJPanel extends javax.swing.JPanel {
             else if(role.equals("NGOAdmin")){
                 orgType = "NGOOrganisation";
             }
+            else if(role.equals("InsuranceAdmin")){
+                orgType = "InsuranceOrganisation";
+            }
             organisation.addOrganisation(orgName, orgType);
             
             JOptionPane.showMessageDialog(this, "Organisation added");

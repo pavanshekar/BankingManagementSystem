@@ -108,7 +108,7 @@ public class BankJPanel extends javax.swing.JPanel {
     private void insuranceJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insuranceJButtonActionPerformed
         // TODO add your handling code here:
         CardLayout layout=(CardLayout)workJPanel.getLayout();
-        insuranceJPanel = new InsuranceJPanel(workJPanel);
+        insuranceJPanel = new InsuranceJPanel(workJPanel, enterpriseName);
         workJPanel.add("workArea", insuranceJPanel);
         layout.next(workJPanel);
     }//GEN-LAST:event_insuranceJButtonActionPerformed

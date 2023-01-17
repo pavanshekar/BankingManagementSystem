@@ -54,13 +54,13 @@ public class NGOJPanel extends javax.swing.JPanel {
 
         ngoJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Bank", "Funds Requested", "Status"
+                "Bank", "Reason", "Funds Requested", "Status"
             }
         ));
         jScrollPane1.setViewportView(ngoJTable);
@@ -147,10 +147,11 @@ public class NGOJPanel extends javax.swing.JPanel {
         try{
             ResultSet rs = ngo.getFundsRequested(enterpriseName);
             while(rs.next()){
-            Object[] rows = new Object[3];
-            rows[0]= rs.getString(1);
+            Object[] rows = new Object[4];
+            rows[0]= rs.getString(2);
             rows[1]= rs.getString(3);
             rows[2]= rs.getString(4);
+            rows[3]= rs.getString(5);
             model.addRow(rows);
             }
         }

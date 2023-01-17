@@ -12,6 +12,7 @@ import Model.Enterprise;
 import Model.UserAccount;
 import UI.Administrator.AdministratorJPanel;
 import UI.Banking.BankJPanel;
+import UI.Insurance.InsuranceJPanel;
 import UI.SystemAdmin.SystemAdminJPanel;
 import UI.Card.CardJPanel;
 import UI.Customer.CustomerJPanel;
@@ -42,6 +43,7 @@ public class MainJFrame extends javax.swing.JFrame {
     LoanJPanel loanJPanel;
     LoanVerificationJPanel loanVerificationJPanel;
     NGOJPanel ngoJPanel;
+    InsuranceJPanel insuranceJPanel;
     private String enterpriseName;
     
     Enterprise enterprise = new Enterprise();
@@ -287,6 +289,16 @@ public class MainJFrame extends javax.swing.JFrame {
                     workJPanel.add("workArea", administratorJPanel);
                     layout.next(workJPanel);
                 } 
+                else if(role.equals("InsuranceAdmin")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    administratorJPanel = new AdministratorJPanel(workJPanel, enterpriseName, role);
+                    workJPanel.add("workArea", administratorJPanel);
+                    layout.next(workJPanel);
+                } 
                 else if(role.equals("Banking")){
                     usernameJTextField.setText("");
                     jPasswordField.setText("");
@@ -345,6 +357,16 @@ public class MainJFrame extends javax.swing.JFrame {
                     CardLayout layout=(CardLayout)workJPanel.getLayout();
                     ngoJPanel = new NGOJPanel(workJPanel, enterpriseName);
                     workJPanel.add("workArea", ngoJPanel);
+                    layout.next(workJPanel);
+                }
+                else if(role.equals("Insurance")){
+                    usernameJTextField.setText("");
+                    jPasswordField.setText("");
+                    loginJButton.setEnabled(false);
+                    logoutJButton.setEnabled(true);
+                    CardLayout layout=(CardLayout)workJPanel.getLayout();
+                    insuranceJPanel = new InsuranceJPanel(workJPanel, enterpriseName);
+                    workJPanel.add("workArea", insuranceJPanel);
                     layout.next(workJPanel);
                 }
                 else{

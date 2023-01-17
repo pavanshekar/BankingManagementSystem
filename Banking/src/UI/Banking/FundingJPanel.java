@@ -59,13 +59,13 @@ public class FundingJPanel extends javax.swing.JPanel {
 
         fundsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "NGO", "Bank", "Funds Requested", "Status"
+                "NGO", "Bank", "Reason", "Funds Requested", "Status"
             }
         ));
         jScrollPane1.setViewportView(fundsJTable);
@@ -183,11 +183,12 @@ public class FundingJPanel extends javax.swing.JPanel {
         }
         String ngoName = model.getValueAt(selectedRowIndex, 0).toString();
         String bankName = model.getValueAt(selectedRowIndex, 1).toString();
-        int fundsRequested = Integer.parseInt(model.getValueAt(selectedRowIndex, 2).toString());
-        String status = model.getValueAt(selectedRowIndex, 3).toString();
+        String reason = model.getValueAt(selectedRowIndex, 2).toString();
+        int fundsRequested = Integer.parseInt(model.getValueAt(selectedRowIndex, 3).toString());
+        String status = model.getValueAt(selectedRowIndex, 4).toString();
         
         if(bankName.equals("")){
-            ngo.assignBank(ngoName, enterpriseName, fundsRequested, status);
+            ngo.assignBank(ngoName, enterpriseName, reason, fundsRequested, status);
             JOptionPane.showMessageDialog(this,"Request is assigned");
             populateFundsTable();
         }
@@ -208,8 +209,9 @@ public class FundingJPanel extends javax.swing.JPanel {
 
         String ngoName = model.getValueAt(selectedRowIndex, 0).toString();
         String bankName = model.getValueAt(selectedRowIndex, 1).toString();
-        int fundsRequested = Integer.parseInt(model.getValueAt(selectedRowIndex, 2).toString());
-        String status = model.getValueAt(selectedRowIndex, 3).toString();
+        String reason = model.getValueAt(selectedRowIndex, 2).toString();
+        int fundsRequested = Integer.parseInt(model.getValueAt(selectedRowIndex, 3).toString());
+        String status = model.getValueAt(selectedRowIndex, 4).toString();
         
         if(bankName.equals("")){
             JOptionPane.showMessageDialog(this,"Request not assigned");
@@ -221,7 +223,7 @@ public class FundingJPanel extends javax.swing.JPanel {
             else{
                 action = processButtonGroup.getSelection().getActionCommand();
                 if(action.equals("Approve")){
-                    ngo.updateFundRequestStatus(ngoName, bankName, fundsRequested, "Approved");
+                    ngo.updateFundRequestStatus(ngoName, bankName, reason, fundsRequested, "Approved");
                     try{
                         ResultSet rs = ngo.getFundsAvailable(ngoName);
                         while(rs.next()){
@@ -238,7 +240,7 @@ public class FundingJPanel extends javax.swing.JPanel {
                     populateFundsTable();
                 }
                 else{
-                    ngo.updateFundRequestStatus(ngoName, bankName, fundsRequested, "Rejected");
+                    ngo.updateFundRequestStatus(ngoName, bankName, reason, fundsRequested, "Rejected");
                     JOptionPane.showMessageDialog(this, "Fund request rejected");
                     populateFundsTable();
                 }
@@ -275,11 +277,12 @@ public class FundingJPanel extends javax.swing.JPanel {
         try{
             ResultSet rs = ngo.getFunds();
             while(rs.next()){
-            Object[] rows = new Object[4];
+            Object[] rows = new Object[5];
             rows[0]= rs.getString(1);
             rows[1]= rs.getString(2);
             rows[2]= rs.getString(3);
             rows[3]= rs.getString(4);
+            rows[4]= rs.getString(5);
             model.addRow(rows);
             }
         }

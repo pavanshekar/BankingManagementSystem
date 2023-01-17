@@ -689,14 +689,15 @@ public class Db {
         return rs;
     }
     
-    public void requestFunds(String ngo, int fundsRequested) {
+    public void requestFunds(String ngo, String reason, int fundsRequested) {
         try {
             Connection connection = getConnection();
-            String sql = "insert into Funds (NGO,FundsRequested,Status)  values(?,?,?)";
+            String sql = "insert into Funds (NGO,Reason,FundsRequested,Status)  values(?,?,?,?)";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
             st.setString(1, ngo);
-            st.setInt(2, fundsRequested);
-            st.setString(3, "Funds Requested");
+            st.setString(2, reason);
+            st.setInt(3, fundsRequested);
+            st.setString(4, "Funds Requested");
             st.executeUpdate();
         } catch(Exception e) {
             System.out.println(e);
@@ -716,15 +717,16 @@ public class Db {
         return rs;
     }
     
-    public void assignBank(String ngo, String bank, int fundsRequested, String status){
+    public void assignBank(String ngo, String bank, String reason, int fundsRequested, String status){
         try{
             Connection connection = getConnection();
-            String sql = "update Funds set Bank=? where NGO=? and FundsRequested=? and status=?";
+            String sql = "update Funds set Bank=? where NGO=? and Reason=? and FundsRequested=? and status=?";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
             st.setString(1, bank);
             st.setString(2, ngo);
-            st.setInt(3, fundsRequested);
-            st.setString(4, status);
+            st.setString(3, reason);
+            st.setInt(4, fundsRequested);
+            st.setString(5, status);
             st.executeUpdate();
         }
         catch(Exception e){
@@ -732,15 +734,16 @@ public class Db {
         }
     }
     
-    public void updateFundRequestStatus(String ngo, String bank, int fundsRequested, String status){
+    public void updateFundRequestStatus(String ngo, String bank, String reason, int fundsRequested, String status){
         try{
             Connection connection = getConnection();
-            String sql = "update Funds set status=? where NGO=? and Bank=? and FundsRequested=?";
+            String sql = "update Funds set status=? where NGO=? and Bank=? and Reason=? and FundsRequested=?";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
             st.setString(1, status);
             st.setString(2, ngo);
             st.setString(3, bank);
-            st.setInt(4, fundsRequested);
+            st.setString(4, reason);
+            st.setInt(5, fundsRequested);
             st.executeUpdate();
         }
         catch(Exception e){
@@ -774,6 +777,85 @@ public class Db {
         catch(Exception e){
             System.out.println(e);
         }
+    }
+    
+    public ResultSet getInsurance(String insurance) {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Insurance where Insurance=?");
+            st.setString(1, insurance);
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public void requestInsurance(String insurance, int insuranceId, String insuranceType, int insuranceAmount) {
+        try {
+            Connection connection = getConnection();
+            String sql = "insert into Insurance (Insurance,InsuranceId,InsuranceType,InsuranceAmount,Status)  values(?,?,?,?,?)";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, insurance);
+            st.setInt(2, insuranceId);
+            st.setString(3, insuranceType);
+            st.setInt(4, insuranceAmount);
+            st.setString(5, "Insurance Requested");
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public void assignBankInsurance(String insurance, int insuranceId, String insuranceType, int insuranceAmount, String bank, String status){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Insurance set Bank=? where Insurance=? and InsuranceId=? and InsuranceType=? and InsuranceAmount=? and Status=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, bank);
+            st.setString(2, insurance);
+            st.setInt(3, insuranceId);
+            st.setString(4, insuranceType);
+            st.setInt(5, insuranceAmount);
+            st.setString(6, status);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public void updateInsuranceRequestStatus(String insurance, int insuranceId, String insuranceType, int insuranceAmount, String bank, String status){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Insurance set Status=? where Insurance=? and InsuranceId=? and InsuranceType=? and InsuranceAmount=? and Bank=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, status);
+            st.setString(2, insurance);
+            st.setInt(3, insuranceId);
+            st.setString(4, insuranceType);
+            st.setInt(5, insuranceAmount);
+            st.setString(6, bank);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public ResultSet getAllInsurance() {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Insurance");
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
     }
     
 }

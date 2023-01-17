@@ -230,6 +230,11 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                     organisation = "NGOOrganisation";
                     empRole = "NGO";
                 }
+                else if(role.equals("InsuranceAdmin")){
+                    enterprise = "Insurance";
+                    organisation = "InsuranceOrganisation";
+                    empRole = "Insurance";
+                }
                 userAccount.addUserAccount(enterpriseName, username, password, empRole);
 
                 JOptionPane.showMessageDialog(this, "Employee added");
@@ -327,6 +332,11 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                     enterprise = "NGO";
                     organisation = "NGOOrganisation";
                     empRole = "NGO";
+                }
+                else if(role.equals("InsuranceAdmin")){
+                    enterprise = "Insurance";
+                    organisation = "InsuranceOrganisation";
+                    empRole = "Insurance";
                 }
 
                 String condition = model.getValueAt(selectedRowIndex, 0).toString();
