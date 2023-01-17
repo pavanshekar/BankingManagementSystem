@@ -5,7 +5,9 @@
 package UI.Customer;
 
 import Model.Customer;
+import Model.CustomerDirectory;
 import Model.Transaction;
+import Model.TransactionDirectory;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
@@ -26,8 +28,8 @@ public class DepositJPanel extends javax.swing.JPanel {
     private String username;
     private int balance;
     
-    Customer customer = new Customer();
-    Transaction transaction = new Transaction();
+    CustomerDirectory customer = new CustomerDirectory();
+    TransactionDirectory transaction = new TransactionDirectory();
     
     public DepositJPanel(JPanel workJPanel, String username) {
         initComponents();

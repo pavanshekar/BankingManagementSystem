@@ -5,6 +5,7 @@
 package UI.Administrator;
 
 import Model.UserAccount;
+import Model.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -27,7 +28,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
     private JPanel workJPanel;
     private String enterpriseName;
     private String role;
-    UserAccount userAccount = new UserAccount();
+    UserAccountDirectory userAccount = new UserAccountDirectory();
     
     public ManageEmployeeJPanel(JPanel workJPanel, String enterpriseName, String role) {
         initComponents();

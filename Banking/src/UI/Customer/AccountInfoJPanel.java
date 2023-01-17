@@ -5,7 +5,9 @@
 package UI.Customer;
 
 import Model.Customer;
+import Model.CustomerDirectory;
 import Model.Transaction;
+import Model.TransactionDirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -26,8 +28,8 @@ public class AccountInfoJPanel extends javax.swing.JPanel {
     
     private JPanel workJPanel;
     private String username;
-    Customer customer = new Customer();
-    Transaction transaction = new Transaction();
+    CustomerDirectory customer = new CustomerDirectory();
+    TransactionDirectory transaction = new TransactionDirectory();
             
     public AccountInfoJPanel(JPanel workJPanel, String username) {
         

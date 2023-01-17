@@ -24,7 +24,20 @@ public class Customer {
     private String role;
     private String network;
     
-    Db db = new Db();
+    public Customer(String AccNo, int Balance, String FName, String LName, String Email, String PhNo, String Address, String username, String password, String role, String network){
+        this.AccNo = AccNo;
+        this.Balance = Balance;
+        this.FName = FName;
+        this.LName = LName;
+        this.Email = Email;
+        this.PhNo = PhNo;
+        this.Address = Address;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.network = network;
+    }
+    
 
     public String getAccNo() {
         return AccNo;
@@ -112,42 +125,5 @@ public class Customer {
 
     public void setNetwork(String network) {
         this.network = network;
-    }
-    
-    public ResultSet getCustomerList() {
-        ResultSet rs = db.getAllCustomers();
-        return rs;
-    }
-    
-    public void addCustomer(String accNo, int balance, String fname, String lname, String email, String phNo, String address, String username, String password, String role, String network){
-        db.addCustomer(accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
-    }
-    
-    public void updateCustomer(String condition, String accNo, int balance, String fname, String lname, String email, String phNo, String address, String username, String password, String role, String network){
-        db.updateCustomer(condition, accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
-    }
-    
-    public void deleteCustomer(String username){
-        db.deleteCustomer(username);
-    }
-    
-    public ResultSet getCustomerDetails(String username) {
-        ResultSet rs = db.getCustomerDetails(username);
-        return rs;
-    }
-    
-    public void updateAccountBalance(String username, int updatedBalance){
-        db.updateAccountBalance(username, updatedBalance);
-    }
-    
-    public ResultSet checkIfAccNoIsUnique(String accNo ){
-        ResultSet rs = db.checkIfAccNoIsUnique(accNo);
-        return rs;
-    }
-    
-    public ResultSet getCustomers(String username) {
-        ResultSet rs = db.getCustomers(username);
-        return rs;
-    }
-    
+    }  
 }

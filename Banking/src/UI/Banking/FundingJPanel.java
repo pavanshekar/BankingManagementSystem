@@ -5,6 +5,7 @@
 package UI.Banking;
 
 import Model.NGO;
+import Model.NGODirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -24,7 +25,7 @@ public class FundingJPanel extends javax.swing.JPanel {
      * Creates new form FundingJPanel
      */
     private JPanel workJPanel;
-    NGO ngo = new NGO();
+    NGODirectory ngo = new NGODirectory();
     private String enterpriseName;
     private String action;
     private int fundsAvailable;

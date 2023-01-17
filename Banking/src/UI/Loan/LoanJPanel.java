@@ -5,6 +5,7 @@
 package UI.Loan;
 
 import Model.Loan;
+import Model.LoanDirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -26,7 +27,7 @@ public class LoanJPanel extends javax.swing.JPanel {
     
     private JPanel workJPanel;
     private String username;
-    Loan loan = new Loan();
+    LoanDirectory loan = new LoanDirectory();
     private String action;
     CheckLoanInsightsJPanel checkLoanInsightsJPanel;
     

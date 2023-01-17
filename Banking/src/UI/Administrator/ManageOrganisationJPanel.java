@@ -5,6 +5,7 @@
 package UI.Administrator;
 
 import Model.Organisation;
+import Model.OrganisationDirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -26,7 +27,7 @@ public class ManageOrganisationJPanel extends javax.swing.JPanel {
     
     private JPanel workJPanel;
     String role;
-    Organisation organisation = new Organisation();
+    OrganisationDirectory organisation = new OrganisationDirectory();
     
     public ManageOrganisationJPanel(JPanel workJPanel, String role) {
         initComponents();

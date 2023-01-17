@@ -9,7 +9,9 @@ package UI;
  * @author pavansomashekar
  */
 import Model.Enterprise;
+import Model.EnterpriseDirectory;
 import Model.UserAccount;
+import Model.UserAccountDirectory;
 import UI.Administrator.AdministratorJPanel;
 import UI.Banking.BankJPanel;
 import UI.Insurance.InsuranceJPanel;
@@ -46,8 +48,8 @@ public class MainJFrame extends javax.swing.JFrame {
     InsuranceJPanel insuranceJPanel;
     private String enterpriseName;
     
-    Enterprise enterprise = new Enterprise();
-    UserAccount userAccount = new UserAccount();
+    EnterpriseDirectory enterprise = new EnterpriseDirectory();
+    UserAccountDirectory userAccount = new UserAccountDirectory();
     
     public MainJFrame() {
         initComponents();

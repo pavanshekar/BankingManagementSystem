@@ -18,7 +18,14 @@ public class Enterprise {
     private String username;
     private String password;
     
-    Db db = new Db();
+    public Enterprise(String EnterpriseName, String EnterpriseType, String Network, String username, String password){
+        this.EnterpriseName = EnterpriseName;
+        this.EnterpriseType = EnterpriseType;
+        this.Network = Network;
+        this.username = username;
+        this.password = password;
+    }
+    
 
     public String getEnterpriseName() {
         return EnterpriseName;
@@ -58,28 +65,5 @@ public class Enterprise {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-    
-    public ResultSet getEnterpriseList() {
-        ResultSet rs = db.getAllEnterprises();
-        return rs;
-    }
-    
-    public ResultSet getEnterprise(String username) {
-        ResultSet rs = db.getEnterprise(username);
-        return rs;
-    }
-
-    public void addEnterprise(String enterpriseName, String enterpriseType, String network, String username, String password){
-        db.addEnterprise(enterpriseName, enterpriseType, network, username, password);
-    }
-    
-    public void updateEnterprise(String condition, String enterpriseName, String enterpriseType, String network, String username, String password){
-        db.updateEnterprise(condition, enterpriseName, enterpriseType, network, username, password);
-    }
-    
-    public void deleteEnterprise(String enterpriseName){
-        db.deleteEnterprise(enterpriseName);
-    }
-    
+    } 
 }

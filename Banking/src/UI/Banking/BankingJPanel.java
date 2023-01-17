@@ -5,9 +5,13 @@
 package UI.Banking;
 
 import Model.Customer;
+import Model.CustomerDirectory;
 import Model.Enterprise;
+import Model.EnterpriseDirectory;
 import Model.Network;
+import Model.NetworkDirectory;
 import Model.UserAccount;
+import Model.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -29,10 +33,10 @@ public class BankingJPanel extends javax.swing.JPanel {
      */
     private JPanel workJPanel;
     private String enterpriseName;
-    Customer customer = new Customer();
-    Network network = new Network();
-    Enterprise enterprise = new Enterprise();
-    UserAccount userAccount = new UserAccount();
+    CustomerDirectory customer = new CustomerDirectory();
+    NetworkDirectory network = new NetworkDirectory();
+    EnterpriseDirectory enterprise = new EnterpriseDirectory();
+    UserAccountDirectory userAccount = new UserAccountDirectory();
     
     public BankingJPanel(JPanel workJPanel, String enterpriseName) {
         initComponents();

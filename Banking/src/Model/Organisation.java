@@ -15,8 +15,11 @@ public class Organisation {
     private String OrgName;
     private String ORGType;
     
-    Db db = new Db();
-
+    public Organisation(String OrgName, String OrgType){
+        this.OrgName = OrgName;
+        this.ORGType = ORGType;
+    }
+    
     public String getOrgName() {
         return OrgName;
     }
@@ -31,23 +34,5 @@ public class Organisation {
 
     public void setORGType(String ORGType) {
         this.ORGType = ORGType;
-    }
-    
-    public void addOrganisation(String orgName, String orgType){
-        db.addOrganisation(orgName, orgType);
-    }
-    
-    public ResultSet getOrganisations(String role) {
-        ResultSet rs = db.getOrganisations(role);
-        return rs;
-    }
-    
-    public void updateOrganisation(String condition, String orgName){
-        db.updateOrganisation(condition, orgName);
-    }
-    
-    public void deleteOrganisation(String orgName){
-        db.deleteOrganisation(orgName);
-    }
-    
+    } 
 }

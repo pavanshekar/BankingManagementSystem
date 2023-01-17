@@ -5,6 +5,7 @@
 package UI.Insurance;
 
 import Model.Insurance;
+import Model.InsuranceDirectory;
 import java.awt.CardLayout;
 import java.util.Random;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ public class InsureAmountJPanel extends javax.swing.JPanel {
     private JPanel workJPanel;
     private String enterpriseName;
     
-    Insurance insurance = new Insurance();
+    InsuranceDirectory insurance = new InsuranceDirectory();
     
     public InsureAmountJPanel(JPanel workJPanel, String enterpriseName) {
         initComponents();

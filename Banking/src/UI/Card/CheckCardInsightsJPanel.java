@@ -5,6 +5,7 @@
 package UI.Card;
 
 import Model.Card;
+import Model.CardDirectory;
 import java.awt.CardLayout;
 import java.sql.ResultSet;
 import javax.swing.JPanel;
@@ -24,7 +25,7 @@ public class CheckCardInsightsJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
-    Card card = new Card();
+    CardDirectory card = new CardDirectory();
     
     public CheckCardInsightsJPanel(JPanel workJPanel) {
         initComponents();

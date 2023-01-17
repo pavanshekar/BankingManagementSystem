@@ -5,6 +5,7 @@
 package UI.Insurance;
 
 import Model.Insurance;
+import Model.InsuranceDirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -26,7 +27,7 @@ public class InsuranceJPanel extends javax.swing.JPanel {
     private String enterpriseName;
     InsureAmountJPanel insureAmountJPanel;
     
-    Insurance insurance = new Insurance();
+    InsuranceDirectory insurance = new InsuranceDirectory();
     
     public InsuranceJPanel(JPanel workJPanel, String enterpriseName) {
         initComponents();

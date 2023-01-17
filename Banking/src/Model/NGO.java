@@ -13,7 +13,20 @@ import java.sql.ResultSet;
 public class NGO {
     
     private String ngo;
-    private String fundsAvailable;
+    private String bank;
+    private String reason;
+    private int fundsRequested;
+    private String status;
+    private int fundsAvailable;
+    
+    public NGO(String ngo, String bank, String reason, int fundsRequested, String status, int fundsAvailable){
+        this.ngo = ngo;
+        this.bank = bank;
+        this.reason = reason;
+        this.fundsRequested = fundsRequested;
+        this.status = status;
+        this.fundsAvailable = fundsAvailable;
+    }
 
     public String getNgo() {
         return ngo;
@@ -23,45 +36,43 @@ public class NGO {
         this.ngo = ngo;
     }
 
-    public String getFundsAvailable() {
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public int getFundsRequested() {
+        return fundsRequested;
+    }
+
+    public void setFundsRequested(int fundsRequested) {
+        this.fundsRequested = fundsRequested;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getFundsAvailable() {
         return fundsAvailable;
     }
 
-    public void setFundsAvailable(String fundsAvailable) {
+    public void setFundsAvailable(int fundsAvailable) {
         this.fundsAvailable = fundsAvailable;
-    }
-    
-    Db db = new Db();
-    
-    public ResultSet getFundsRequested(String ngo) {
-        ResultSet rs = db.getFundsRequested(ngo);
-        return rs;
-    }
-    
-    public void requestFunds(String ngo, String reason, int fundsRequested){
-        db.requestFunds(ngo, reason, fundsRequested);
-    }
-    
-    public ResultSet getFunds() {
-        ResultSet rs = db.getFunds();
-        return rs;
-    }
-    
-    public void assignBank(String ngo, String bank, String reason, int fundsRequested, String status){
-        db.assignBank(ngo, bank, reason, fundsRequested, status);
-    }
-    
-    public void updateFundRequestStatus(String ngo, String bank, String reason, int fundsRequested, String status){
-        db.updateFundRequestStatus(ngo, bank, reason, fundsRequested, status);
-    }
-    
-    public ResultSet getFundsAvailable(String ngo) {
-        ResultSet rs = db.getFundsAvailable(ngo);
-        return rs;
-    }
-    
-    public void updateFundsAvailable(String ngo, int updatedFunds){
-        db.updateFundsAvailable(ngo, updatedFunds);
-    }
-    
+    } 
 }

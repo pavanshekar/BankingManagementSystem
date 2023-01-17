@@ -19,6 +19,16 @@ public class Loan {
     private String LoanOfficer;
     private String LoanVerificationOfficer;
     private String Status;
+    
+    public Loan(String AccNo, String LoanNo, String LoanType, String LoanAmount, String LoanOfficer, String LoanVerificationOfficer, String Status){
+        this.AccNo = AccNo;
+        this.LoanNo = LoanNo;
+        this.LoanType = LoanType;
+        this.LoanAmount = LoanAmount;
+        this.LoanOfficer = LoanOfficer;
+        this.LoanVerificationOfficer = LoanVerificationOfficer;
+        this.Status = Status;
+    }
 
     public String getAccNo() {
         return AccNo;
@@ -68,47 +78,11 @@ public class Loan {
         this.LoanVerificationOfficer = LoanVerificationOfficer;
     }
     
-    
-
     public String getStatus() {
         return Status;
     }
 
     public void setStatus(String Status) {
         this.Status = Status;
-    }
-    
-    Db db = new Db();
-    
-    public void applyLoan(String accNo, String loanNo, String loanType, String loanAmount, String status){
-        db.applyLoan(accNo, loanNo, loanType, loanAmount,status);
-    }
-    
-    public ResultSet getCustomerLoans(String accNo) {
-        ResultSet rs = db.getCustomerLoans(accNo);
-        return rs;
-    }
-    
-    public ResultSet getLoans() {
-        ResultSet rs = db.getLoans();
-        return rs;
-    }
-    
-    public void updateLoanStatus(String loanNo, String status){
-        db.updateLoanStatus(loanNo, status);
-    }
-    
-    public ResultSet getApprovedLoans(){
-        ResultSet rs = db.getApprovedLoans();
-        return rs;
-    }
-    
-    public void assignLoanOfficer(String loanNo, String username){
-        db.assignLoanOfficer(loanNo, username);
-    }
-    
-    public void assignLoanVerificationOfficer(String loanNo, String username){
-        db.assignLoanVerificationOfficer(loanNo, username);
-    }
-    
+    }   
 }

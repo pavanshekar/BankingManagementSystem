@@ -5,6 +5,7 @@
 package UI.Loan;
 
 import Model.Loan;
+import Model.LoanDirectory;
 import java.awt.CardLayout;
 import java.sql.ResultSet;
 import javax.swing.JPanel;
@@ -24,7 +25,7 @@ public class CheckLoanInsightsJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
-    Loan loan = new Loan();
+    LoanDirectory loan = new LoanDirectory();
     
     public CheckLoanInsightsJPanel(JPanel workJPanel) {
         initComponents();

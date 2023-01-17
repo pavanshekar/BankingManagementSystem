@@ -5,6 +5,7 @@
 package UI.CardVerification;
 
 import Model.Card;
+import Model.CardDirectory;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ public class CardVerificationJPanel extends javax.swing.JPanel {
     
     private JPanel workJPanel;
     private String username;
-    Card card = new Card();
+    CardDirectory card = new CardDirectory();
     private String action;
     
     public CardVerificationJPanel(JPanel workJPanel, String username) {

@@ -11,10 +11,12 @@ import java.sql.ResultSet;
  */
 
 public class Network {
-    
-    Db db = new Db();
-    
+        
     String name;
+    
+    public Network(String name){
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -22,23 +24,5 @@ public class Network {
 
     public void setName(String name) {
         this.name = name;
-    }
-    
-    public void addNetwork(String city){
-        db.addNetwork(city);
-    }
-    
-    public ResultSet getNetworkList() {
-        ResultSet rs = db.getAllNetwork();
-        return rs;
-    }
-    
-    public void updateNetwork(String condition, String city){
-        db.updateNetwork(condition, city);
-    }
-    
-    public void deleteNetwork(String city){
-        db.deleteNetwork(city);
-    }
-    
+    } 
 }

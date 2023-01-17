@@ -5,6 +5,7 @@
 package UI.Card;
 
 import Model.Card;
+import Model.CardDirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -26,7 +27,7 @@ public class CardJPanel extends javax.swing.JPanel {
     
     private JPanel workJPanel;
     private String username;
-    Card card = new Card();
+    CardDirectory card = new CardDirectory();
     private String action;
     CheckCardInsightsJPanel checkCardInsightsJPanel;
     

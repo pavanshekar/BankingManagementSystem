@@ -5,7 +5,9 @@
 package UI.Customer;
 
 import Model.Customer;
+import Model.CustomerDirectory;
 import Model.Loan;
+import Model.LoanDirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -31,8 +33,8 @@ public class LoanJPanel extends javax.swing.JPanel {
     private String username;
     private String accNo;
     
-    Customer customer = new Customer();
-    Loan loan = new Loan();
+    CustomerDirectory customer = new CustomerDirectory();
+    LoanDirectory loan = new LoanDirectory();
     
     public LoanJPanel(JPanel workJPanel, String username) {
         initComponents();

@@ -5,6 +5,7 @@
 package UI.LoanVerification;
 
 import Model.Loan;
+import Model.LoanDirectory;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ public class LoanVerificationJPanel extends javax.swing.JPanel {
     
     private JPanel workJPanel;
     private String username;
-    Loan loan = new Loan();
+    LoanDirectory loan = new LoanDirectory();
     private String action;
     
     public LoanVerificationJPanel(JPanel workJPanel, String username) {

@@ -18,6 +18,15 @@ public class Card {
     private String CardOfficer;
     private String CardVerificationOfficer;
     private String Status;
+    
+    public Card(String AccNo, String CardNo, String CardType, String CardOfficer, String CardVerificationOfficer, String Status){
+        this.AccNo = AccNo;
+        this.CardNo = CardNo;
+        this.CardType = CardType;
+        this.CardOfficer = CardOfficer;
+        this.CardVerificationOfficer = CardVerificationOfficer;
+        this.Status = Status;
+    }
 
     public String getAccNo() {
         return AccNo;
@@ -59,8 +68,6 @@ public class Card {
         this.CardVerificationOfficer = CardVerificationOfficer;
     }
     
-    
-
     public String getStatus() {
         return Status;
     }
@@ -69,36 +76,4 @@ public class Card {
         this.Status = Status;
     }
     
-    Db db = new Db();
-    
-    public void addCard(String accNo, String cardNo, String cardType, String status){
-        db.addCard(accNo, cardNo, cardType, status);
-    }
-    
-    public ResultSet getCustomerCards(String accNo) {
-        ResultSet rs = db.getCustomerCards(accNo);
-        return rs;
-    }
-    
-    public ResultSet getCards() {
-        ResultSet rs = db.getCards();
-        return rs;
-    }
-    
-    public void updateCardStatus(String cardNo, String status){
-        db.updateCardStatus(cardNo, status);
-    }
-    
-    public ResultSet getApprovedCards(){
-        ResultSet rs = db.getApprovedCards();
-        return rs;
-    }
-    
-    public void assignCardOfficer(String cardNo, String username){
-        db.assignCardOfficer(cardNo, username);
-    }
-    
-    public void assignCardVerificationOfficer(String cardNo, String username){
-        db.assignCardVerificationOfficer(cardNo, username);
-    }
 }

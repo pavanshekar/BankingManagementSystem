@@ -5,6 +5,7 @@
 package UI.NGO;
 
 import Model.NGO;
+import Model.NGODirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -24,7 +25,7 @@ public class NGOJPanel extends javax.swing.JPanel {
      */
     private JPanel workJPanel;
     private String enterpriseName;
-    NGO ngo = new NGO();
+    NGODirectory ngo = new NGODirectory();
     RequestFundsJPanel requestFundsJPanel;
     
     public NGOJPanel(JPanel workJPanel, String enterpriseName) {

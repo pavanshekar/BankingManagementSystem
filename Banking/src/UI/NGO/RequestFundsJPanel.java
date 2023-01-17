@@ -5,6 +5,7 @@
 package UI.NGO;
 
 import Model.NGO;
+import Model.NGODirectory;
 import java.awt.CardLayout;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -21,7 +22,7 @@ public class RequestFundsJPanel extends javax.swing.JPanel {
      */
     private JPanel workJPanel;
     private String enterpriseName;
-    NGO ngo = new NGO();
+    NGODirectory ngo = new NGODirectory();
     
     public RequestFundsJPanel(JPanel workJPanel, String enterpriseName) {
         initComponents();

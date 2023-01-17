@@ -16,6 +16,13 @@ public class Transaction {
     private String TransactionType;
     private int TransactionAmount;
     private int Balance;
+    
+    public Transaction(String username, String TransactionType, int TransactionAmount, int Balance){
+        this.username = username;
+        this.TransactionType = TransactionType;
+        this.TransactionAmount = TransactionAmount;
+        this.Balance = Balance;
+    }
 
     public String getUsername() {
         return username;
@@ -47,17 +54,5 @@ public class Transaction {
 
     public void setBalance(int Balance) {
         this.Balance = Balance;
-    }
-    
-    Db db = new Db();
-    
-    public void addTransaction(String username, String transactionType, int transactionAmount, int balance){
-        db.addTransaction(username, transactionType, transactionAmount, balance);
-    }
-            
-    public ResultSet getCustomerTransactions(String username) {
-        ResultSet rs = db.getCustomerTransactions(username);
-        return rs;
-    }
-    
+    }   
 }

@@ -5,6 +5,7 @@
 package UI.SystemAdmin;
 
 import Model.Network;
+import Model.NetworkDirectory;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -25,7 +26,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
-    Network network = new Network();
+    NetworkDirectory network = new NetworkDirectory();
     
     public ManageNetworkJPanel(JPanel workJPanel) {
         initComponents();

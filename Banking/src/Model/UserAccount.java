@@ -12,12 +12,27 @@ import java.sql.ResultSet;
  */
 public class UserAccount {
     
+    
+    private String enterprise;
     private String username;
     private String password;
     private String role;
     
-    Db db = new Db();
+    public UserAccount(String enterprise, String username, String password, String role){
+        this.enterprise = enterprise;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
+    public String getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(String enterprise) {
+        this.enterprise = enterprise;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -40,57 +55,5 @@ public class UserAccount {
 
     public void setRole(String role) {
         this.role = role;
-    }
-    
-    public String checkCredentials(String username, String password){
-        String role = "";
-        ResultSet rs = db.getUserAccountDetails(username, password);
-
-        try{
-            if(rs != null){
-                role = rs.getString("role");
-                return role;
-            }
-            else{
-                return null;
-            }
-        }
-        catch(Exception e){
-            System.out.println("Invalid Credentials");
-        }
-        
-        if (rs == null) {
-            return null;
-        }
-        return role;
-
-    }
-    
-    public ResultSet getUserAccountsList() {
-        ResultSet rs = db.getUserAccountsList();
-        return rs;
-    }
-    
-    public void addUserAccount(String enterpriseName, String username, String password, String role){
-        db.addUserAccount(enterpriseName, username, password, role);
-    }
-    
-    public void updateUserAccount(String condition, String username, String password, String role){
-        db.updateUserAccount(condition, username, password, role);
-    }
-    
-    public void deleteUserAccount(String username){
-        db.deleteUserAccount(username);
-    }
-    
-    public ResultSet checkIfUsernameIsUnique(String username){
-        ResultSet rs = db.checkIfUsernameIsUnique(username);
-        return rs;
-    }
-    
-    public ResultSet getUserAccounts(String role) {
-        ResultSet rs = db.getUserAccounts(role);
-        return rs;
-    }
-    
+    } 
 }

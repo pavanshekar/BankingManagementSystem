@@ -13,11 +13,20 @@ import java.sql.ResultSet;
 public class Insurance {
     
     private String Insurance;
-    private String InsuranceId;
+    private int InsuranceId;
     private String InsuranceType;
     private int InsuranceAmount;
     private String Bank;
     private String Status;
+    
+    public Insurance(String Insurance, int InsuranceId, String InsuranceType, int InsuranceAmount, String Bank, String Status){
+        this.Insurance = Insurance;
+        this.InsuranceId = InsuranceId;
+        this.InsuranceType = InsuranceType;
+        this.InsuranceAmount = InsuranceAmount;
+        this.Bank = Bank;
+        this.Status = Status;
+    }
 
     public String getInsurance() {
         return Insurance;
@@ -27,11 +36,11 @@ public class Insurance {
         this.Insurance = Insurance;
     }
 
-    public String getInsuranceId() {
+    public int getInsuranceId() {
         return InsuranceId;
     }
 
-    public void setInsuranceId(String InsuranceId) {
+    public void setInsuranceId(int InsuranceId) {
         this.InsuranceId = InsuranceId;
     }
 
@@ -65,30 +74,5 @@ public class Insurance {
 
     public void setStatus(String Status) {
         this.Status = Status;
-    }
-    
-    Db db = new Db();
-    
-    public ResultSet getInsurance(String insurance) {
-        ResultSet rs = db.getInsurance(insurance);
-        return rs;
-    }
-    
-    public void requestInsurance(String insurance, int insuranceId, String insuranceType, int insuranceAmount){
-        db.requestInsurance(insurance, insuranceId, insuranceType, insuranceAmount);
-    }
-    
-    public void assignBankInsurance(String insurance, int insuranceId, String insuranceType, int insuranceAmount, String bank, String status){
-        db.assignBankInsurance(insurance, insuranceId, insuranceType, insuranceAmount, bank, status);
-    }
-    
-    public void updateInsuranceRequestStatus(String insurance, int insuranceId, String insuranceType, int insuranceAmount, String bank, String status){
-        db.updateInsuranceRequestStatus(insurance, insuranceId, insuranceType, insuranceAmount, bank, status);
-    }
-    
-    public ResultSet getAllInsurance() {
-        ResultSet rs = db.getAllInsurance();
-        return rs;
-    }
-    
+    }   
 }
