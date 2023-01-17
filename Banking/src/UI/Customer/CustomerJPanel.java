@@ -24,6 +24,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
     WithdrawJPanel withdrawJPanel;
     CardJPanel cardJPanel;
     LoanJPanel loanJPanel;
+    TransferJPanel transferJPanel;
     
     public CustomerJPanel(JPanel workJPanel, String username) {
         initComponents();
@@ -46,6 +47,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
         withdrawJButton = new javax.swing.JButton();
         cardsJButton = new javax.swing.JButton();
         loanJButton = new javax.swing.JButton();
+        transferJButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -87,6 +89,13 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        transferJButton.setText("Transfer");
+        transferJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transferJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,7 +116,8 @@ public class CustomerJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(loanJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(withdrawJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cardsJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
+                            .addComponent(cardsJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                            .addComponent(transferJButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(227, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -117,15 +127,17 @@ public class CustomerJPanel extends javax.swing.JPanel {
                 .addComponent(customerJLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(accInfoJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(37, 37, 37)
                 .addComponent(depositJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(42, 42, 42)
                 .addComponent(withdrawJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(42, 42, 42)
+                .addComponent(transferJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
                 .addComponent(cardsJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(35, 35, 35)
                 .addComponent(loanJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -169,6 +181,14 @@ public class CustomerJPanel extends javax.swing.JPanel {
         layout.next(workJPanel);
     }//GEN-LAST:event_loanJButtonActionPerformed
 
+    private void transferJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transferJButtonActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout=(CardLayout)workJPanel.getLayout();
+        transferJPanel = new TransferJPanel(workJPanel, username);
+        workJPanel.add("workArea", transferJPanel);
+        layout.next(workJPanel);
+    }//GEN-LAST:event_transferJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accInfoJButton;
@@ -176,6 +196,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel customerJLabel;
     private javax.swing.JButton depositJButton;
     private javax.swing.JButton loanJButton;
+    private javax.swing.JButton transferJButton;
     private javax.swing.JButton withdrawJButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -401,6 +401,20 @@ public class Db {
         return rs;
     }
     
+    public ResultSet getCustomers(String username) {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select username from Customer where username!=?");
+            st.setString(1, username);
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
     public void updateAccountBalance(String username, int updatedBalance){
         try{
             Connection connection = getConnection();

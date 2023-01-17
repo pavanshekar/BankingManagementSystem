@@ -145,4 +145,9 @@ public class Customer {
         return rs;
     }
     
+    public ResultSet getCustomers(String username) {
+        ResultSet rs = db.getCustomers(username);
+        return rs;
+    }
+    
 }
