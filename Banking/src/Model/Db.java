@@ -105,6 +105,20 @@ public class Db {
         return rs;
     }
     
+    public ResultSet getEnterprise(String username) {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select enterprise from UserAccount where username=?");
+            st.setString(1, username);
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
     public void addEnterprise(String enterpriseName, String enterpriseType, String network, String username, String password) {
         try {
             Connection connection = getConnection();
@@ -188,14 +202,15 @@ public class Db {
         return rs;
     }
     
-    public void addUserAccount(String username, String password, String role) {
+    public void addUserAccount(String enterpriseName, String username, String password, String role) {
         try {
             Connection connection = getConnection();
-            String sql = "insert into UserAccount values(?,?,?)";
+            String sql = "insert into UserAccount values(?,?,?,?)";
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
-            st.setString(1, username);
-            st.setString(2, password);
-            st.setString(3, role);
+            st.setString(1, enterpriseName);
+            st.setString(2, username);
+            st.setString(3, password);
+            st.setString(4, role);
             st.executeUpdate();
         } catch(Exception e) {
             System.out.println(e);
@@ -653,6 +668,107 @@ public class Db {
             PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
             st.setString(1, username);
             st.setString(2, loanNo);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public ResultSet getFundsRequested(String ngo) {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Funds where NGO=?");
+            st.setString(1, ngo);
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public void requestFunds(String ngo, int fundsRequested) {
+        try {
+            Connection connection = getConnection();
+            String sql = "insert into Funds (NGO,FundsRequested,Status)  values(?,?,?)";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, ngo);
+            st.setInt(2, fundsRequested);
+            st.setString(3, "Funds Requested");
+            st.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public ResultSet getFunds() {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select * from Funds");
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public void assignBank(String ngo, String bank, int fundsRequested, String status){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Funds set Bank=? where NGO=? and FundsRequested=? and status=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, bank);
+            st.setString(2, ngo);
+            st.setInt(3, fundsRequested);
+            st.setString(4, status);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public void updateFundRequestStatus(String ngo, String bank, int fundsRequested, String status){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Funds set status=? where NGO=? and Bank=? and FundsRequested=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setString(1, status);
+            st.setString(2, ngo);
+            st.setString(3, bank);
+            st.setInt(4, fundsRequested);
+            st.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public ResultSet getFundsAvailable(String ngo) {
+        ResultSet rs = null;
+        try {
+            Connection connection = getConnection();
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement("select max(FundsAvailable) from Funds where NGO=?");
+            st.setString(1, ngo);
+            rs = st.executeQuery();
+            return rs;
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
+    
+    public void updateFundsAvailable(String ngo, int updatedFunds){
+        try{
+            Connection connection = getConnection();
+            String sql = "update Funds set FundsAvailable=? where NGO=?";
+            PreparedStatement st = (PreparedStatement) connection.prepareStatement(sql);
+            st.setInt(1, updatedFunds);
+            st.setString(2, ngo);
             st.executeUpdate();
         }
         catch(Exception e){

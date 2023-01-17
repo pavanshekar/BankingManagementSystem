@@ -71,8 +71,8 @@ public class UserAccount {
         return rs;
     }
     
-    public void addUserAccount(String username, String password, String role){
-        db.addUserAccount(username, password, role);
+    public void addUserAccount(String enterpriseName, String username, String password, String role){
+        db.addUserAccount(enterpriseName, username, password, role);
     }
     
     public void updateUserAccount(String condition, String username, String password, String role){

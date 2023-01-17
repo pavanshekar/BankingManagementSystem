@@ -20,11 +20,14 @@ public class AdministratorJPanel extends javax.swing.JPanel {
     private JPanel workJPanel;
     ManageOrganisationJPanel manageOrganisationJPanel;
     ManageEmployeeJPanel manageEmployeeJPanel;
-    String role;
+    private String enterpriseName;
+    private String role;
     
-    public AdministratorJPanel(JPanel workJPanel, String role) {
+    public AdministratorJPanel(JPanel workJPanel, String enterpriseName, String role) {
         initComponents();
+        System.out.println(enterpriseName);
         this.workJPanel = workJPanel;
+        this.enterpriseName = enterpriseName;
         this.role = role;
     }
 
@@ -111,7 +114,7 @@ public class AdministratorJPanel extends javax.swing.JPanel {
     private void empJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empJButtonActionPerformed
         // TODO add your handling code here:
         CardLayout layout=(CardLayout)workJPanel.getLayout();
-        manageEmployeeJPanel = new ManageEmployeeJPanel(workJPanel, role);
+        manageEmployeeJPanel = new ManageEmployeeJPanel(workJPanel, enterpriseName, role);
         workJPanel.add("workArea", manageEmployeeJPanel);
         layout.next(workJPanel);
     }//GEN-LAST:event_empJButtonActionPerformed

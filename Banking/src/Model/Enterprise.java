@@ -64,6 +64,11 @@ public class Enterprise {
         ResultSet rs = db.getAllEnterprises();
         return rs;
     }
+    
+    public ResultSet getEnterprise(String username) {
+        ResultSet rs = db.getEnterprise(username);
+        return rs;
+    }
 
     public void addEnterprise(String enterpriseName, String enterpriseType, String network, String username, String password){
         db.addEnterprise(enterpriseName, enterpriseType, network, username, password);

@@ -102,7 +102,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
 
         roleJLabel.setText("Role");
 
-        roleJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Banking", "Card", "Loan", "CardVerification", "LoanVerification" }));
+        roleJComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Banking", "Card", "Loan", "CardVerification", "LoanVerification", "NGO" }));
         roleJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roleJComboBoxActionPerformed(evt);
@@ -190,13 +190,10 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                         .addGap(32, 32, 32)
                         .addComponent(networkJLabel))
                     .addComponent(networkJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(enterpriseJLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(enterpriseJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(enterpriseJLabel)
+                    .addComponent(enterpriseJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameJLabel)
@@ -249,9 +246,9 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 String network = (String) networkJComboBox.getSelectedItem();
                 String enterpriseType = (String) roleJComboBox.getSelectedItem();
                 String role = enterpriseType+"Admin";
-
+                
                 enterprise.addEnterprise(enterpriseName, enterpriseType, network, username, password);
-                userAccount.addUserAccount(username, password, role);
+                userAccount.addUserAccount(enterpriseName, username, password, role);
 
                 JOptionPane.showMessageDialog(this, "Enterprise added successfully");
 

@@ -25,12 +25,14 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
      */
     
     private JPanel workJPanel;
-    String role;
+    private String enterpriseName;
+    private String role;
     UserAccount userAccount = new UserAccount();
     
-    public ManageEmployeeJPanel(JPanel workJPanel, String role) {
+    public ManageEmployeeJPanel(JPanel workJPanel, String enterpriseName, String role) {
         initComponents();
         this.workJPanel = workJPanel;
+        this.enterpriseName = enterpriseName;
         this.role = role;
         JTableHeader thead = employeeJTable.getTableHeader();
         thead.setForeground(Color.BLUE);
@@ -64,13 +66,13 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
 
         employeeJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Username", "Role"
+                "Name", "Username", "Role"
             }
         ));
         employeeJTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -223,7 +225,12 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                     organisation = "LoanVerificationOrganisation";
                     empRole = "LoanVerification";
                 }
-                userAccount.addUserAccount(username, password, empRole);
+                else if(role.equals("NGOAdmin")){
+                    enterprise = "NGO";
+                    organisation = "NGOOrganisation";
+                    empRole = "NGO";
+                }
+                userAccount.addUserAccount(enterpriseName, username, password, empRole);
 
                 JOptionPane.showMessageDialog(this, "Employee added");
 
@@ -316,6 +323,11 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
                     organisation = "LoanVerificationOrganisation";
                     empRole = "LoanVerification";
                 }
+                else if(role.equals("NGOAdmin")){
+                    enterprise = "NGO";
+                    organisation = "NGOOrganisation";
+                    empRole = "NGO";
+                }
 
                 String condition = model.getValueAt(selectedRowIndex, 0).toString();
 
@@ -348,9 +360,10 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         try{
             ResultSet rs = userAccount.getUserAccounts(role);
             while(rs.next()){
-            Object[] rows = new Object[2];
+            Object[] rows = new Object[3];
             rows[0]= rs.getString(1);
-            rows[1]= rs.getString(3);
+            rows[1]= rs.getString(2);
+            rows[2]= rs.getString(4);
             model.addRow(rows);
             }
         }

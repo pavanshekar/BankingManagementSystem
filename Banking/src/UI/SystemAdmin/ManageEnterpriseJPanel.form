@@ -87,15 +87,10 @@
                   </Group>
                   <Component id="networkJComboBox" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="enterpriseJLabel" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="enterpriseJTextField" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="enterpriseJLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="enterpriseJTextField" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -209,12 +204,13 @@
     <Component class="javax.swing.JComboBox" name="roleJComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="6">
             <StringItem index="0" value="Banking"/>
             <StringItem index="1" value="Card"/>
             <StringItem index="2" value="Loan"/>
             <StringItem index="3" value="CardVerification"/>
             <StringItem index="4" value="LoanVerification"/>
+            <StringItem index="5" value="NGO"/>
           </StringArray>
         </Property>
       </Properties>

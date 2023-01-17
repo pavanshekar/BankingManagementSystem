@@ -8,6 +8,7 @@ import Model.Customer;
 import Model.Enterprise;
 import Model.Network;
 import Model.UserAccount;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
@@ -27,14 +28,16 @@ public class BankingJPanel extends javax.swing.JPanel {
      * Creates new form BankingAdminJPanel
      */
     private JPanel workJPanel;
+    private String enterpriseName;
     Customer customer = new Customer();
     Network network = new Network();
     Enterprise enterprise = new Enterprise();
     UserAccount userAccount = new UserAccount();
     
-    public BankingJPanel(JPanel workJPanel) {
+    public BankingJPanel(JPanel workJPanel, String enterpriseName) {
         initComponents();
         this.workJPanel = workJPanel;
+        this. enterpriseName = enterpriseName;
         JTableHeader thead = customerJTable.getTableHeader();
         thead.setForeground(Color.BLUE);
         thead.setFont(thead.getFont().deriveFont(Font.BOLD));
@@ -77,6 +80,7 @@ public class BankingJPanel extends javax.swing.JPanel {
         deleteCustomerJButton = new javax.swing.JButton();
         networkJComboBox = new javax.swing.JComboBox<>();
         jPasswordField = new javax.swing.JPasswordField();
+        backJButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
 
@@ -156,6 +160,13 @@ public class BankingJPanel extends javax.swing.JPanel {
             }
         });
 
+        backJButton.setText("Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,7 +177,8 @@ public class BankingJPanel extends javax.swing.JPanel {
                 .addComponent(deleteCustomerJButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(backJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -216,15 +228,19 @@ public class BankingJPanel extends javax.swing.JPanel {
                                     .addGap(18, 18, 18)
                                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(updateCustomerJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(backJButton)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addComponent(deleteCustomerJButton)
@@ -262,7 +278,7 @@ public class BankingJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addCustomerJButton)
                     .addComponent(updateCustomerJButton))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -399,7 +415,7 @@ public class BankingJPanel extends javax.swing.JPanel {
                 String role = "Customer";
                 String network = (String) networkJComboBox.getSelectedItem();
 
-                userAccount.addUserAccount(username, password, role);
+                userAccount.addUserAccount(enterpriseName, username, password, role);
                 customer.addCustomer(accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
 
                 JOptionPane.showMessageDialog(this, "Customer added successfully");
@@ -510,6 +526,13 @@ public class BankingJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_balanceJTextFieldKeyPressed
 
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        // TODO add your handling code here:
+        workJPanel.remove(this);
+        CardLayout layout = (CardLayout) workJPanel.getLayout();
+        layout.previous(workJPanel);
+    }//GEN-LAST:event_backJButtonActionPerformed
+
     private void populateCustomerTable() {
         DefaultTableModel model = (DefaultTableModel) customerJTable.getModel();
 
@@ -545,6 +568,7 @@ public class BankingJPanel extends javax.swing.JPanel {
     private javax.swing.JButton addCustomerJButton;
     private javax.swing.JLabel addressJLabel;
     private javax.swing.JTextField addressJTextField;
+    private javax.swing.JButton backJButton;
     private javax.swing.JLabel balanceJLabel;
     private javax.swing.JTextField balanceJTextField;
     private javax.swing.JTable customerJTable;
