@@ -13,20 +13,33 @@ import java.util.ArrayList;
  */
 public class CustomerDirectory {
     
-    private ArrayList<Customer> customerDirectory = new ArrayList<>();
+    private ArrayList<Customer> customerDirectory;
+    
+    
+    public CustomerDirectory(){
+        this.customerDirectory = new ArrayList<>();
+    }
+    
     
     Db db = new Db();
     
-    public ResultSet getCustomerList() {
-        ResultSet rs = db.getAllCustomers();
-        return rs;
-    }
+    
     
     public void addCustomer(String accNo, int balance, String fname, String lname, String email, String phNo, String address, String username, String password, String role, String network){
         db.addCustomer(accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
         Customer customer = new Customer(accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
         customerDirectory.add(customer);
     }
+    
+    public ArrayList<Customer> getAllCustomers() {
+        return customerDirectory;
+    }
+    
+    public ResultSet getCustomers(String username) {
+        ResultSet rs = db.getCustomers(username);
+        return rs;
+    }
+   
     
     public void updateCustomer(String condition, String accNo, int balance, String fname, String lname, String email, String phNo, String address, String username, String password, String role, String network){
         db.updateCustomer(condition, accNo, balance, fname, lname, email, phNo, address, username, password, role, network);
@@ -50,8 +63,8 @@ public class CustomerDirectory {
         return rs;
     }
     
-    public ResultSet getCustomers(String username) {
-        ResultSet rs = db.getCustomers(username);
+    public ResultSet getCustomerList() {
+        ResultSet rs = db.getAllCustomers();
         return rs;
     }
     

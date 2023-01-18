@@ -13,19 +13,31 @@ import java.util.ArrayList;
  */
 public class NGODirectory {
     
-    private ArrayList<NGO> ngoDirectory = new ArrayList<>();
+    private ArrayList<NGO> ngoDirectory;
+    
+    public NGODirectory(){
+        this.ngoDirectory = new ArrayList<>();
+    }
+    
     
     Db db = new Db();
     
-    public ResultSet getFundsRequested(String ngo) {
-        ResultSet rs = db.getFundsRequested(ngo);
-        return rs;
-    }
     
     public void requestFunds(String ngo, String reason, int fundsRequested){
         db.requestFunds(ngo, reason, fundsRequested);
         NGO n = new NGO(ngo, "", reason, fundsRequested, "Funds Requested", 0);
         ngoDirectory.add(n);
+    }
+    
+    
+    public ArrayList<NGO> getAllFunds() {
+        return ngoDirectory;
+    }
+    
+    
+    public ResultSet getFundsRequested(String ngo) {
+        ResultSet rs = db.getFundsRequested(ngo);
+        return rs;
     }
     
     public ResultSet getFunds() {

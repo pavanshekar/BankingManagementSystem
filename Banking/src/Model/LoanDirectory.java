@@ -13,14 +13,25 @@ import java.util.ArrayList;
  */
 public class LoanDirectory {
     
-    private ArrayList<Loan> loanDirectory = new ArrayList<>();
+    private ArrayList<Loan> loanDirectory;
+    
+    
+    public LoanDirectory(){
+        this.loanDirectory = new ArrayList<>();
+    }
+    
     
     Db db = new Db();
+    
     
     public void applyLoan(String accNo, String loanNo, String loanType, String loanAmount, String status){
         db.applyLoan(accNo, loanNo, loanType, loanAmount,status);
         Loan loan = new Loan(accNo, loanNo, loanType, loanAmount, "", "", status);
         loanDirectory.add(loan);
+    }
+    
+    public ArrayList<Loan> getAllLoans() {
+        return loanDirectory;
     }
     
     public ResultSet getCustomerLoans(String accNo) {

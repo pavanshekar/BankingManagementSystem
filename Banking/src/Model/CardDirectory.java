@@ -13,9 +13,16 @@ import java.util.ArrayList;
  */
 public class CardDirectory {
     
-    private ArrayList<Card> cardDirectory = new ArrayList<>();
+    private ArrayList<Card> cardDirectory;
+    
+    
+    public CardDirectory(){
+        this.cardDirectory = new ArrayList<>();
+    }
+    
     
     Db db = new Db();
+    
     
     public void addCard(String accNo, String cardNo, String cardType, String status){
         db.addCard(accNo, cardNo, cardType, status);
@@ -23,13 +30,12 @@ public class CardDirectory {
         cardDirectory.add(card);
     }
     
-    public ResultSet getCustomerCards(String accNo) {
-        ResultSet rs = db.getCustomerCards(accNo);
-        return rs;
+    public ArrayList<Card> getAllCards() {
+        return cardDirectory;
     }
     
-    public ResultSet getCards() {
-        ResultSet rs = db.getCards();
+    public ResultSet getCustomerCards(String accNo) {
+        ResultSet rs = db.getCustomerCards(accNo);
         return rs;
     }
     
@@ -37,6 +43,11 @@ public class CardDirectory {
         db.updateCardStatus(cardNo, status);
     }
     
+    public ResultSet getCards() {
+        ResultSet rs = db.getCards();
+        return rs;
+    }
+     
     public ResultSet getApprovedCards(){
         ResultSet rs = db.getApprovedCards();
         return rs;

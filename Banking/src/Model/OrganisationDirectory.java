@@ -13,9 +13,16 @@ import java.util.ArrayList;
  */
 public class OrganisationDirectory {
     
-    private ArrayList<Organisation> organisationDirectory = new ArrayList<>();
+    private ArrayList<Organisation> organisationDirectory;
+    
+    
+    public OrganisationDirectory(){
+        this.organisationDirectory = new ArrayList<>();
+    }
+    
     
     Db db = new Db();
+    
     
     public void addOrganisation(String orgName, String orgType){
         db.addOrganisation(orgName, orgType);
@@ -23,13 +30,19 @@ public class OrganisationDirectory {
         organisationDirectory.add(org);
     }
     
-    public ResultSet getOrganisations(String role) {
-        ResultSet rs = db.getOrganisations(role);
-        return rs;
+    
+    public ArrayList<Organisation> getAllOrganisations() {
+        return organisationDirectory;
     }
+    
     
     public void updateOrganisation(String condition, String orgName){
         db.updateOrganisation(condition, orgName);
+    }
+    
+    public ResultSet getOrganisations(String role) {
+        ResultSet rs = db.getOrganisations(role);
+        return rs;
     }
     
     public void deleteOrganisation(String orgName){

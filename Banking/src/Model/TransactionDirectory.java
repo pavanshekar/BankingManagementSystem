@@ -13,15 +13,28 @@ import java.util.ArrayList;
  */
 public class TransactionDirectory {
     
-    private ArrayList<Transaction> transactionDirectory = new ArrayList<>();
+    private ArrayList<Transaction> transactionDirectory;
+    
+    
+    public TransactionDirectory(){
+        this.transactionDirectory = new ArrayList<>();
+    }
+    
     
     Db db = new Db();
+    
     
     public void addTransaction(String username, String transactionType, int transactionAmount, int balance){
         db.addTransaction(username, transactionType, transactionAmount, balance);
         Transaction transaction = new Transaction(username, transactionType, transactionAmount, balance);
         transactionDirectory.add(transaction);
     }
+    
+    
+    public ArrayList<Transaction> getAllTransactions() {
+        return transactionDirectory;
+    }
+    
             
     public ResultSet getCustomerTransactions(String username) {
         ResultSet rs = db.getCustomerTransactions(username);

@@ -13,9 +13,16 @@ import java.util.ArrayList;
  */
 public class NetworkDirectory {
     
-    private ArrayList<Network> networkDirectory = new ArrayList<>();
+    private ArrayList<Network> networkDirectory;
+    
+    
+    public NetworkDirectory(){
+        this.networkDirectory = new ArrayList<>();
+    }
+    
     
     Db db = new Db();
+    
     
     public void addNetwork(String city){
         db.addNetwork(city);
@@ -23,13 +30,18 @@ public class NetworkDirectory {
         networkDirectory.add(network);
     }
     
-    public ResultSet getNetworkList() {
-        ResultSet rs = db.getAllNetwork();
-        return rs;
+    
+    public ArrayList<Network> getNetworks() {
+        return networkDirectory;
     }
     
     public void updateNetwork(String condition, String city){
         db.updateNetwork(condition, city);
+    }
+    
+    public ResultSet getNetworkList() {
+        ResultSet rs = db.getAllNetwork();
+        return rs;
     }
     
     public void deleteNetwork(String city){

@@ -13,19 +13,30 @@ import java.util.ArrayList;
  */
 public class InsuranceDirectory {
     
-    private ArrayList<Insurance> insuranceDirectory = new ArrayList<>();
+    private ArrayList<Insurance> insuranceDirectory;
+    
+    
+    public InsuranceDirectory(){
+        this.insuranceDirectory = new ArrayList<>();
+    }
+    
     
     Db db = new Db();
     
-    public ResultSet getInsurance(String insurance) {
-        ResultSet rs = db.getInsurance(insurance);
-        return rs;
-    }
     
     public void requestInsurance(String insurance, int insuranceId, String insuranceType, int insuranceAmount){
         db.requestInsurance(insurance, insuranceId, insuranceType, insuranceAmount);
         Insurance ins = new Insurance(insurance, insuranceId, insuranceType, insuranceAmount, "", "Insurance Requested");
         insuranceDirectory.add(ins);
+    }
+    
+    public ArrayList<Insurance> getInsurances() {
+        return insuranceDirectory;
+    }
+    
+    public ResultSet getInsurance(String insurance) {
+        ResultSet rs = db.getInsurance(insurance);
+        return rs;
     }
     
     public void assignBankInsurance(String insurance, int insuranceId, String insuranceType, int insuranceAmount, String bank, String status){

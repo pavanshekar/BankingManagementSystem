@@ -13,9 +13,16 @@ import java.util.ArrayList;
  */
 public class UserAccountDirectory {
     
-    private ArrayList<UserAccount> userAccountDirectory = new ArrayList<>();
+    private ArrayList<UserAccount> userAccountDirectory;
+    
+    
+    public UserAccountDirectory(){
+        this.userAccountDirectory = new ArrayList<>();
+    }
+    
     
     Db db = new Db();
+    
     
     public String checkCredentials(String username, String password){
         String role = "";
@@ -41,9 +48,8 @@ public class UserAccountDirectory {
 
     }
     
-    public ResultSet getUserAccountsList() {
-        ResultSet rs = db.getUserAccountsList();
-        return rs;
+    public ArrayList<UserAccount> getAllUsers() {
+        return userAccountDirectory;
     }
     
     public void addUserAccount(String enterpriseName, String username, String password, String role){
@@ -54,6 +60,11 @@ public class UserAccountDirectory {
     
     public void updateUserAccount(String condition, String username, String password, String role){
         db.updateUserAccount(condition, username, password, role);
+    }
+    
+    public ResultSet getUserAccountsList() {
+        ResultSet rs = db.getUserAccountsList();
+        return rs;
     }
     
     public void deleteUserAccount(String username){
