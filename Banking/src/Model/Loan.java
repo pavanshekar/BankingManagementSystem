@@ -20,15 +20,6 @@ public class Loan {
     private String LoanVerificationOfficer;
     private String Status;
     
-    public Loan(String AccNo, String LoanNo, String LoanType, String LoanAmount, String LoanOfficer, String LoanVerificationOfficer, String Status){
-        this.AccNo = AccNo;
-        this.LoanNo = LoanNo;
-        this.LoanType = LoanType;
-        this.LoanAmount = LoanAmount;
-        this.LoanOfficer = LoanOfficer;
-        this.LoanVerificationOfficer = LoanVerificationOfficer;
-        this.Status = Status;
-    }
 
     public String getAccNo() {
         return AccNo;

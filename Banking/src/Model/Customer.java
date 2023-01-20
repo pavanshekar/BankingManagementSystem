@@ -24,20 +24,6 @@ public class Customer {
     private String role;
     private String network;
     
-    public Customer(String AccNo, int Balance, String FName, String LName, String Email, String PhNo, String Address, String username, String password, String role, String network){
-        this.AccNo = AccNo;
-        this.Balance = Balance;
-        this.FName = FName;
-        this.LName = LName;
-        this.Email = Email;
-        this.PhNo = PhNo;
-        this.Address = Address;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-        this.network = network;
-    }
-    
 
     public String getAccNo() {
         return AccNo;

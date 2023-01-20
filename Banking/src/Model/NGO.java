@@ -19,14 +19,6 @@ public class NGO {
     private String status;
     private int fundsAvailable;
     
-    public NGO(String ngo, String bank, String reason, int fundsRequested, String status, int fundsAvailable){
-        this.ngo = ngo;
-        this.bank = bank;
-        this.reason = reason;
-        this.fundsRequested = fundsRequested;
-        this.status = status;
-        this.fundsAvailable = fundsAvailable;
-    }
 
     public String getNgo() {
         return ngo;

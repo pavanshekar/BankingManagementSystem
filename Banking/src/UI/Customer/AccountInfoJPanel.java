@@ -45,24 +45,17 @@ public class AccountInfoJPanel extends javax.swing.JPanel {
     }
     
     private void populateInfo() {
-        
-        try{
-            ResultSet rs = customer.getCustomerDetails(username);
-            while(rs.next()){
-                accNo.setText(String.valueOf(rs.getString(1)));
-                fName.setText(String.valueOf(rs.getString(2)));
-                lName.setText(String.valueOf(rs.getString(3)));
-                email.setText(String.valueOf(rs.getString(4)));
-                phNo.setText(String.valueOf(rs.getString(5)));
-                address.setText(String.valueOf(rs.getString(6)));
-                balance.setText(String.valueOf(rs.getString(7)));
-                uname.setText(String.valueOf(rs.getString(8)));
-                network.setText(String.valueOf(rs.getString(11)));
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
+
+        for(Customer c: customer.getCustomerDetails(username)){
+            accNo.setText(String.valueOf(c.getAccNo()));
+            fName.setText(String.valueOf(c.getFName()));
+            lName.setText(String.valueOf(c.getLName()));
+            email.setText(String.valueOf(c.getEmail()));
+            phNo.setText(String.valueOf(c.getPhNo()));
+            address.setText(String.valueOf(c.getAddress()));
+            balance.setText(String.valueOf(c.getBalance()));
+            uname.setText(String.valueOf(c.getUsername()));
+            network.setText(String.valueOf(c.getNetwork()));
         }
         
     }
@@ -280,20 +273,13 @@ public class AccountInfoJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) transactionJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{
-            ResultSet rs = transaction.getCustomerTransactions(username);
-            while(rs.next()){
+
+        for(Transaction t: transaction.getCustomerTransactions(username)){
             Object[] rows = new Object[3];
-            rows[0]= rs.getString(2);
-            rows[1]= rs.getString(3);
-            rows[2]= rs.getString(4);
+            rows[0]= t.getTransactionType();
+            rows[1]= t.getTransactionAmount();
+            rows[2]= t.getBalance();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

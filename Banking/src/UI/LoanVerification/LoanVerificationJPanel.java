@@ -225,24 +225,17 @@ public class LoanVerificationJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) loanJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{
-            ResultSet rs = loan.getLoans();
-            while(rs.next()){
+
+        for(Loan l: loan.getLoans()){
             Object[] rows = new Object[7];
-            rows[0]= rs.getString(1);
-            rows[1]= rs.getString(2);
-            rows[2]= rs.getString(3);
-            rows[3]= rs.getString(4);
-            rows[4]= rs.getString(5);
-            rows[5]= rs.getString(6);
-            rows[6]= rs.getString(7);
+            rows[0]= l.getAccNo();
+            rows[1]= l.getLoanNo();
+            rows[2]= l.getLoanType();
+            rows[3]= l.getLoanAmount();
+            rows[4]= l.getLoanOfficer();
+            rows[5]= l.getLoanVerificationOfficer();
+            rows[6]= l.getStatus();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

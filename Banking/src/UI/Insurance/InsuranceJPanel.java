@@ -134,22 +134,15 @@ public class InsuranceJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) insuranceJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{
-            ResultSet rs = insurance.getInsurance(enterpriseName);
-            while(rs.next()){
+
+        for(Insurance i: insurance.getInsurance(enterpriseName)){
             Object[] rows = new Object[5];
-            rows[0] = rs.getString(2);
-            rows[1]= rs.getString(3);
-            rows[2]= rs.getString(4);
-            rows[3]= rs.getString(5);
-            rows[4]= rs.getString(6);
+            rows[0] = i.getInsuranceId();
+            rows[1]= i.getInsuranceType();
+            rows[2]= i.getInsuranceAmount();
+            rows[3]= i.getBank();
+            rows[4]= i.getStatus();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

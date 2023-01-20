@@ -187,17 +187,10 @@ public class WithdrawJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_withdrawAmountJTextFieldKeyPressed
 
     private void populateAccountBalance() {
-        
-        try{
-            ResultSet rs = customer.getCustomerDetails(username);
-            while(rs.next()){
-                balance = Integer.parseInt(String.valueOf(rs.getString(7)));
-                accountBalance.setText(String.valueOf(rs.getString(7)));
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
+
+        for(Customer cust: customer.getCustomerDetails(username)){
+            balance = cust.getBalance();
+            accountBalance.setText(String.valueOf(cust.getBalance()));
         }
         
     }

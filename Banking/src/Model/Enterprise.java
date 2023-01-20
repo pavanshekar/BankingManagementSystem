@@ -18,14 +18,6 @@ public class Enterprise {
     private String username;
     private String password;
     
-    public Enterprise(String EnterpriseName, String EnterpriseType, String Network, String username, String password){
-        this.EnterpriseName = EnterpriseName;
-        this.EnterpriseType = EnterpriseType;
-        this.Network = Network;
-        this.username = username;
-        this.password = password;
-    }
-    
 
     public String getEnterpriseName() {
         return EnterpriseName;

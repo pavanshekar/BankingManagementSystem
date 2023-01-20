@@ -26,26 +26,65 @@ public class CardDirectory {
     
     public void addCard(String accNo, String cardNo, String cardType, String status){
         db.addCard(accNo, cardNo, cardType, status);
-        Card card = new Card(accNo, cardNo, cardType, "", "", status);
-        cardDirectory.add(card);
+        Card card = new Card();
+        card.setAccNo(accNo);
+        card.setCardNo(cardNo);
+        card.setCardType(cardType);
+        card.setCardOfficer("");
+        card.setCardVerificationOfficer("");
+        card.setStatus(status);
+        this.cardDirectory.add(card);
     }
     
-    public ArrayList<Card> getAllCards() {
-        return cardDirectory;
-    }
     
-    public ResultSet getCustomerCards(String accNo) {
+    public ArrayList<Card> getCustomerCards(String accNo) {
         ResultSet rs = db.getCustomerCards(accNo);
-        return rs;
+        Card card;
+        this.cardDirectory.removeAll(cardDirectory);
+        try{
+            while(rs.next()){
+                card = new Card();
+                card.setAccNo(rs.getString(1));
+                card.setCardNo(rs.getString(2));
+                card.setCardType(rs.getString(3));
+                card.setCardOfficer(rs.getString(4));
+                card.setCardVerificationOfficer(rs.getString(5));
+                card.setStatus(rs.getString(6));
+                this.cardDirectory.add(card);
+            }            
+            return this.cardDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.cardDirectory;
+    }
+    
+    public ArrayList<Card> getCards() {
+        ResultSet rs = db.getCards();
+        Card card;
+        this.cardDirectory.removeAll(cardDirectory);
+        try{
+            while(rs.next()){
+                card = new Card();
+                card.setAccNo(rs.getString(1));
+                card.setCardNo(rs.getString(2));
+                card.setCardType(rs.getString(3));
+                card.setCardOfficer(rs.getString(4));
+                card.setCardVerificationOfficer(rs.getString(5));
+                card.setStatus(rs.getString(6));
+                this.cardDirectory.add(card);
+            }            
+            return this.cardDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.cardDirectory;
     }
     
     public void updateCardStatus(String cardNo, String status){
         db.updateCardStatus(cardNo, status);
-    }
-    
-    public ResultSet getCards() {
-        ResultSet rs = db.getCards();
-        return rs;
     }
      
     public ResultSet getApprovedCards(){

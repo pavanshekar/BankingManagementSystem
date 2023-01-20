@@ -39,15 +39,8 @@ public class CardJPanel extends javax.swing.JPanel {
         initComponents();
         this.workJPanel = workJPanel;
         this.username = username;
-        try{
-            ResultSet rs = customer.getCustomerDetails(username);
-            while(rs.next()){
-                accNo = String.valueOf(rs.getString(1));
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
+        for(Customer cust: customer.getCustomerDetails(username)){
+            accNo = cust.getAccNo();
         }
         JTableHeader thead = cardJTable.getTableHeader();
         thead.setForeground(Color.BLUE);
@@ -191,20 +184,13 @@ public class CardJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) cardJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{
-            ResultSet rs = card.getCustomerCards(accNo);
-            while(rs.next()){
+
+        for(Card c: card.getCustomerCards(accNo)){
             Object[] rows = new Object[3];
-            rows[0]= rs.getString(1);
-            rows[1]= rs.getString(2);
-            rows[2]= rs.getString(3);
+            rows[0] = c.getAccNo();
+            rows[1] = c.getCardNo();
+            rows[2] = c.getCardType();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

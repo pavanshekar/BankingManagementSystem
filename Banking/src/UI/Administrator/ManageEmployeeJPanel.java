@@ -367,20 +367,13 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) employeeJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{
-            ResultSet rs = userAccount.getUserAccounts(role);
-            while(rs.next()){
+
+        for(UserAccount ua: userAccount.getUserAccounts(role)){
             Object[] rows = new Object[3];
-            rows[0]= rs.getString(1);
-            rows[1]= rs.getString(2);
-            rows[2]= rs.getString(4);
+            rows[0]= ua.getEnterprise();
+            rows[1]= ua.getUsername();
+            rows[2]= ua.getRole();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

@@ -16,13 +16,6 @@ public class Transaction {
     private String TransactionType;
     private int TransactionAmount;
     private int Balance;
-    
-    public Transaction(String username, String TransactionType, int TransactionAmount, int Balance){
-        this.username = username;
-        this.TransactionType = TransactionType;
-        this.TransactionAmount = TransactionAmount;
-        this.Balance = Balance;
-    }
 
     public String getUsername() {
         return username;

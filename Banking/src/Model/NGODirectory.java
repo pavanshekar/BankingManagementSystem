@@ -25,24 +25,61 @@ public class NGODirectory {
     
     public void requestFunds(String ngo, String reason, int fundsRequested){
         db.requestFunds(ngo, reason, fundsRequested);
-        NGO n = new NGO(ngo, "", reason, fundsRequested, "Funds Requested", 0);
-        ngoDirectory.add(n);
+        NGO n = new NGO();
+        n.setNgo(ngo);
+        n.setBank("");
+        n.setReason(reason);
+        n.setFundsRequested(fundsRequested);
+        n.setStatus("Funds Requested");
+        n.setFundsAvailable(0);
+        this.ngoDirectory.add(n);
     }
     
     
-    public ArrayList<NGO> getAllFunds() {
-        return ngoDirectory;
-    }
-    
-    
-    public ResultSet getFundsRequested(String ngo) {
+    public ArrayList<NGO> getFundsRequested(String ngo) {
         ResultSet rs = db.getFundsRequested(ngo);
-        return rs;
+        NGO n;
+        this.ngoDirectory.removeAll(ngoDirectory);
+        try{
+            while(rs.next()){
+                n = new NGO();
+                n.setNgo(rs.getString(1));
+                n.setBank(rs.getString(2));
+                n.setReason(rs.getString(3));
+                n.setFundsRequested(rs.getInt(4));
+                n.setStatus(rs.getString(5));
+                n.setFundsAvailable(rs.getInt(6));
+                this.ngoDirectory.add(n);
+            }            
+            return this.ngoDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.ngoDirectory;
     }
     
-    public ResultSet getFunds() {
+    public ArrayList<NGO> getFunds() {
         ResultSet rs = db.getFunds();
-        return rs;
+        NGO n;
+        this.ngoDirectory.removeAll(ngoDirectory);
+        try{
+            while(rs.next()){
+                n = new NGO();
+                n.setNgo(rs.getString(1));
+                n.setBank(rs.getString(2));
+                n.setReason(rs.getString(3));
+                n.setFundsRequested(rs.getInt(4));
+                n.setStatus(rs.getString(5));
+                n.setFundsAvailable(rs.getInt(6));
+                this.ngoDirectory.add(n);
+            }            
+            return this.ngoDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.ngoDirectory;
     }
     
     public void assignBank(String ngo, String bank, String reason, int fundsRequested, String status){

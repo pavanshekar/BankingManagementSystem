@@ -19,14 +19,6 @@ public class Insurance {
     private String Bank;
     private String Status;
     
-    public Insurance(String Insurance, int InsuranceId, String InsuranceType, int InsuranceAmount, String Bank, String Status){
-        this.Insurance = Insurance;
-        this.InsuranceId = InsuranceId;
-        this.InsuranceType = InsuranceType;
-        this.InsuranceAmount = InsuranceAmount;
-        this.Bank = Bank;
-        this.Status = Status;
-    }
 
     public String getInsurance() {
         return Insurance;

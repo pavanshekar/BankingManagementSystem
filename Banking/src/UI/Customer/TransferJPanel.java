@@ -215,31 +215,17 @@ public class TransferJPanel extends javax.swing.JPanel {
     }
     
     private void populateWithdrawAccountBalance() {
-        
-        try{
-            ResultSet rs = customer.getCustomerDetails(username);
-            while(rs.next()){
-                withdrawBalance = Integer.parseInt(String.valueOf(rs.getString(7)));
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
+
+        for(Customer cust: customer.getCustomerDetails(username)){
+            withdrawBalance = cust.getBalance();
         }
         
     }
     
     private void populateDepositAccountBalance() {
-        
-        try{
-            ResultSet rs = customer.getCustomerDetails(customerName);
-            while(rs.next()){
-                depositBalance = Integer.parseInt(String.valueOf(rs.getString(7)));
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
+
+        for(Customer cust: customer.getCustomerDetails(customerName)){
+            depositBalance = cust.getBalance();
         }
         
     }

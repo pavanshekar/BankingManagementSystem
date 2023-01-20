@@ -26,26 +26,46 @@ public class EnterpriseDirectory {
     
     public void addEnterprise(String enterpriseName, String enterpriseType, String network, String username, String password){
         db.addEnterprise(enterpriseName, enterpriseType, network, username, password);
-        Enterprise enterprise = new Enterprise(enterpriseName, enterpriseType, network, username, password);
-        enterpriseDirectory.add(enterprise);
+        Enterprise enterprise = new Enterprise();
+        enterprise.setEnterpriseName(enterpriseName);
+        enterprise.setEnterpriseType(enterpriseType);
+        enterprise.setNetwork(network);
+        enterprise.setUsername(username);
+        enterprise.setPassword(password);
+        this.enterpriseDirectory.add(enterprise);
     }
     
-    public ArrayList<Enterprise> getAllEnterprises() {
-        return enterpriseDirectory;
+    
+    public ArrayList<Enterprise> getEnterpriseList() {
+        ResultSet rs = db.getAllEnterprises();
+//        return rs;
+        Enterprise enterprise;
+        this.enterpriseDirectory.removeAll(enterpriseDirectory);
+        try{
+            while(rs.next()){
+                enterprise = new Enterprise();
+                enterprise.setEnterpriseName(rs.getString(1));
+                enterprise.setEnterpriseType(rs.getString(2));
+                enterprise.setNetwork(rs.getString(3));
+                enterprise.setUsername(rs.getString(4));
+                enterprise.setPassword(rs.getString(5));
+                this.enterpriseDirectory.add(enterprise);
+            }            
+            return this.enterpriseDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.enterpriseDirectory;
+    }
+    
+    public void updateEnterprise(String condition, String enterpriseName, String enterpriseType, String network, String username, String password){
+        db.updateEnterprise(condition, enterpriseName, enterpriseType, network, username, password);
     }
     
     public ResultSet getEnterprise(String username) {
         ResultSet rs = db.getEnterprise(username);
         return rs;
-    }
-    
-    public ResultSet getEnterpriseList() {
-        ResultSet rs = db.getAllEnterprises();
-        return rs;
-    }
-    
-    public void updateEnterprise(String condition, String enterpriseName, String enterpriseType, String network, String username, String password){
-        db.updateEnterprise(condition, enterpriseName, enterpriseType, network, username, password);
     }
     
     public void deleteEnterprise(String enterpriseName){

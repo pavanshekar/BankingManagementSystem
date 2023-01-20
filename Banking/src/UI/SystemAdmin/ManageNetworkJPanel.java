@@ -256,18 +256,11 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) networkJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{
-            ResultSet rs = network.getNetworkList();
-            while(rs.next()){
+
+        for(Network n: network.getNetworkList()){
             Object[] rows = new Object[1];
-            rows[0]= rs.getString(1);
+            rows[0]= n.getName();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

@@ -26,22 +26,31 @@ public class NetworkDirectory {
     
     public void addNetwork(String city){
         db.addNetwork(city);
-        Network network = new Network(city);
-        networkDirectory.add(network);
+        Network network = new Network();
+        network.setName(city);
+        this.networkDirectory.add(network);
     }
     
-    
-    public ArrayList<Network> getNetworks() {
-        return networkDirectory;
+    public ArrayList<Network> getNetworkList() {
+        ResultSet rs = db.getAllNetwork();
+        Network network;
+        this.networkDirectory.removeAll(networkDirectory);
+        try{
+            while(rs.next()){
+                network = new Network();
+                network.setName(rs.getString(1));
+                this.networkDirectory.add(network);
+            }            
+            return this.networkDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.networkDirectory;
     }
     
     public void updateNetwork(String condition, String city){
         db.updateNetwork(condition, city);
-    }
-    
-    public ResultSet getNetworkList() {
-        ResultSet rs = db.getAllNetwork();
-        return rs;
     }
     
     public void deleteNetwork(String city){

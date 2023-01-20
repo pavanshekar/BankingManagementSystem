@@ -293,22 +293,15 @@ public class CardJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) cardJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{ 
-            ResultSet rs = card.getCards();
-            while(rs.next()){
+
+        for(Card c: card.getCards()){
             Object[] rows = new Object[5];
-            rows[0] = rs.getString(1);
-            rows[1] = rs.getString(2);
-            rows[2] = rs.getString(3);
-            rows[3] = rs.getString(4);
-            rows[4] = rs.getString(6);
+            rows[0] = c.getAccNo();
+            rows[1] = c.getCardNo();
+            rows[2] = c.getCardType();
+            rows[3] = c.getCardOfficer();
+            rows[4] = c.getStatus();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

@@ -150,21 +150,14 @@ public class NGOJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) ngoJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{
-            ResultSet rs = ngo.getFundsRequested(enterpriseName);
-            while(rs.next()){
-            Object[] rows = new Object[4];
-            rows[0]= rs.getString(2);
-            rows[1]= rs.getString(3);
-            rows[2]= rs.getString(4);
-            rows[3]= rs.getString(5);
+
+        for(NGO n: ngo.getFundsRequested(enterpriseName)){
+            Object[] rows = new Object[5];
+            rows[0]= n.getBank();
+            rows[1]= n.getReason();
+            rows[2]= n.getFundsRequested();
+            rows[3]= n.getStatus();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

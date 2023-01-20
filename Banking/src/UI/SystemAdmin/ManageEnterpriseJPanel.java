@@ -353,20 +353,13 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) enterpriseJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{ 
-            ResultSet rs = enterprise.getEnterpriseList();
-            while(rs.next()){
+
+        for(Enterprise e: enterprise.getEnterpriseList()){
             Object[] rows = new Object[3];
-            rows[0] = rs.getString(3);
-            rows[1] = rs.getString(1);
-            rows[2] = rs.getString(4);
+            rows[0] = e.getNetwork();
+            rows[1] = e.getEnterpriseName();
+            rows[2] = e.getUsername();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }
@@ -374,16 +367,10 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
     public void populateNetworkComboBox() {
         networkJComboBox.removeAllItems();
 
-        try{ 
-            ResultSet rs = network.getNetworkList();
-            while(rs.next()){
-            networkJComboBox.addItem(rs.getString(1));
-            }
+        for(Network n: network.getNetworkList()){
+            networkJComboBox.addItem(n.getName());
         }
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }
+
     }
     
 

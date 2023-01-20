@@ -19,14 +19,6 @@ public class Card {
     private String CardVerificationOfficer;
     private String Status;
     
-    public Card(String AccNo, String CardNo, String CardType, String CardOfficer, String CardVerificationOfficer, String Status){
-        this.AccNo = AccNo;
-        this.CardNo = CardNo;
-        this.CardType = CardType;
-        this.CardOfficer = CardOfficer;
-        this.CardVerificationOfficer = CardVerificationOfficer;
-        this.Status = Status;
-    }
 
     public String getAccNo() {
         return AccNo;

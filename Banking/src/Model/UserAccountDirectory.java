@@ -48,13 +48,13 @@ public class UserAccountDirectory {
 
     }
     
-    public ArrayList<UserAccount> getAllUsers() {
-        return userAccountDirectory;
-    }
-    
     public void addUserAccount(String enterpriseName, String username, String password, String role){
         db.addUserAccount(enterpriseName, username, password, role);
-        UserAccount ua = new UserAccount(enterpriseName, username, password, role);
+        UserAccount ua = new UserAccount();
+        ua.setEnterprise(enterpriseName);
+        ua.setUsername(username);
+        ua.setPassword(password);
+        ua.setRole(role);
         userAccountDirectory.add(ua);
     }
     
@@ -62,9 +62,46 @@ public class UserAccountDirectory {
         db.updateUserAccount(condition, username, password, role);
     }
     
-    public ResultSet getUserAccountsList() {
+    public ArrayList<UserAccount> getUserAccountsList() {
         ResultSet rs = db.getUserAccountsList();
-        return rs;
+        UserAccount userAccount;
+        this.userAccountDirectory.removeAll(userAccountDirectory);
+        try{
+            while(rs.next()){
+                userAccount = new UserAccount();
+                userAccount.setEnterprise(rs.getString(1));
+                userAccount.setUsername(rs.getString(2));
+                userAccount.setPassword(rs.getString(3));
+                userAccount.setRole(rs.getString(4));
+                this.userAccountDirectory.add(userAccount);
+            }            
+            return this.userAccountDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.userAccountDirectory;
+    }
+    
+    public ArrayList<UserAccount> getUserAccounts(String role) {
+        ResultSet rs = db.getUserAccounts(role);
+        UserAccount userAccount;
+        this.userAccountDirectory.removeAll(userAccountDirectory);
+        try{
+            while(rs.next()){
+                userAccount = new UserAccount();
+                userAccount.setEnterprise(rs.getString(1));
+                userAccount.setUsername(rs.getString(2));
+                userAccount.setPassword(rs.getString(3));
+                userAccount.setRole(rs.getString(4));
+                this.userAccountDirectory.add(userAccount);
+            }            
+            return this.userAccountDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.userAccountDirectory;
     }
     
     public void deleteUserAccount(String username){
@@ -73,11 +110,6 @@ public class UserAccountDirectory {
     
     public ResultSet checkIfUsernameIsUnique(String username){
         ResultSet rs = db.checkIfUsernameIsUnique(username);
-        return rs;
-    }
-    
-    public ResultSet getUserAccounts(String role) {
-        ResultSet rs = db.getUserAccounts(role);
         return rs;
     }
     

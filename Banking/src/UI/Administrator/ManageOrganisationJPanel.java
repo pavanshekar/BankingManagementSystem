@@ -273,17 +273,10 @@ public class ManageOrganisationJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
         
-        try{
-            ResultSet rs = organisation.getOrganisations(role);
-            while(rs.next()){
+        for(Organisation o: organisation.getOrganisations(role)){
             Object[] rows = new Object[1];
-            rows[0]= rs.getString(1);
+            rows[0]= o.getOrgName();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

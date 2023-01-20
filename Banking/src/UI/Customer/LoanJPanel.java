@@ -40,15 +40,8 @@ public class LoanJPanel extends javax.swing.JPanel {
         initComponents();
         this.workJPanel = workJPanel;
         this.username = username;
-        try{
-            ResultSet rs = customer.getCustomerDetails(username);
-            while(rs.next()){
-                accNo = String.valueOf(rs.getString(1));
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
+        for(Customer cust: customer.getCustomerDetails(username)){
+            accNo = cust.getAccNo();
         }
         JTableHeader thead = loanJTable.getTableHeader();
         thead.setForeground(Color.BLUE);
@@ -240,21 +233,14 @@ public class LoanJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) loanJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{
-            ResultSet rs = loan.getCustomerLoans(accNo);
-            while(rs.next()){
+
+        for(Loan l: loan.getCustomerLoans(accNo)){
             Object[] rows = new Object[4];
-            rows[0]= rs.getString(1);
-            rows[1]= rs.getString(2);
-            rows[2]= rs.getString(3);
-            rows[3]= rs.getString(4);
+            rows[0]= l.getAccNo();
+            rows[1]= l.getLoanNo();
+            rows[2]= l.getLoanType();
+            rows[3]= l.getLoanAmount();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

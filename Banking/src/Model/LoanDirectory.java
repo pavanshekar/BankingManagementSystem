@@ -26,22 +26,63 @@ public class LoanDirectory {
     
     public void applyLoan(String accNo, String loanNo, String loanType, String loanAmount, String status){
         db.applyLoan(accNo, loanNo, loanType, loanAmount,status);
-        Loan loan = new Loan(accNo, loanNo, loanType, loanAmount, "", "", status);
-        loanDirectory.add(loan);
+        Loan loan = new Loan();
+        loan.setAccNo(accNo);
+        loan.setLoanNo(loanNo);
+        loan.setLoanType(loanType);
+        loan.setLoanAmount(loanAmount);
+        loan.setLoanOfficer("");
+        loan.setLoanVerificationOfficer("");
+        loan.setStatus(status);
+        this.loanDirectory.add(loan);
     }
     
-    public ArrayList<Loan> getAllLoans() {
-        return loanDirectory;
-    }
-    
-    public ResultSet getCustomerLoans(String accNo) {
+    public ArrayList<Loan> getCustomerLoans(String accNo) {
         ResultSet rs = db.getCustomerLoans(accNo);
-        return rs;
+        Loan loan;
+        this.loanDirectory.removeAll(loanDirectory);
+        try{
+            while(rs.next()){
+                loan = new Loan();
+                loan.setAccNo(rs.getString(1));
+                loan.setLoanNo(rs.getString(2));
+                loan.setLoanType(rs.getString(3));
+                loan.setLoanAmount(rs.getString(4));
+                loan.setLoanOfficer(rs.getString(5));
+                loan.setLoanVerificationOfficer(rs.getString(6));
+                loan.setStatus(rs.getString(7));
+                this.loanDirectory.add(loan);
+            }            
+            return this.loanDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.loanDirectory;
     }
     
-    public ResultSet getLoans() {
+    public ArrayList<Loan> getLoans() {
         ResultSet rs = db.getLoans();
-        return rs;
+        Loan loan;
+        this.loanDirectory.removeAll(loanDirectory);
+        try{
+            while(rs.next()){
+                loan = new Loan();
+                loan.setAccNo(rs.getString(1));
+                loan.setLoanNo(rs.getString(2));
+                loan.setLoanType(rs.getString(3));
+                loan.setLoanAmount(rs.getString(4));
+                loan.setLoanOfficer(rs.getString(5));
+                loan.setLoanVerificationOfficer(rs.getString(6));
+                loan.setStatus(rs.getString(7));
+                this.loanDirectory.add(loan);
+            }            
+            return this.loanDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.loanDirectory;
     }
     
     public void updateLoanStatus(String loanNo, String status){

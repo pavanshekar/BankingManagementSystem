@@ -445,16 +445,10 @@ public class BankingJPanel extends javax.swing.JPanel {
     public void populateNetworkComboBox() {
         networkJComboBox.removeAllItems();
 
-        try{ 
-            ResultSet rs = network.getNetworkList();
-            while(rs.next()){
-            networkJComboBox.addItem(rs.getString(1));
-            }
+        for(Network n: network.getNetworkList()){
+            networkJComboBox.addItem(n.getName());
         }
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }
+
     }
     
     private void deleteCustomerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCustomerJButtonActionPerformed
@@ -541,26 +535,19 @@ public class BankingJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) customerJTable.getModel();
 
         model.setRowCount(0);
-        
-        try{
-            ResultSet rs = customer.getCustomerList();
-            while(rs.next()){
+
+        for(Customer c: customer.getCustomerList()){
             Object[] rows = new Object[9];
-            rows[0]= rs.getString(1);
-            rows[1]= rs.getString(2);
-            rows[2]= rs.getString(3);
-            rows[3]= rs.getString(4);
-            rows[4]= rs.getString(5);
-            rows[5]= rs.getString(6);
-            rows[6]= rs.getString(8);
-            rows[7]= rs.getString(11);
-            rows[8]= rs.getString(7);
+            rows[0]= c.getAccNo();
+            rows[1]= c.getFName();
+            rows[2]= c.getLName();
+            rows[3]= c.getEmail();
+            rows[4]= c.getPhNo();
+            rows[5]= c.getAddress();
+            rows[6]= c.getUsername();
+            rows[7]= c.getNetwork();
+            rows[8]= c.getBalance();
             model.addRow(rows);
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
         
     }

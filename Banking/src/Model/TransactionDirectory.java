@@ -26,19 +26,33 @@ public class TransactionDirectory {
     
     public void addTransaction(String username, String transactionType, int transactionAmount, int balance){
         db.addTransaction(username, transactionType, transactionAmount, balance);
-        Transaction transaction = new Transaction(username, transactionType, transactionAmount, balance);
+        Transaction transaction = new Transaction();
+        transaction.setUsername(username);
+        transaction.setTransactionType(transactionType);
+        transaction.setTransactionAmount(transactionAmount);
+        transaction.setBalance(balance);
         transactionDirectory.add(transaction);
     }
-    
-    
-    public ArrayList<Transaction> getAllTransactions() {
-        return transactionDirectory;
-    }
-    
             
-    public ResultSet getCustomerTransactions(String username) {
+    public ArrayList<Transaction> getCustomerTransactions(String username) {
         ResultSet rs = db.getCustomerTransactions(username);
-        return rs;
+        Transaction transaction;
+        this.transactionDirectory.removeAll(transactionDirectory);
+        try{
+            while(rs.next()){
+                transaction = new Transaction();
+                transaction.setUsername(rs.getString(1));
+                transaction.setTransactionType(rs.getString(2));
+                transaction.setTransactionAmount(rs.getInt(3));
+                transaction.setBalance(rs.getInt(4));
+                this.transactionDirectory.add(transaction);
+            }            
+            return this.transactionDirectory;
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        return this.transactionDirectory;
     }
     
 }

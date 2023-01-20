@@ -17,13 +17,6 @@ public class UserAccount {
     private String username;
     private String password;
     private String role;
-    
-    public UserAccount(String enterprise, String username, String password, String role){
-        this.enterprise = enterprise;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
 
     public String getEnterprise() {
         return enterprise;

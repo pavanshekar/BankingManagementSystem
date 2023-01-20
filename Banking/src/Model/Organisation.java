@@ -15,11 +15,6 @@ public class Organisation {
     private String OrgName;
     private String ORGType;
     
-    public Organisation(String OrgName, String OrgType){
-        this.OrgName = OrgName;
-        this.ORGType = ORGType;
-    }
-    
     public String getOrgName() {
         return OrgName;
     }
